@@ -1,0 +1,7 @@
+﻿services:
+  halomakes.cms:
+    image: halomakes.cms
+    build:
+      context: .
+      dockerfile: Halomakes.Cms/Dockerfile
+
