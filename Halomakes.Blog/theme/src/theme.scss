@@ -1,3 +1,36 @@
-body {
-  background-color: red;
-}
+@use './sass/colors' as colors;
+@use "sass:map";
+
+// core files
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+
+// remove colours
+$theme-colors: map.remove($theme-colors, "body", "secondary", "tertiary", "emphasis", "border", "primary", "danger", "warning", "info", "light", "dark");
+$theme-colors: map.merge($theme-colors, (
+        "primary": colors.$primary,
+        "secondary": colors.$secondary
+));
+
+
+// core files continued
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/root";
+@import "bootstrap/scss/utilities";
+@import "bootstrap/scss/reboot";
+@import "bootstrap/scss/type";
+@import "bootstrap/scss/images";
+@import "bootstrap/scss/containers";
+@import "bootstrap/scss/grid";
+@import "bootstrap/scss/helpers";
+@import "bootstrap/scss/utilities/api";
+
+// extra components
+//@import "bootstrap/scss/offcanvas";
+@import "bootstrap/scss/navbar";
+//@import "bootstrap/scss/card";
+//@import "bootstrap/scss/dropdown";
+//@import "bootstrap/scss/list-group";
+@import "bootstrap/scss/nav";

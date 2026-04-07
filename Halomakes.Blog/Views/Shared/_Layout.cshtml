@@ -1,16 +1,17 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@ViewData["Title"] - Halomakes.Blog</title>
     <script type="importmap"></script>
-    <script type="module" crossorigin asp-src-include="~/dist/assets/index-*.js"></script>
-    <link rel="stylesheet" crossorigin asp-href-include="~/dist/assets/index-*.css">
+    <script type="application/javascript" crossorigin src="~/dist/main.es.js"
+            asp-append-version="true"></script>
+    <link rel="stylesheet" crossorigin href="~/dist/theme.css" asp-append-version="true">
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
         <div class="container-fluid">
             <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Halomakes.Blog</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
@@ -39,12 +40,8 @@
 
 <footer class="border-top footer text-muted">
     <div class="container">
-        &copy; 2026 - Halomakes.Blog - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
     </div>
 </footer>
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/site.js" asp-append-version="true"></script>
 @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

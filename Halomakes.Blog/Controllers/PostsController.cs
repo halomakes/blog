@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Halomakes.Blog.Controllers;
 
-public class PostsController(IWebHostEnvironment environment, PostsService postsService) : Controller
+public class PostsController(PostsService postsService) : Controller
 {
     [HttpGet("/posts/{year:int}/{month:int}/{slug}")]
     public IActionResult GetPost(int year, int month, string slug)

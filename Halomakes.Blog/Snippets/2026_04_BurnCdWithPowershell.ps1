@@ -1,31 +1,3 @@
-@model BlogPostModel
-@attribute [Post("Using PowerShell to burn FLACs with CD-Text", 2026, 4, 7)]
-@attribute [Slug("burning-cds-with-powershell")]
-@attribute [Tags("powershell", "music", "physical-media")]
-
-<p>
-    I've been working on my grandpa's old minivan lately, and have been wanting to burn some CDs to enjoy on the radio
-    in there. I'm one of those weirdos that still maintains a music library (some of the songs date back to my first
-    iPod Nano) so I have a lot of FLACs on-hand. I burned (burnt?) a bunch of discs from my MusicBee library but was
-    disappointed after hitting the road and realizing that many of them just play an intensely unpleasant digital
-    static. I suspect that this is to do with much of my modern music being in "Hi-Res" 24bit audio, sometimes in
-    different sample rates than CD's standard 44.1kHz. MusicBee didn't appear to bother converting these or warning
-    about the issue and happily wasted some happy discuses on my behalf.
-    <br/>
-    From looking online, the consensus appears to be that the way to burn CDs (and include CD-Text data) is using
-    ImgBurn. ImgBurn gave me some definite nostalgia hearing the chime at the end of a burn, but the process of getting
-    everything that far was pretty tedious. You have to transcode/resample the audio to make it compatible with the CD
-    format and get the tags in to build a cue file before you can burn it.
-    <br/>
-    So, as is seemingly the norm for me, instead of spending a few minutes doing the tedious/repetitive task, I wasted
-    my entire evening writing a PowerShell script to do it for me. Point it at a folder of FLACs and it will convert
-    them to the appropriate format, generate a CUE file with CD-Text information, and open up ImgBurn with the settings
-    loaded up so all the interaction from there is clicking the burn button. Thought I'd share in case anyone winds up
-    with the same very specific issue.
-    <br/>
-    Enjoy!
-</p>
-<code lang="powershell">
 class Song {
     hidden [string[]] $FfmpegOutput;
     hidden [string] $CuePath;
@@ -45,7 +17,7 @@ class Song {
     }
 
     [void] Convert() {
-        $this.FfmpegOutput = (ffmpeg -i $this.SourcePath -ar 44100 -sample_fmt s16 -map_metadata 0:s:0 -y $this.OutputPath 2>&amp;1);
+        $this.FfmpegOutput = (ffmpeg -i $this.SourcePath -ar 44100 -sample_fmt s16 -map_metadata 0:s:0 -y $this.OutputPath 2>&1);
         $this.Album = $this.GetMetaAttribute("album");
         $this.Artist = $this.GetMetaAttribute("artist");
         $this.Title = $this.GetMetaAttribute("title");
@@ -92,7 +64,7 @@ function ConvertTo-RedbookAudio {
     # convert / resample for CD
     New-Item -Force -Type Directory "Burn" | Out-Null;
 
-    [Song[]] $songs = @@();
+    [Song[]] $songs = @();
     [int] $index = 1;
     [System.IO.FileSystemInfo[]] $flacs = Get-ChildItem -Filter "*.flac";
     $flacs | Select-Object | ForEach-Object {
@@ -121,4 +93,3 @@ PERFORMER `"$($songs[0].Artist)`"";
         & $executablePath /mode WRITE /source $cueFile.FullName;
     }
 }
-</code>
