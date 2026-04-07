@@ -2,10 +2,11 @@
 @use 'mixins/typography';
 @use 'mixins/layout';
 @use 'variables/colors';
+@use 'mixins/hover';
 @use 'sass:color';
 
 header {
-  height: sizing.$navbar-height;
+  min-height: sizing.$navbar-height - (2 * sizing.$navbar-padding);
   margin-bottom: sizing.$padding-md;
   @include typography.mono();
   display: flex;
@@ -13,14 +14,23 @@ header {
   align-items: center;
   font-size: 24px;
   background-color: color.scale(colors.$dark-bg, $alpha: -30%);
+  padding: sizing.$navbar-padding;
 
   a {
     color: color.scale(colors.$white, $alpha: -20%);
     text-decoration: none !important;
   }
 
-  mark {
-    padding: 0;
+  .areas {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+
+    a {
+      @include hover.opacity(0.5, 0.8);
+      font-size: 16px;
+    }
   }
 
   & > nav {
@@ -31,24 +41,14 @@ header {
     align-items: center;
     width: 100%;
     justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
 
     & > .title {
       display: flex;
       flex-direction: row;
       justify-content: flex-start;
       align-items: center;
-
-      & > .selector {
-        & > .selected {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-        }
-
-        & > .options {
-          display: none;
-        }
-      }
 
       .dot {
         color: color.scale(colors.$white, $alpha: -60%);

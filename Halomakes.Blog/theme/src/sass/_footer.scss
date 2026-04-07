@@ -1,0 +1,11 @@
+@use 'mixins/typography';
+@use 'variables/colors';
+
+footer {
+  padding: 36px;
+  text-align: center;
+  opacity: 20%;
+  font-style: italic;
+  color: colors.$white;
+  @include typography.mono;
+}

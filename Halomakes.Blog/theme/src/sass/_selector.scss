@@ -1,0 +1,51 @@
+@use 'variables/colors' as colors;
+@use 'mixins/hover' as hover;
+@use 'sass:color';
+
+.selector {
+  $duration: 0.2s;
+  $ease: ease;
+
+  position: relative;
+
+  & > .selected {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: colors.$white;
+    @include hover.opacity;
+
+    & > svg {
+      transition: transform $duration $ease;
+    }
+  }
+
+  & > .options {
+    pointer-events: none;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background-color: color.scale(colors.$dark-bg, $lightness: -40%);
+    top: 0;
+    right: 0;
+    clip-path: inset(0% 0% 100% 0%);
+    transition: clip-path $duration $ease;
+    z-index: 99;
+
+    & > a {
+      color: colors.$white;
+      @include hover.opacity;
+    }
+  }
+
+  &.open {
+    & > .selected > svg {
+      transform: rotate(180deg);
+    }
+
+    & > .options {
+      pointer-events: initial;
+      clip-path: inset(0% 0% 0% 0%);
+    }
+  }
+}

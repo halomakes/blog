@@ -7,6 +7,8 @@
 @forward 'sass/mixins/typography';
 @forward 'sass/layout';
 @forward "sass/navbar";
+@forward 'sass/selector';
+@forward 'sass/footer';
 
 body {
   background-color: colors.$dark-bg;

@@ -11,18 +11,21 @@
     static. I suspect that this is to do with much of my modern music being in "Hi-Res" 24bit audio, sometimes in
     different sample rates than CD's standard 44.1kHz. MusicBee didn't appear to bother converting these or warning
     about the issue and happily wasted some happy discuses on my behalf.
-    <br/>
+</p>
+<p>
     From looking online, the consensus appears to be that the way to burn CDs (and include CD-Text data) is using
     ImgBurn. ImgBurn gave me some definite nostalgia hearing the chime at the end of a burn, but the process of getting
     everything that far was pretty tedious. You have to transcode/resample the audio to make it compatible with the CD
     format and get the tags in to build a cue file before you can burn it.
-    <br/>
+</p>
+<p>
     So, as is seemingly the norm for me, instead of spending a few minutes doing the tedious/repetitive task, I wasted
     my entire evening writing a PowerShell script to do it for me. Point it at a folder of FLACs and it will convert
     them to the appropriate format, generate a CUE file with CD-Text information, and open up ImgBurn with the settings
     loaded up so all the interaction from there is clicking the burn button. Thought I'd share in case anyone winds up
     with the same very specific issue.
-    <br/>
+</p>
+<p>
     Enjoy!
 </p>
 <code file="2026_04_BurnCdWithPowershell.ps1"></code>

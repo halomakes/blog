@@ -12,6 +12,8 @@
   $button-size: 24px;
   background-color: color.scale(colors.$white, $alpha: -80%);
   border: 1px solid colors.$primary;
+  margin-top: card.$card-padding;
+  margin-bottom: card.$card-padding;
 
   display: flex;
   flex-direction: column;
