@@ -1,0 +1,77 @@
+@use 'variables/colors' as colors;
+@use 'variables/sizing' as sizing;
+@use 'mixins/card' as card;
+@use 'sass:color';
+
+code {
+  white-space: pre-wrap;
+  --bs-code-color: initial;
+  position: relative;
+  display: block;
+  padding: card.$card-padding;
+  $bg-color: colors.$black-bg;
+
+
+  &:after {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    @include card.card($bg-color, colors.$white);
+  }
+
+  .hljs-class {
+
+
+    .hljs-keyword {
+      color: colors.$secondary;
+    }
+
+    .hljs-title {
+      color: colors.$warning;
+    }
+  }
+
+  .hljs-keyword {
+    color: colors.$light;
+  }
+
+  .hljs-built_in {
+    color: colors.$success;
+  }
+
+  .hljs-variable {
+    color: colors.$info;
+  }
+
+  .hljs-type {
+    color: color.scale(colors.$success, $lightness: 20%);
+  }
+
+  .hljs-comment {
+    color: color.scale(colors.$warning, $alpha: -40%);
+  }
+
+  .hljs-string {
+    color: color.scale(colors.$danger, $lightness: 30%);
+  }
+
+  .hljs-number {
+    color: color.scale(colors.$danger, $lightness: 20%);
+  }
+
+  .hljs-literal {
+    color: color.scale(colors.$success, $saturation: 5%);
+  }
+
+  .hljs-title {
+    color: color.scale(colors.$compliment, $lightness: 20%);
+  }
+
+  .hljs-variable {
+    color: color.scale(colors.$secondary, $lightness: 20%);
+  }
+}

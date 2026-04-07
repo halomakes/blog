@@ -1,5 +1,3 @@
-using System.Text.Encodings.Web;
-using Microsoft.AspNetCore.Mvc.TagHelpers;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace Halomakes.Blog.TagHelpers;
@@ -8,16 +6,27 @@ namespace Halomakes.Blog.TagHelpers;
  * Formats a code bock for use with highlight.js
  */
 [HtmlTargetElement("code-snippet")]
-[HtmlTargetElement("code", Attributes = "lang")]
-public class CodeSnippetTagHelper : TagHelper
+[HtmlTargetElement("code", Attributes = "file")]
+public class CodeSnippetTagHelper(IWebHostEnvironment environment) : TagHelper
 {
-    [HtmlAttributeName("lang")]
-    public required string Language { get; set; }
+    [HtmlAttributeName("file")]
+    public required string Filename { get; set; }
 
-    public override void Process(TagHelperContext context, TagHelperOutput output)
+    public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
     {
         output.TagName = "code";
-        output.Attributes.Add("lang", Language);
-        output.AddClass($"code-{Language}", HtmlEncoder.Default);
+        var file = environment.WebRootFileProvider.GetFileInfo($"snippets/{Filename}");
+        if (file.Exists)
+        {
+            output.Attributes.Add("lang", file.Name[(file.Name.LastIndexOf('.') + 1)..]);
+            await using var stream = file.CreateReadStream();
+            using var reader = new StreamReader(stream);
+            var content = await reader.ReadToEndAsync();
+            output.Content.SetContent(content);
+        }
+        else
+        {
+            output.Content.SetContent("Couldn't load this code snippet, sorry.");
+        }
     }
 }

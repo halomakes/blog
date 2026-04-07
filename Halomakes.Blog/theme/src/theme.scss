@@ -1,4 +1,4 @@
-@use './sass/colors' as colors;
+@use './sass/variables/colors' as colors;
 @use "sass:map";
 
 // core files
@@ -28,9 +28,6 @@ $theme-colors: map.merge($theme-colors, (
 @import "bootstrap/scss/utilities/api";
 
 // extra components
-//@import "bootstrap/scss/offcanvas";
 @import "bootstrap/scss/navbar";
-//@import "bootstrap/scss/card";
-//@import "bootstrap/scss/dropdown";
-//@import "bootstrap/scss/list-group";
 @import "bootstrap/scss/nav";
+@import "sass/codeSnippet";
