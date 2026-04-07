@@ -6,6 +6,7 @@
 @forward 'sass/codeSnippet';
 @forward 'sass/mixins/typography';
 @forward 'sass/layout';
+@forward "sass/navbar";
 
 body {
   background-color: colors.$dark-bg;

@@ -1,0 +1,70 @@
+@use 'variables/sizing';
+@use 'mixins/typography';
+@use 'mixins/layout';
+@use 'variables/colors';
+@use 'sass:color';
+
+header {
+  height: sizing.$navbar-height;
+  margin-bottom: sizing.$padding-md;
+  @include typography.mono();
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 24px;
+  background-color: color.scale(colors.$dark-bg, $alpha: -30%);
+
+  a {
+    color: color.scale(colors.$white, $alpha: -20%);
+    text-decoration: none !important;
+  }
+
+  mark {
+    padding: 0;
+  }
+
+  & > nav {
+    max-width: sizing.$container-lg;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+
+    & > .title {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+
+      & > .selector {
+        & > .selected {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+        }
+
+        & > .options {
+          display: none;
+        }
+      }
+
+      .dot {
+        color: color.scale(colors.$white, $alpha: -60%);
+      }
+
+      .domain {
+        color: color.scale(colors.$white, $alpha: -40%);
+      }
+
+      .tld {
+        color: color.scale(colors.$white, $alpha: -50%);
+      }
+    }
+
+    @include layout.breakpoint(medium) {
+      max-width: 100%;
+    }
+  }
+}
