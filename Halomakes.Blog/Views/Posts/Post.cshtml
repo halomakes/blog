@@ -1,0 +1,16 @@
+@model BlogPostModel;
+@{
+    ViewData["Title"] = $"{Model.Title} - Haley's Blog";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@Model.Title</h1>
+<p>Published @Model.PublishDate</p>
+<div>
+    @foreach (var tag in Model.Tags)
+    {
+        <span>@tag</span>
+    }
+</div>
+
+<partial name="@Model.ViewName"/>
