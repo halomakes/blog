@@ -3,33 +3,38 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>@ViewData["Title"] - Halomakes.Blog</title>
-    <script type="importmap"></script>
+    <title>@ViewData["Title"] - haley</title>
     <script type="application/javascript" crossorigin src="~/dist/main.es.js"
-            asp-append-version="true"></script>
-    <link rel="stylesheet" crossorigin href="~/dist/theme.css" asp-append-version="true">
+            asp-append-version="true" async></script>
+    <link rel="stylesheet" crossorigin href="~/dist/theme.css" asp-append-version="true" media="print"
+          onload="this.media='all'">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cascadia+Code:ital,wght@0,200..700;1,200..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet" media="print" onload="this.media='all'">
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
-        <div class="container-fluid">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Halomakes.Blog</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
-                    aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+    <nav>
+        <span class="title">
+            <span class="selector">
+                    <span class="selected">blog</span>
+                <span class="options">
+                    <a href="https://blog.haley.casa">blog</a>
+                    <a href="https://www.alexgriffith.me">www</a>
+                    <a href="https://youtube.halomak.es">yt</a>
+                </span>
+            </span>
+            <span class="dot">.</span>
+            <span class="domain">haley</span>
+            <span class="dot">.</span>
+            <span class="tld">contact</span>
+        </span>
+        <span class="areas">
+            <a href="#">recent</a>
+            <a href="#">tags</a>
+        </span>
     </nav>
 </header>
 <div class="container">
@@ -38,8 +43,11 @@
     </main>
 </div>
 
-<footer class="border-top footer text-muted">
+<footer>
     <div class="container">
+        &copy; @DateTime.Now.Year
+        <br/>
+        this site is powered by sleep-deprived brain cells
     </div>
 </footer>
 @await RenderSectionAsync("Scripts", required: false)

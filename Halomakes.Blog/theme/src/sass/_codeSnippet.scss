@@ -1,27 +1,66 @@
 @use 'variables/colors' as colors;
 @use 'variables/sizing' as sizing;
 @use 'mixins/card' as card;
+@use 'mixins/typography' as typography;
 @use 'sass:color';
+@use 'icons' as icons;
+
+.code-snippet {
+  @include card.card();
+  padding: 0;
+  $toolbar-color: color.scale(colors.$white, $lightness: -20%);
+  $button-size: 24px;
+  background-color: color.scale(colors.$white, $alpha: -80%);
+  border: 1px solid colors.$primary;
+
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  & > :first-child {
+    display: flex;
+    flex-direction: row;
+    gap: card.$card-padding;
+    align-items: center;
+    padding: card.$card-padding;
+
+    & > label {
+      grid-area: title;
+      color: $toolbar-color;
+      flex-grow: 1;
+    }
+
+    & > a {
+      @include icons.toolbar-button($button-size);
+      color: $toolbar-color;
+      justify-self: end;
+      margin: -0.25 * card.$card-padding;
+
+      &[data-action] {
+        grid-area: copy;
+      }
+
+      &:not([data-action]) {
+        grid-area: download;
+      }
+    }
+  }
+
+
+  label, & > code {
+    @include typography.mono(300);
+  }
+
+  & > code {
+    background-color: colors.$black-bg;
+    padding: card.$card-padding;
+    grid-area: code;
+  }
+}
 
 code {
   white-space: pre-wrap;
   --bs-code-color: initial;
-  position: relative;
-  display: block;
-  padding: card.$card-padding;
-  $bg-color: colors.$black-bg;
-
-
-  &:after {
-    content: ' ';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: -1;
-    @include card.card($bg-color, colors.$white);
-  }
 
   .hljs-class {
 

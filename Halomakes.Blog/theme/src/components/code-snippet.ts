@@ -11,11 +11,21 @@ const languageMap = new Map<string, any>([
 ]);
 
 export class CodeSnippet {
-    public static readonly selector: string = 'code';
+    public static readonly selector: string = '.code-snippet';
     private static initializedLanguages: string[] = [];
+    private code?: string;
 
     constructor(element: HTMLElement) {
-        const language: string = element.lang;
+        const codeElement: HTMLElement = element.lastElementChild as HTMLElement;
+        if (!codeElement)
+            return;
+        this.code = codeElement.innerText;
+        const language: string = (codeElement as any).lang;
+        this.highlightCode(language, codeElement);
+        this.setupCopyButton(element);
+    }
+
+    private highlightCode(language: string, codeElement: HTMLElement) {
         if (!language)
             return;
         if (!languageMap.has(language))
@@ -25,6 +35,19 @@ export class CodeSnippet {
             hljs.registerLanguage(language, languageMap.get(language));
         }
 
-        hljs.highlightElement(element);
+        hljs.highlightElement(codeElement);
+    }
+
+    private setupCopyButton(element: HTMLElement) {
+        const button = element.querySelector('[data-action=copy]');
+        if (!button)
+            return;
+        button.addEventListener('click', () => this.copy());
+    }
+
+    public async copy() {
+        if (this.code) {
+            await navigator.clipboard.writeText(this.code);
+        }
     }
 }

@@ -1,0 +1,18 @@
+@use 'variables/sizing' as sizing;
+@use 'variables/colors' as colors;
+
+@mixin toolbar-button($size:24px) {
+  $color: colors.$black-bg;
+  width: $size;
+  height: $size;
+
+  & > i, & > svg {
+    width: $size;
+    height: $size;
+    display: block;
+  }
+
+  padding: sizing.$padding-sm;
+  border-radius: sizing.$radius-sm;
+  border: 1px solid $color;
+}

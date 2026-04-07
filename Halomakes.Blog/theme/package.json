@@ -11,8 +11,9 @@
   },
   "devDependencies": {
     "@types/node": "^25.5.2",
-    "bootstrap": "^5.3.8",
     "highlight.js": "^11.11.1",
+    "lucide": "^1.7.0",
+    "normalize.css": "^8.0.1",
     "sass-embedded": "^1.99.0",
     "typescript": "~6.0.2",
     "vite": "^8.0.4"

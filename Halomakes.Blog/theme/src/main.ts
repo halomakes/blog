@@ -1,5 +1,6 @@
 import './theme.scss'
 import {CodeSnippet} from "./components/code-snippet.ts";
+import {loadIcons} from "./components/icons.ts";
 
 declare let window: { components: any[] };
 
@@ -27,4 +28,5 @@ const initializeComponent = <TComponent>(type: {
 ready(() => {
     window.components ??= [];
     window.components.concat(initializeComponent(CodeSnippet));
+    loadIcons();
 });

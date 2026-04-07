@@ -1,0 +1,19 @@
+$width-sm: 600px;
+$width-md: 900px;
+$width-lg: 1200px;
+
+@mixin breakpoint($point) {
+  @if $point == small {
+    @media (max-width: #{$width-sm}) {
+      @content;
+    }
+  } @else if $point == medium {
+    @media (max-width: #{$width-md}) {
+      @content;
+    }
+  } @else if $point == large {
+    @media (max-width: #{$width-lg}) {
+      @content;
+    }
+  }
+}

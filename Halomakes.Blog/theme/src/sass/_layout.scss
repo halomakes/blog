@@ -1,0 +1,16 @@
+@use 'mixins/layout' as layout;
+@use 'variables/sizing' as sizing;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  & > * {
+    max-width: sizing.$container-lg;
+
+    @include layout.breakpoint(medium) {
+      max-width: 100%;
+    }
+  }
+}

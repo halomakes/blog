@@ -3,7 +3,7 @@
 $card-padding: sizing.$padding-md;
 $card-radius: sizing.$radius-md;
 
-@mixin card($background-color, $foreground-color) {
+@mixin card($background-color: null, $foreground-color: null) {
   @if ($background-color) {
     background-color: $background-color;
   }
@@ -13,5 +13,6 @@ $card-radius: sizing.$radius-md;
 
   padding: $card-padding;
   border-radius: $card-radius;
+  overflow: hidden;
 }
 

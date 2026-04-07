@@ -1,33 +1,13 @@
-@use './sass/variables/colors' as colors;
+@use 'sass/variables/colors' as colors;
+@use 'sass/mixins/typography' as typography;
 @use "sass:map";
 
-// core files
-@import "bootstrap/scss/functions";
-@import "bootstrap/scss/variables";
-@import "bootstrap/scss/variables-dark";
+@forward 'normalize.css/normalize.css';
+@forward 'sass/codeSnippet';
+@forward 'sass/mixins/typography';
+@forward 'sass/layout';
 
-// remove colours
-$theme-colors: map.remove($theme-colors, "body", "secondary", "tertiary", "emphasis", "border", "primary", "danger", "warning", "info", "light", "dark");
-$theme-colors: map.merge($theme-colors, (
-        "primary": colors.$primary,
-        "secondary": colors.$secondary
-));
-
-
-// core files continued
-@import "bootstrap/scss/maps";
-@import "bootstrap/scss/mixins";
-@import "bootstrap/scss/root";
-@import "bootstrap/scss/utilities";
-@import "bootstrap/scss/reboot";
-@import "bootstrap/scss/type";
-@import "bootstrap/scss/images";
-@import "bootstrap/scss/containers";
-@import "bootstrap/scss/grid";
-@import "bootstrap/scss/helpers";
-@import "bootstrap/scss/utilities/api";
-
-// extra components
-@import "bootstrap/scss/navbar";
-@import "bootstrap/scss/nav";
-@import "sass/codeSnippet";
+body {
+  background-color: colors.$dark-bg;
+  color: colors.$white;
+}
