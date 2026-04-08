@@ -1610,17 +1610,24 @@ var I = class e {
 			t.textContent = "header { display: none!important; } main {padding-top: 0!important}", e.target.contentDocument.head.appendChild(t);
 		});
 	}
-}, R = (e) => {
-	document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", e) : e();
+}, R = class {
+	static selector = "nav";
+	constructor(e) {
+		let t = window.location.host.split(".");
+		t.length < 2 || (Array.from(e.querySelectorAll(".domain")).forEach((e) => e.textContent = t[t.length - 2]), Array.from(e.querySelectorAll(".tld")).forEach((e) => e.textContent = t[t.length - 1]));
+	}
 }, z = (e) => {
+	document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", e) : e();
+}, B = (e) => {
 	let t = document.querySelectorAll(e.selector);
 	return Array.from(t).map((e) => e).map((t) => new e(t));
 };
-R(() => {
+z(() => {
 	window.components = [
-		...z(b),
-		...z(I),
-		...z(L)
+		...B(b),
+		...B(I),
+		...B(L),
+		...B(R)
 	], F();
 });
 //#endregion
