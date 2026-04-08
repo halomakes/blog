@@ -17,6 +17,7 @@ header {
   font-size: 24px;
   background-color: color.scale(colors.$dark-bg, $alpha: -20%);
   padding: sizing.$navbar-padding;
+  z-index: 2;
 
   a {
     color: color.scale(colors.$white, $alpha: -20%);

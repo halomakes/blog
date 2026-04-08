@@ -10,7 +10,7 @@
   }
 }
 
-@mixin shift($amount: 12px, $opacityMin: 0.8, $opacityMax: 1,$bar-color: colors.$primary,  $inner: false) {
+@mixin shift($amount: 12px, $opacityMin: 0.8, $opacityMax: 1,$bar-color: colors.$white,  $inner: false) {
   $shift: $amount;
   position: relative;
 
