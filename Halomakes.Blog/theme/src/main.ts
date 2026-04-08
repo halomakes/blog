@@ -3,6 +3,7 @@ import {CodeSnippet} from "./components/code-snippet.ts";
 import {loadIcons} from "./components/icons.ts";
 import {Selector} from "./components/selector..ts";
 import {ImmichGallery} from "./components/immich-gallery.ts";
+import { Navbar } from "./components/navbar.ts";
 
 declare let window: { components: any[] };
 
@@ -31,7 +32,8 @@ ready(() => {
     window.components = [
         ...initializeComponent(CodeSnippet),
         ...initializeComponent(Selector),
-        ...initializeComponent(ImmichGallery)
+        ...initializeComponent(ImmichGallery),
+        ...initializeComponent(Navbar)
     ];
     loadIcons();
 });

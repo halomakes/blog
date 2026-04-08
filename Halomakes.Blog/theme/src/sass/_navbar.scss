@@ -52,6 +52,10 @@ header {
       justify-content: flex-start;
       align-items: center;
 
+      .options {
+        text-align: right;
+      }
+
       .dot {
         color: color.scale(colors.$white, $alpha: -60%);
       }
