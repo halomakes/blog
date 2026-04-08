@@ -3,17 +3,19 @@
 @use 'mixins/layout';
 @use 'variables/colors';
 @use 'mixins/hover';
+@use 'mixins/blur';
 @use 'sass:color';
 
 header {
   min-height: sizing.$navbar-height - (2 * sizing.$navbar-padding);
   margin-bottom: sizing.$padding-md;
-  @include typography.mono();
+  @include typography.mono;
+  @include blur.blur;
   display: flex;
   flex-direction: column;
   align-items: center;
   font-size: 24px;
-  background-color: color.scale(colors.$dark-bg, $alpha: -30%);
+  background-color: color.scale(colors.$dark-bg, $alpha: -20%);
   padding: sizing.$navbar-padding;
 
   a {

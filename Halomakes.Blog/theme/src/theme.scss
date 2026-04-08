@@ -13,6 +13,11 @@
 @forward 'sass/post-item';
 
 body {
-  background-color: colors.$dark-bg;
+  background: colors.$dark-bg linear-gradient(125deg, colors.$light 0%, colors.$tertiary 17%, colors.$dark 60%, colors.$dark-bg 100%) fixed;
   color: colors.$white;
+}
+
+canvas#tsparticles {
+  mix-blend-mode: screen;
+  opacity: 0.15;
 }

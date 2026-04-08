@@ -6,7 +6,7 @@ export default {
         sourcemap: true,
         lib: {
             name: 'blog',
-            entry: ['src/main.ts'],
+            entry: ['src/main.ts', 'src/particles.ts'],
             fileName: (format, entryName) => `${entryName}.${format}.js`,
             cssFileName: 'theme',
         }

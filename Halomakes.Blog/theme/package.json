@@ -10,6 +10,7 @@
     "watch": "vite build --watch"
   },
   "devDependencies": {
+    "@tsparticles/preset-triangles": "^3.2.0",
     "@types/node": "^25.5.2",
     "highlight.js": "^11.11.1",
     "lucide": "^1.7.0",

@@ -6,6 +6,8 @@
     <title>@ViewData["Title"] - haley</title>
     <script type="application/javascript" crossorigin src="~/dist/main.es.js"
             asp-append-version="true" async></script>
+    <script type="application/javascript" crossorigin src="~/dist/particles.es.js"
+            asp-append-version="true" async></script>
     <link rel="stylesheet" crossorigin href="~/dist/theme.css" asp-append-version="true" media="print"
           onload="this.media='all'">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,6 +23,7 @@
     <link rel="manifest" href="/site.webmanifest" />
 </head>
 <body>
+<canvas id="tsparticles"></canvas>
 <header>
     <nav>
         <span class="title">

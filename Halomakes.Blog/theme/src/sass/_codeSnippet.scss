@@ -1,12 +1,14 @@
 @use 'variables/colors' as colors;
 @use 'variables/sizing' as sizing;
 @use 'mixins/card' as card;
+@use 'mixins/blur';
 @use 'mixins/typography' as typography;
 @use 'sass:color';
 @use 'icons' as icons;
 
 .code-snippet {
-  @include card.card();
+  @include card.card;
+  @include blur.blur;
   padding: 0;
   $toolbar-color: color.scale(colors.$white, $lightness: -20%);
   $button-size: 24px;
@@ -54,7 +56,7 @@
   }
 
   & > code {
-    background-color: colors.$black-bg;
+    background-color: color.scale(colors.$black-bg, $alpha: -20%);
     padding: card.$card-padding;
     grid-area: code;
   }

@@ -1,0 +1,3 @@
+@mixin blur($radius: 8px) {
+  backdrop-filter: blur($radius);
+}
