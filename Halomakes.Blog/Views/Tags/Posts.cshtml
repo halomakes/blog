@@ -1,0 +1,9 @@
+@model IEnumerable<BlogPostModel>
+@{
+    ViewBag.Title = $"Posts for {ViewBag.Tag}";
+}
+
+<h1>Posts tagged with @ViewBag.Tag</h1>
+<div>
+    <partial name="_PostList" model="Model"/>
+</div>

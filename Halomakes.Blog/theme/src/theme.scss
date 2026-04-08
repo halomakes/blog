@@ -9,6 +9,8 @@
 @forward "sass/navbar";
 @forward 'sass/selector';
 @forward 'sass/footer';
+@forward 'sass/tag';
+@forward 'sass/post-item';
 
 body {
   background-color: colors.$dark-bg;

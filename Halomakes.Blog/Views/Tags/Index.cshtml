@@ -1,0 +1,10 @@
+@model IEnumerable<TagModel>
+@{
+    ViewBag.Title = "Top Tags";
+}
+
+<h1>Tags</h1>
+@foreach (var tag in Model)
+{
+    <tag-link tag="@tag.Name" count="@tag.Count"></tag-link>
+}

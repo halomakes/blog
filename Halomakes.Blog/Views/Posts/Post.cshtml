@@ -1,16 +1,37 @@
+@using Halomakes.Blog.Services
 @model BlogPostModel;
+@inject PostsService service;
 @{
-    ViewData["Title"] = $"{Model.Title} - Haley's Blog";
+    ViewData["Title"] = Model.Title;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>@Model.Title</h1>
-<p>Published @Model.PublishDate</p>
+<p class="date">Published @Model.PublishDate</p>
 <div>
     @foreach (var tag in Model.Tags)
     {
-        <span class="badge rounded-pill">@tag</span>
+        <tag-link tag="@tag"></tag-link>
     }
 </div>
 
 <partial name="@Model.ViewName"/>
+
+@{
+    var related = service.GetPosts()
+        .Where(p => p != Model)
+        .OrderByDescending(static p => p.PublishDate)
+        .Select(p => (post: p, overlap: p.Tags.Count(t => Model.Tags.Contains(t))))
+        .Where(static g => g.overlap > 0)
+        .OrderByDescending(static g => g.overlap)
+        .Take(5)
+        .Select(static g => g.post)
+        .ToList();
+}
+@if (related.Any())
+{
+    <div class="related">
+        <h2>Related Posts</h2>
+        <partial name="_PostList" model="related"/>
+    </div>
+}

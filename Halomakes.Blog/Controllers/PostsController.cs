@@ -17,9 +17,13 @@ public class PostsController(PostsService postsService) : Controller
             : View("NotFound");
     }
 
-    [HttpGet("/posts/list")]
-    public IActionResult GetPosts()
+    [HttpGet("/posts")]
+    public IActionResult GetRecentPosts()
     {
-        return Ok(postsService.GetPosts());
+        var posts = postsService.GetPosts()
+            .OrderByDescending(static p => p.PublishDate)
+            .Take(10)
+            .ToList();
+        return View("Recent", posts);
     }
 }

@@ -1,0 +1,9 @@
+@use 'variables/colors';
+@use 'mixins/hover';
+
+.post-item {
+  text-decoration: none !important;
+  color: colors.$white;
+  @include hover.shift($opacityMin: 0.6, $inner: true);
+  display: block;
+}

@@ -1,0 +1,12 @@
+@model IEnumerable<BlogPostModel>
+
+<div class="posts">
+@foreach (var post in Model)
+{
+    <a asp-controller="Posts" asp-action="GetPost" asp-route-year="@post.PublishDate.Year"
+       asp-route-month="@post.PublishDate.Month" asp-route-slug="@post.Slugs.FirstOrDefault()" class="post-item">
+        <h3>@post.Title</h3>
+        <p class="date">@post.PublishDate</p>
+    </a>
+}
+</div>

@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 $primary: #312773;
 $secondary: #8466F2;
 $tertiary: #3A29A6;
@@ -7,6 +9,7 @@ $dark: #1E1940;
 $black-bg: #12120E;
 $dark-bg: #1D1D2B;
 $white: white;
+$dim: color.scale($white, $lightness: -30%);
 
 $success: #80F5C2;
 $info: #F5DFC8;
