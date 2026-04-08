@@ -13,7 +13,6 @@
   $toolbar-color: color.scale(colors.$white, $lightness: -20%);
   $button-size: 24px;
   background-color: color.scale(colors.$white, $alpha: -80%);
-  border: 1px solid colors.$primary;
   margin-top: card.$card-padding;
   margin-bottom: card.$card-padding;
 

@@ -2,6 +2,7 @@ import './theme.scss'
 import {CodeSnippet} from "./components/code-snippet.ts";
 import {loadIcons} from "./components/icons.ts";
 import {Selector} from "./components/selector..ts";
+import {ImmichGallery} from "./components/immich-gallery.ts";
 
 declare let window: { components: any[] };
 
@@ -29,7 +30,8 @@ const initializeComponent = <TComponent>(type: {
 ready(() => {
     window.components = [
         ...initializeComponent(CodeSnippet),
-        ...initializeComponent(Selector)
+        ...initializeComponent(Selector),
+        ...initializeComponent(ImmichGallery)
     ];
     loadIcons();
 });

@@ -1,9 +1,12 @@
 @use '../variables/sizing';
+@use '../variables/colors';
 
 $card-padding: sizing.$padding-md;
 $card-radius: sizing.$radius-md;
 
 @mixin card($background-color: null, $foreground-color: null) {
+  border: 1px solid colors.$primary;
+
   @if ($background-color) {
     background-color: $background-color;
   }
