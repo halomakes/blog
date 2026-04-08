@@ -4,8 +4,8 @@
 footer {
   padding: 36px;
   text-align: center;
-  opacity: 20%;
+  opacity: 30%;
   font-style: italic;
-  color: colors.$white;
+  color: colors.$secondary;
   @include typography.mono;
 }
