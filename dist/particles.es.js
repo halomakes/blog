@@ -3451,15 +3451,22 @@ async function Ri(e, t = !0) {
 //#endregion
 //#region src/particles.ts
 (async () => {
-	await Ri(nr), await nr.load({
+	await Ri(nr), window.particles = await nr.load({
 		id: "tsparticles",
 		options: {
 			preset: "triangles",
-			particles: { move: { speed: {
-				min: .003,
-				max: .2
-			} } },
-			fpsLimit: 30
+			particles: {
+				move: { speed: {
+					min: .003,
+					max: .2
+				} },
+				number: { density: {
+					enable: !0,
+					width: 1920,
+					height: 1080
+				} }
+			},
+			fpsLimit: 60
 		}
 	});
 })();
