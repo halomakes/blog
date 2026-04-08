@@ -1602,14 +1602,26 @@ var I = class e {
 	toggle(t) {
 		t.preventDefault(), this.element.classList.toggle(e.activeClass);
 	}
-}, L = (e) => {
-	document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", e) : e();
+}, L = class {
+	static selector = "immich-gallery";
+	constructor(e) {
+		e.addEventListener("load", (e) => {
+			let t = document.createElement("style");
+			t.textContent = "header { display: none!important; } main {padding-top: 0!important}", e.target.contentDocument.head.appendChild(t);
+		});
+	}
 }, R = (e) => {
+	document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", e) : e();
+}, z = (e) => {
 	let t = document.querySelectorAll(e.selector);
 	return Array.from(t).map((e) => e).map((t) => new e(t));
 };
-L(() => {
-	window.components = [...R(b), ...R(I)], F();
+R(() => {
+	window.components = [
+		...z(b),
+		...z(I),
+		...z(L)
+	], F();
 });
 //#endregion
 
