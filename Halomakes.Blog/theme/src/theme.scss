@@ -21,4 +21,8 @@ body {
 canvas#tsparticles {
   mix-blend-mode: screen;
   opacity: 0.15;
+
+  &:not([data-generated]) {
+    display: none;
+  }
 }

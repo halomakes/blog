@@ -14,9 +14,15 @@ a.tag {
   border-radius: $height * 0.5;
   background-color: color.scale(colors.$white, $alpha: -100%);
   transition: background-color animation.$duration animation.$ease;
-  $margin: 20px;
-  margin-top: $margin;
-  margin-bottom: $margin;
+  display: inline-flex;
+  flex-direction: row;
+  gap: 4px;
+  align-items: center;
+  margin: 4px;
+
+  & > .count {
+    opacity: .6;
+  }
 
   &:hover {
     background-color: color.scale(colors.$white, $alpha: -80%);
