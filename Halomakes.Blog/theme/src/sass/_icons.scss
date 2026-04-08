@@ -1,5 +1,7 @@
 @use 'variables/sizing' as sizing;
 @use 'variables/colors' as colors;
+@use 'variables/animation';
+@use 'sass:color';
 
 @mixin toolbar-button($size:24px) {
   $color: colors.$black-bg;
@@ -15,4 +17,10 @@
   padding: sizing.$padding-sm;
   border-radius: sizing.$radius-sm;
   border: 1px solid $color;
+  background-color: color.scale($color, $alpha: -100%);
+  transition: background-color animation.$duration animation.$ease;
+
+  &:hover {
+    background-color: color.scale($color, $alpha: -80%);
+  }
 }
