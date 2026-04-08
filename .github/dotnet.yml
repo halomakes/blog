@@ -1,0 +1,40 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: .NET
+permissions:
+  contents: write
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 10.x
+      - uses: actions/setup-node@v6
+        name: Setup Node.JS
+        node-version: 25.x
+      - name: Restore Node Packages
+        run: npm --prefix ./Halomakes.Blog/theme install
+      - name: Build Vite bundles
+        run: npm  --prefix ./Halomakes.Blog/theme run build
+      - name: Restore NuGet packages
+        run: dotnet restore
+      - name: Build Solution
+        run: dotnet build --no-restore
+      - name: Generate Offline Pages
+        run: dotnet run --project Halomakes.Blog.OfflineRenderer/Halomakes.Blog.OfflineRenderer.csproj
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: Halomakes.Blog.OfflineRenderer/bin/Debug/net10.0/wwwroot

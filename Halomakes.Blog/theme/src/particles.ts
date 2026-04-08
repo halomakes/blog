@@ -10,9 +10,10 @@ import {loadTrianglesPreset} from "@tsparticles/preset-triangles"
             preset: "triangles",
             particles: {
                 move: {
-                    speed: {min: .001, max: .1}
+                    speed: {min: .003, max: .2}
                 }
-            }
+            },
+            fpsLimit: 30
         },
     });
 })();
