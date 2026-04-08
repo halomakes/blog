@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Using PowerShell to burn FLACs with CD-Text - haley</title>
+    <script type="application/javascript" crossorigin src="/dist/main.es.js?v=93eOVZzaCgFqx9uzijaHP2HyVht9YEluSbUgSWO_ngc" async></script>
+    <script type="application/javascript" crossorigin src="/dist/particles.es.js?v=0RUzaebFwNgA0qL96xO4jm99rVgl2IyHIPppCafKoSM" async></script>
+    <link rel="stylesheet" crossorigin href="/dist/theme.css?v=70m2Gfjzjcx4D6oF8ZpEC4IOmasp0IRhlOQGwvH1VXY" media="print" onload="this.media='all'">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cascadia+Code:ital,wght@0,200..700;1,200..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet" media="print" onload="this.media='all'">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="MyWebSite" />
+    <link rel="manifest" href="/site.webmanifest" />
+</head>
+<body>
+<canvas b-q4u8wyg0h0 id="tsparticles"></canvas>
+<header b-q4u8wyg0h0>
+    <nav b-q4u8wyg0h0>
+        <span b-q4u8wyg0h0 class="title">
+            <span b-q4u8wyg0h0 class="selector">
+                <a b-q4u8wyg0h0 href="#" class="selected">
+                    <i b-q4u8wyg0h0 data-lucide="chevrons-down"></i>
+                    <span b-q4u8wyg0h0>blog</span>
+                </a>
+                <span b-q4u8wyg0h0 class="options">
+                    <a b-q4u8wyg0h0 href="/">blog</a>
+                    <a b-q4u8wyg0h0 href="https://www.alexgriffith.me">www</a>
+                    <a b-q4u8wyg0h0 href="https://www.youtube.com/halomademeapc">yt</a>
+                </span>
+            </span>
+            <span b-q4u8wyg0h0 class="dot">.</span>
+            <span b-q4u8wyg0h0 class="domain">haley</span>
+            <span b-q4u8wyg0h0 class="dot">.</span>
+            <span b-q4u8wyg0h0 class="tld">contact</span>
+        </span>
+        <span b-q4u8wyg0h0 class="areas">
+            <a href="/posts">recent</a>
+            <a href="/tags">tags</a>
+        </span>
+    </nav>
+</header>
+<div b-q4u8wyg0h0 class="container">
+    <main b-q4u8wyg0h0 role="main" class="pb-3">
+        
+<h1>Using PowerShell to burn FLACs with CD-Text</h1>
+<p class="date">Published 04/07/2026</p>
+<div>
+        <a class="tag" href="/tags/powershell">powershell <span class="count">(1)</span></a>
+        <a class="tag" href="/tags/music">music <span class="count">(1)</span></a>
+        <a class="tag" href="/tags/physical-media">physical-media <span class="count">(1)</span></a>
+</div>
+
+
+<p>
+    I've been working on my grandpa's old minivan lately, and have been wanting to burn some CDs to enjoy on the radio
+    in there. I'm one of those weirdos that still maintains a music library (some of the songs date back to my first
+    iPod Nano) so I have a lot of FLACs on-hand. I burned (burnt?) a bunch of discs from my MusicBee library but was
+    disappointed after hitting the road and realizing that many of them just play an intensely unpleasant digital
+    static. I suspect that this is to do with much of my modern music being in "Hi-Res" 24bit audio, sometimes in
+    different sample rates than CD's standard 44.1kHz. MusicBee didn't appear to bother converting these or warning
+    about the issue and happily wasted some happy discuses on my behalf.
+</p>
+<p>
+    From looking online, the consensus appears to be that the way to burn CDs (and include CD-Text data) is using
+    ImgBurn. ImgBurn gave me some definite nostalgia hearing the chime at the end of a burn, but the process of getting
+    everything that far was pretty tedious. You have to transcode/resample the audio to make it compatible with the CD
+    format and get the tags in to build a cue file before you can burn it.
+</p>
+<p>
+    So, as is seemingly the norm for me, instead of spending a few minutes doing the tedious/repetitive task, I wasted
+    my entire evening writing a PowerShell script to do it for me. Point it at a folder of FLACs and it will convert
+    them to the appropriate format, generate a CUE file with CD-Text information, and open up ImgBurn with the settings
+    loaded up so all the interaction from there is clicking the burn button. Thought I'd share in case anyone winds up
+    with the same very specific issue.
+</p>
+<p>
+    Enjoy!
+</p>
+<div class="code-snippet"><div><label>2026_04_BurnCdWithPowershell.ps1</label><a href="/snippets/2026_04_BurnCdWithPowershell.ps1" target="_blank" title="Download"><i data-lucide="download"></i></a><a data-action="copy" href="#" title="Copy to Clipboard"><i data-lucide="clipboard-copy"></i></a></div><code lang="ps1">class Song {&#xA;    hidden [string[]] $FfmpegOutput;&#xA;    hidden [string] $CuePath;&#xA;&#xA;    [string] $Album;&#xA;    [string] $Artist;&#xA;    [string] $Title;&#xA;    [string] $OutputPath;&#xA;    [string] $SourcePath;&#xA;    [int] $Index;&#xA;&#xA;    Song([System.IO.FileSystemInfo] $file, [int] $index) {&#xA;        $this.SourcePath = $file;&#xA;        $this.CuePath = &quot;$($file.BaseName).wav&quot;&#xA;        $this.OutputPath = &quot;./Burn/$($this.CuePath)&quot;;&#xA;        $this.Index = $index;&#xA;    }&#xA;&#xA;    [void] Convert() {&#xA;        $this.FfmpegOutput = (ffmpeg -i $this.SourcePath -ar 44100 -sample_fmt s16 -map_metadata 0:s:0 -y $this.OutputPath 2&gt;&amp;1);&#xA;        $this.Album = $this.GetMetaAttribute(&quot;album&quot;);&#xA;        $this.Artist = $this.GetMetaAttribute(&quot;artist&quot;);&#xA;        $this.Title = $this.GetMetaAttribute(&quot;title&quot;);&#xA;    }&#xA;&#xA;    hidden [string] GetMetaAttribute($attribute) {&#xA;        if ([string]::IsNullOrWhiteSpace($this.FfmpegOutput)) {&#xA;            return $null;&#xA;        }&#xA;        [string] $line = $this.FfmpegOutput | Select-String &quot;   $Attribute&quot;;&#xA;        if ([string]::IsNullOrWhiteSpace($line)) {&#xA;            return $null;&#xA;        }&#xA;        [string[]] $split = $line.Split(&quot;:&quot;);&#xA;        if ($null -eq $split -or $split.Length -lt 2) {&#xA;            return $null;&#xA;        }&#xA;        [string] $trimmed = $split[1].Trim();&#xA;&#xA;        # Normalize the text using FormKD (Compatibility Decomposition, followed by Canonical Composition)&#xA;        $normalizedText = [System.Text.RegularExpressions.Regex]::Replace($trimmed, &#x27;\p{M}&#x27;, &#x27;&#x27;).Normalize([System.Text.NormalizationForm]::FormKD)&#xA;&#xA;        # Remove diacritic marks&#xA;        return [System.Text.RegularExpressions.Regex]::Replace($normalizedText, &#x27;\p{M}&#x27;, &#x27;&#x27;)&#xA;    }&#xA;&#xA;    [string[]] CreateCueSegment() {&#xA;        return &quot;&#xA;FILE `&quot;$($this.CuePath)`&quot; WAVE&#xA;  TRACK $($this.Index.ToString(&#x27;00&#x27;)) AUDIO&#xA;    TITLE `&quot;$($this.Title)`&quot;&#xA;    PERFORMER `&quot;$($this.Artist)`&quot;&#xA;    INDEX 01 00:00:00&quot;;&#xA;    }&#xA;}&#xA;&#xA;&#xA;function ConvertTo-RedbookAudio {&#xA;    if (-not [bool] (Get-Command -ErrorAction Ignore -Type Application &quot;ffmpeg&quot;)) {&#xA;        Write-Error &quot;ffmpeg does not appear to be installed or is not registered in the path.&quot;;&#xA;        return;&#xA;    }&#xA;&#xA;    # convert / resample for CD&#xA;    New-Item -Force -Type Directory &quot;Burn&quot; | Out-Null;&#xA;&#xA;    [Song[]] $songs = @();&#xA;    [int] $index = 1;&#xA;    [System.IO.FileSystemInfo[]] $flacs = Get-ChildItem -Filter &quot;*.flac&quot;;&#xA;    $flacs | Select-Object | ForEach-Object {&#xA;        Write-Progress -PercentComplete ($index * 100 / $flacs.Length ) -Activity &quot;Converting Songs&quot; -Status &quot;Transcoding $_&quot;;&#xA;        [Song] $song = [Song]::new($_, $index);&#xA;        $songs &#x2B;= $song;&#xA;        $song.Convert();&#xA;&#xA;        $index&#x2B;&#x2B;;&#xA;    }&#xA;&#xA;    # Create CUE File to burn&#xA;    [string] $albumName = $songs[0].Album;&#xA;    [string] $cueSheet = &quot;TITLE `&quot;$albumName`&quot;&#xA;PERFORMER `&quot;$($songs[0].Artist)`&quot;&quot;;&#xA;    $songs | ForEach-Object {&#xA;        $cueSheet &#x2B;= $_.CreateCueSegment();&#xA;    }&#xA;&#xA;    $cueSheet | Out-File -Force &quot;./Burn/$albumName.cue&quot;;&#xA;&#xA;    # launch IMGBurn if we can&#xA;    [string] $executablePath = &quot;$(${env:ProgramFiles(x86)})\IMGBurn\ImgBurn.exe&quot;;&#xA;    if (Test-Path $executablePath) {&#xA;        $cueFile = Get-Item &quot;./Burn/$albumName.cue&quot;;&#xA;        &amp; $executablePath /mode WRITE /source $cueFile.FullName;&#xA;    }&#xA;}</code></div>
+
+
+    </main>
+</div>
+
+<footer b-q4u8wyg0h0>
+    <div b-q4u8wyg0h0 class="container">
+        Generated 04/08/2026 03:27:40 <br b-q4u8wyg0h0/>
+        this site is powered by sleep-deprived brain cells
+    </div>
+</footer>
+
+</body>
+</html>
