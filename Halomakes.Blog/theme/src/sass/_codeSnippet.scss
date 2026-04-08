@@ -28,9 +28,10 @@
     padding: card.$card-padding;
 
     & > label {
-      grid-area: title;
       color: $toolbar-color;
       flex-grow: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     & > a {
@@ -38,14 +39,6 @@
       color: $toolbar-color;
       justify-self: end;
       margin: -0.25 * card.$card-padding;
-
-      &[data-action] {
-        grid-area: copy;
-      }
-
-      &:not([data-action]) {
-        grid-area: download;
-      }
     }
   }
 
@@ -57,7 +50,8 @@
   & > code {
     background-color: color.scale(colors.$black-bg, $alpha: -20%);
     padding: card.$card-padding;
-    grid-area: code;
+    overflow-x: scroll;
+    text-wrap: nowrap;
   }
 }
 
