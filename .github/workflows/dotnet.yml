@@ -23,7 +23,8 @@ jobs:
           dotnet-version: 10.x
       - uses: actions/setup-node@v6
         name: Setup Node.JS
-        node-version: 25.x
+        with:
+          node-version: 25.x
       - name: Restore Node Packages
         run: npm --prefix ./Halomakes.Blog/theme install
       - name: Build Vite bundles
