@@ -14,13 +14,18 @@
 @forward 'sass/frames';
 
 html {
-  background: colors.$dark-bg linear-gradient(125deg, colors.$light 0%, colors.$tertiary 17%, colors.$dark 60%, colors.$dark-bg 100%);
+  background: #201D38 linear-gradient(125deg, colors.$light 0%, colors.$tertiary 17%, colors.$dark 60%, colors.$dark-bg 100%);
   color: colors.$white;
 }
 
+body {
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
 canvas#tsparticles {
-  mix-blend-mode: screen;
-  opacity: 0.15;
+  mix-blend-mode: lighten;
+  opacity: 0.3;
+  background-color: #201D38 !important;;
 
   &:not([data-generated]) {
     display: none;
