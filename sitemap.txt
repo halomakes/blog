@@ -1,0 +1,14 @@
+/
+/posts
+/posts/2026/4/using-powershell-to-burn-flacs-with-cd-text
+/posts/2026/4/burning-cds-with-powershell
+/posts/2026/4/progress-on-the-powermac-g5-pc-build-resurrection
+/tags
+/tags/powershell
+/tags/music
+/tags/physical-media
+/tags/gaming
+/tags/modding
+/tags/makes
+/tags/3d-printing
+/tags/vintage
