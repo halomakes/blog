@@ -9,35 +9,21 @@ public partial class Program
     private const string OutputDirectory = "wwwroot";
     private static WebApplicationFactory<Halomakes.Blog.Program>? factory;
 
-    public static async Task Main(string[] args)
+    public static async Task Main(string[] _)
     {
-        // var resources = new[]
-        // {
-        //     "dist/main.es.js",
-        //     "dist/particles.es.js",
-        //     "dist/theme.css",
-        //     "snippets/2026_04_BurnCdWithPowershell.ps1",
-        //     "favicon.svg",
-        //     "favicon.ico",
-        //     "apple-touch-icon.png",
-        //     "favicon-96x96.png",
-        //     "site.webmanifest",
-        //     "web-app-manifest-192x192.png",
-        //     "web-app-manifest-512x512.png"
-        // };
-
         factory = new WebApplicationFactory<Halomakes.Blog.Program>();
         using var client = factory.CreateClient();
 
 
         var resources = GetStaticResources().ToList();
-        var pages = GetApplicationRoutes().ToList();
+        var pages = await GetApplicationRoutes(client).ToListAsync();
 
         foreach (var resource in resources)
             await StoreResource(client, resource, resource);
         foreach (var page in pages)
             await StoreResource(client, page, string.IsNullOrEmpty(page) ? "index.html" : $"{page}/index.html");
         await StoreResource(client, "posts/404", "404.html");
+        await StoreResource(client, "sitemap.xml", "sitemap.xml");
     }
 
     private static async Task StoreResource(HttpClient client, string fetchUrl, string filePath)
@@ -71,24 +57,14 @@ public partial class Program
         }
     }
 
-    private static IEnumerable<string> GetApplicationRoutes()
+    private static async IAsyncEnumerable<string> GetApplicationRoutes(HttpClient client)
     {
-        var posts = factory!.Services.GetRequiredService<PostsService>().GetPosts();
-        foreach (var post in posts)
-        foreach (var slug in post.Slugs)
-        {
-            yield return $"posts/{post.PublishDate.Year}/{post.PublishDate.Month:00}/{slug}";
-            if (post.PublishDate.Month < 10)
-                yield return $"posts/{post.PublishDate.Year}/{post.PublishDate.Month}/{slug}";
-        }
-
-        foreach (var tag in posts.SelectMany(static p => p.Tags).Distinct())
-            yield return $"tags/{tag}";
-
-        yield return "tags";
-        yield return "posts";
-        yield return "";
-        yield return "404";
+        var sitemap = await client.GetStringAsync("sitemap.txt");
+        foreach (var url in sitemap.Split(Environment.NewLine)
+                     .Select(static u => u.TrimStart('/'))
+                     .Select(u => string.Concat(u))
+                     .Where(static u => !string.IsNullOrWhiteSpace(u)))
+            yield return url;
     }
 
     private static IEnumerable<string> GetStaticResources()
