@@ -33,18 +33,19 @@ public class Program
                 pattern: "{controller=Home}/{action=Index}/{id?}")
             .WithStaticAssets();
 
-        app.UseStatusCodePages(context =>
+        app.UseStatusCodePages(async context =>
         {
             var response = context.HttpContext.Response;
 
             if (response.StatusCode == 404)
-                response.Redirect($"/posts/404");
+            {
+                response.Redirect("/posts/not-found");
+            }
 
-            // just keeping static generator from getting amgy
-            if (response.StatusCode is < 200 or >= 300)
+            if (response.StatusCode is < 200 or >= 400)
+            {
                 response.StatusCode = 200;
-
-            return Task.CompletedTask;
+            }
         });
 
         app.Run();

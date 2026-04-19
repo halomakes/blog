@@ -26,4 +26,10 @@ public class PostsController(PostsService postsService) : Controller
             .ToList();
         return View("Recent", posts);
     }
+
+    [HttpGet("/posts/not-found")]
+    public IActionResult NotFound()
+    {
+        return View();
+    }
 }
