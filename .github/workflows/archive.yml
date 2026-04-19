@@ -1,9 +1,30 @@
 name: Wayback Machine Crawl
 on: workflow_dispatch
 jobs:
-  publish:
+  domainA:
+    name: Crawl blog.halomak.es
     environment: crawl-delay
     runs-on: ubuntu-latest
     steps:
       - name: Archive Site
         uses: JamieMagee/wayback@v2
+        with:
+          url: blog.halomak.es
+  domainB:
+    name: Crawl blog.alexgriffith.me
+    environment: crawl-delay
+    runs-on: ubuntu-latest
+    steps:
+      - name: Archive Site
+        uses: JamieMagee/wayback@v2
+        with:
+          url: blog.alexgriffith.me
+  domainC:
+    name: Crawl blog.haley.contact
+    environment: crawl-delay
+    runs-on: ubuntu-latest
+    steps:
+      - name: Archive Site
+        uses: JamieMagee/wayback@v2
+        with:
+          url: blog.haley.contact
