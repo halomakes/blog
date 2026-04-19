@@ -1,16 +1,44 @@
 name: Wayback Machine Crawl
 on: workflow_dispatch
+permissions:
+  contents: read
 jobs:
   archive:
     name: Crawl Sites
     environment: crawl-delay
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v6
+        name: Checkout Sitemap File
+        with:
+          ref: gh-pages
+          sparse-checkout: |
+            sitemap.txt
+          sparse-checkout-cone-mode: false
+      - name: Read file contents
+        id: read_file
+        uses: andstor/file-reader-action@v1
+        with:
+          path: "sitemap.txt"
+      - id: urls
+        shell: pwsh
+        run: |
+          [string[]] $urls = @();
+          [string[]] $domains = @("https://blog.halomak.es", "https://blog.haley.casa", "https://blog.alexgriffith.me")
+          Get-Content "sitemap.txt" | ForEach-Object {
+            [string] $path = $_;
+            $domains | ForEach-Object {
+              [string] $domain = $_;
+              $urls += "$($domain)$($path)";
+            }
+          }
+          [string] $multilineUrls = [string]::Join("`n", $urls);
+          "urls<<EOF`n$multilineUrls`nEOF" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+      - name: List URLs
+        run: |
+          echo "${{ steps.urls.outputs.urls }}"
       - name: Archive Site
         uses: JamieMagee/wayback@v2
         with:
-          url: |-
-            blog.halomak.es
-            blog.alexgriffith.me
-            blog.haley.contact
+          url: ${{ steps.urls.outputs.urls }}
           saveOutlinks: true
