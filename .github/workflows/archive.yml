@@ -1,3 +1,4 @@
+name: Wayback Machine Crawl
 on: deployment_status
 jobs:
   publish:
