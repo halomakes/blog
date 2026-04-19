@@ -1,8 +1,12 @@
 name: Wayback Machine Crawl
-on: deployment_status
+on:
+  workflow_run:
+    workflows: [pages build and deployment]
+    types:
+      - completed
 jobs:
   publish:
-    if: github.event.deployment_status.state == 'success'
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - name: Archive Site
