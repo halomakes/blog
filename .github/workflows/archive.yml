@@ -27,7 +27,10 @@ jobs:
             [string] $path = $_;
             $domains | ForEach-Object {
               [string] $domain = $_;
-              $urls += "$($domain)$($path)";
+              $url = "$($domain)$($path)"
+              $urls += $url;
+              Write-Host "Warming up $url";
+              Invoke-WebRequest $url -ErrorAction Ignore -ProgressAction SilentlyContinue | Out-Null;
             }
           }
           [string] $multilineUrls = [string]::Join("`n", $urls);
