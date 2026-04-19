@@ -32,7 +32,7 @@ jobs:
               $urls += "$($domain)$($path)";
             }
           }
-          [string] $multilineUrls = [string]::Join("\n", $domains);
+          [string] $multilineUrls = [string]::Join("`n", $urls);
           "urls=$multilineUrls" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
       - name: List URLs
         run: |
