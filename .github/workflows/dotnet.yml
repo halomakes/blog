@@ -4,14 +4,12 @@
 name: Build Static Site
 permissions:
   contents: write
+  actions: write
 on:
   push:
     branches: [ "main", "master" ]
 jobs:
   build:
-    permissions:
-      actions: write
-      contents: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
