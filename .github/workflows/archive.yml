@@ -33,7 +33,7 @@ jobs:
             }
           }
           [string] $multilineUrls = [string]::Join("`n", $urls);
-          "urls=$multilineUrls" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+          "urls<<EOF`n$multilineUrls`nEOF" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
       - name: List URLs
         run: |
           echo "${{ steps.urls.outputs.urls }}"
