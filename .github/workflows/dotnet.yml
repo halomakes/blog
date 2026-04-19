@@ -33,7 +33,7 @@ jobs:
       - name: Generate Offline Pages
         run: dotnet run --project Halomakes.Blog.OfflineRenderer/Halomakes.Blog.OfflineRenderer.csproj
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
+        uses: JamesIves/github-pages-deploy-action@v4.8.0
         with:
           folder: Halomakes.Blog.OfflineRenderer/bin/Debug/net10.0/wwwroot
       - name: Trigger Site Crawl
