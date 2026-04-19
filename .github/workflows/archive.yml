@@ -30,7 +30,7 @@ jobs:
               $url = "$($domain)$($path)"
               $urls += $url;
               Write-Host "Warming up $url";
-              Invoke-WebRequest $url -ErrorAction Ignore -ProgressAction SilentlyContinue | Out-Null;
+              Invoke-WebRequest $url -AllowInsecureRedirect -ErrorAction Ignore -ProgressAction SilentlyContinue | Out-Null;
             }
           }
           [string] $multilineUrls = [string]::Join("`n", $urls);
