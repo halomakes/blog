@@ -39,3 +39,6 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: Halomakes.Blog.OfflineRenderer/bin/Debug/net10.0/wwwroot
+      - uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: Wayback Machine Crawl
