@@ -1,7 +1,7 @@
 # This workflow will build a .NET project
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
 
-name: .NET
+name: Build Static Site
 permissions:
   contents: write
 on:
@@ -9,6 +9,8 @@ on:
     branches: [ "main", "master" ]
 jobs:
   build:
+    permissions:
+      actions: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
