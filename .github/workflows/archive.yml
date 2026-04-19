@@ -1,0 +1,8 @@
+on: deployment_status
+jobs:
+  publish:
+    if: github.event.deployment_status.state == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Archive Site
+        uses: JamieMagee/wayback@v2
