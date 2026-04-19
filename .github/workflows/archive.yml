@@ -1,15 +1,5 @@
 name: Wayback Machine Crawl
-on:
-  workflow_dispatch:
-    inputs:      
-      attemptNumber:
-        description: 'Attempt number'
-        required: false
-        default: '1'
-      maxAttempts:
-        description: 'Max attempts'
-        required: false
-        default: '5'
+on: workflow_dispatch
 jobs:
   publish:
     environment: crawl-delay
