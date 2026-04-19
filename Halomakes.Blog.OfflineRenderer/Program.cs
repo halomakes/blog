@@ -24,6 +24,7 @@ public partial class Program
             await StoreResource(client, page, string.IsNullOrEmpty(page) ? "index.html" : $"{page}/index.html");
         await StoreResource(client, "posts/404", "404.html");
         await StoreResource(client, "sitemap.xml", "sitemap.xml");
+        await StoreResource(client, "sitemap.txt", "sitemap.txt");
     }
 
     private static async Task StoreResource(HttpClient client, string fetchUrl, string filePath)
