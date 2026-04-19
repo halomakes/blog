@@ -2,6 +2,9 @@ name: Wayback Machine Crawl
 on: workflow_dispatch
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
 jobs:
   archive:
     name: Crawl Sites
