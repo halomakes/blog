@@ -28,7 +28,7 @@ jobs:
           Get-Content "sitemap.txt" | ForEach-Object {
             [string] $path = $_;
             $domains | ForEach-Object {
-              [string] $domain = $);
+              [string] $domain = $_;
               $urls += "$($domain)$($path)";
             }
           }
