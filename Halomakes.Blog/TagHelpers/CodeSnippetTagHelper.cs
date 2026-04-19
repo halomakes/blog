@@ -1,4 +1,5 @@
 using System.Text.Encodings.Web;
+using Lucide.Icons.TagHelper.TagHelpers;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.TagHelpers;
@@ -33,14 +34,14 @@ public class CodeSnippetTagHelper(IWebHostEnvironment environment) : TagHelper
             var downloadButton = new TagBuilder("a");
             downloadButton.MergeAttribute("href", $"/{filePath}");
             downloadButton.MergeAttribute("target", "_blank");
-            downloadButton.Attributes.Add("title","Download");
-            downloadButton.InnerHtml.SetHtmlContent("<i data-lucide=\"download\"></i>");
+            downloadButton.Attributes.Add("title", "Download");
+            downloadButton.InnerHtml.SetHtmlContent(GetIcon("download"));
 
             var copyButton = new TagBuilder("a");
             copyButton.MergeAttribute("href", "#");
             copyButton.MergeAttribute("data-action", "copy");
             copyButton.MergeAttribute("title", "Copy to Clipboard");
-            copyButton.InnerHtml.SetHtmlContent("<i data-lucide=\"clipboard-copy\"></i>");
+            copyButton.InnerHtml.SetHtmlContent(GetIcon("clipboard-copy"));
 
             toolbarDiv.InnerHtml.AppendHtml(labelDiv);
             toolbarDiv.InnerHtml.AppendHtml(downloadButton);
@@ -59,6 +60,19 @@ public class CodeSnippetTagHelper(IWebHostEnvironment environment) : TagHelper
         else
         {
             output.Content.SetContent("Couldn't load this code snippet, sorry.");
+        }
+
+        TagHelperOutput GetIcon(string iconName)
+        {
+            var helper = new LucideIconTagHelper(environment)
+            {
+                Name = iconName
+            };
+            var resultContext =
+                new TagHelperOutput("lucide-icon", [],
+                    (_, _) => Task.FromResult(new DefaultTagHelperContent() as TagHelperContent));
+            helper.Process(context, resultContext);
+            return resultContext;
         }
     }
 }
