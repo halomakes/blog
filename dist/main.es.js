@@ -1496,103 +1496,7 @@ var y = new Map([
 	async copy() {
 		this.code && await navigator.clipboard.writeText(this.code);
 	}
-}, x = {
-	xmlns: "http://www.w3.org/2000/svg",
-	width: 24,
-	height: 24,
-	viewBox: "0 0 24 24",
-	fill: "none",
-	stroke: "currentColor",
-	"stroke-width": 2,
-	"stroke-linecap": "round",
-	"stroke-linejoin": "round"
-}, S = ([e, t, n]) => {
-	let r = document.createElementNS("http://www.w3.org/2000/svg", e);
-	return Object.keys(t).forEach((e) => {
-		r.setAttribute(e, String(t[e]));
-	}), n?.length && n.forEach((e) => {
-		let t = S(e);
-		r.appendChild(t);
-	}), r;
-}, C = (e, t = {}) => S([
-	"svg",
-	{
-		...x,
-		...t
-	},
-	e
-]), w = (e) => {
-	for (let t in e) if (t.startsWith("aria-") || t === "role" || t === "title") return !0;
-	return !1;
-}, T = (...e) => e.filter((e, t, n) => !!e && e.trim() !== "" && n.indexOf(e) === t).join(" ").trim(), E = (e) => e.replace(/^([A-Z])|[\s-_]+(\w)/g, (e, t, n) => n ? n.toUpperCase() : t.toLowerCase()), D = (e) => {
-	let t = E(e);
-	return t.charAt(0).toUpperCase() + t.slice(1);
-}, O = (e) => Array.from(e.attributes).reduce((e, t) => (e[t.name] = t.value, e), {}), k = (e) => typeof e == "string" ? e : !e || !e.class ? "" : e.class && typeof e.class == "string" ? e.class.split(" ") : e.class && Array.isArray(e.class) ? e.class : "", A = (e, { nameAttr: t, icons: n, attrs: r }) => {
-	let i = e.getAttribute(t);
-	if (i == null) return;
-	let a = n[D(i)];
-	if (!a) return console.warn(`${e.outerHTML} icon name was not found in the provided icons object.`);
-	let o = O(e), s = w(o) ? {} : { "aria-hidden": "true" }, c = {
-		...x,
-		"data-lucide": i,
-		...s,
-		...r,
-		...o
-	}, l = k(o), u = k(r), d = T("lucide", `lucide-${i}`, ...l, ...u);
-	d && Object.assign(c, { class: d });
-	let f = C(a, c);
-	return e.parentNode?.replaceChild(f, e);
-}, j = [["path", { d: "m7 6 5 5 5-5" }], ["path", { d: "m7 13 5 5 5-5" }]], M = [
-	["rect", {
-		width: "8",
-		height: "4",
-		x: "8",
-		y: "2",
-		rx: "1",
-		ry: "1"
-	}],
-	["path", { d: "M8 4H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" }],
-	["path", { d: "M16 4h2a2 2 0 0 1 2 2v4" }],
-	["path", { d: "M21 14H11" }],
-	["path", { d: "m15 10-4 4 4 4" }]
-], N = [
-	["path", { d: "M12 15V3" }],
-	["path", { d: "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" }],
-	["path", { d: "m7 10 5 5 5-5" }]
-], P = ({ icons: e = {}, nameAttr: t = "data-lucide", attrs: n = {}, root: r = document, inTemplates: i } = {}) => {
-	if (!Object.values(e).length) throw Error("Please provide an icons object.\nIf you want to use all the icons you can import it like:\n `import { createIcons, icons } from 'lucide';\nlucide.createIcons({icons});`");
-	if (r === void 0) throw Error("`createIcons()` only works in a browser environment.");
-	if (Array.from(r.querySelectorAll(`[${t}]`)).forEach((r) => A(r, {
-		nameAttr: t,
-		icons: e,
-		attrs: n
-	})), i && Array.from(r.querySelectorAll("template")).forEach((r) => P({
-		icons: e,
-		nameAttr: t,
-		attrs: n,
-		root: r.content,
-		inTemplates: i
-	})), t === "data-lucide") {
-		let t = r.querySelectorAll("[icon-name]");
-		t.length > 0 && (console.warn("[Lucide] Some icons were found with the now deprecated icon-name attribute. These will still be replaced for backwards compatibility, but will no longer be supported in v1.0 and you should switch to data-lucide"), Array.from(t).forEach((t) => A(t, {
-			nameAttr: "icon-name",
-			icons: e,
-			attrs: n
-		})));
-	}
-};
-//#endregion
-//#region src/components/icons.ts
-function F() {
-	P({ icons: {
-		Download: N,
-		ClipboardCopy: M,
-		ChevronsDown: j
-	} });
-}
-//#endregion
-//#region src/components/selector..ts
-var I = class e {
+}, x = class e {
 	static selector = ".selector";
 	element;
 	static activeClass = "open";
@@ -1602,7 +1506,7 @@ var I = class e {
 	toggle(t) {
 		t.preventDefault(), this.element.classList.toggle(e.activeClass);
 	}
-}, L = class {
+}, S = class {
 	static selector = "immich-gallery";
 	constructor(e) {
 		e.addEventListener("load", (e) => {
@@ -1610,25 +1514,18 @@ var I = class e {
 			t.textContent = "header { display: none!important; } main {padding-top: 0!important}", e.target.contentDocument.head.appendChild(t);
 		});
 	}
-}, R = class {
-	static selector = "nav";
-	constructor(e) {
-		let t = window.location.host.split(".");
-		t.length < 2 || (Array.from(e.querySelectorAll(".domain")).forEach((e) => e.textContent = t[t.length - 2]), Array.from(e.querySelectorAll(".tld")).forEach((e) => e.textContent = t[t.length - 1]));
-	}
-}, z = (e) => {
+}, C = (e) => {
 	document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", e) : e();
-}, B = (e) => {
+}, w = (e) => {
 	let t = document.querySelectorAll(e.selector);
 	return Array.from(t).map((e) => e).map((t) => new e(t));
 };
-z(() => {
+C(() => {
 	window.components = [
-		...B(b),
-		...B(I),
-		...B(L),
-		...B(R)
-	], F();
+		...w(b),
+		...w(x),
+		...w(S)
+	];
 });
 //#endregion
 
