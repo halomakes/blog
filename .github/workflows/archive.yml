@@ -1,0 +1,16 @@
+name: Wayback Machine Crawl
+on: workflow_dispatch
+jobs:
+  archive:
+    name: Crawl Sites
+    environment: crawl-delay
+    runs-on: ubuntu-latest
+    steps:
+      - name: Archive Site
+        uses: JamieMagee/wayback@v2
+        with:
+          url: |-
+            blog.halomak.es
+            blog.alexgriffith.me
+            blog.haley.contact
+          saveOutlinks: true
