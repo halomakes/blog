@@ -2,6 +2,9 @@ name: Wayback Machine Crawl
 on: workflow_dispatch
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
 jobs:
   archive:
     name: Crawl Sites
@@ -15,16 +18,11 @@ jobs:
           sparse-checkout: |
             sitemap.txt
           sparse-checkout-cone-mode: false
-      - name: Read file contents
-        id: read_file
-        uses: andstor/file-reader-action@v1
-        with:
-          path: "sitemap.txt"
       - id: urls
         shell: pwsh
         run: |
           [string[]] $urls = @();
-          [string[]] $domains = @("https://blog.halomak.es", "https://blog.haley.casa", "https://blog.alexgriffith.me")
+          [string[]] $domains = @("https://blog.halomak.es", "https://blog.haley.contact", "https://blog.alexgriffith.me")
           Get-Content "sitemap.txt" | ForEach-Object {
             [string] $path = $_;
             $domains | ForEach-Object {
