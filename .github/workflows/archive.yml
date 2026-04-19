@@ -18,11 +18,6 @@ jobs:
           sparse-checkout: |
             sitemap.txt
           sparse-checkout-cone-mode: false
-      - name: Read file contents
-        id: read_file
-        uses: andstor/file-reader-action@v1
-        with:
-          path: "sitemap.txt"
       - id: urls
         shell: pwsh
         run: |
