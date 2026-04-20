@@ -1,5 +1,6 @@
 using Halomakes.Blog.Providers;
 using Halomakes.Blog.Services;
+using Jering.Web.SyntaxHighlighters.HighlightJS;
 using Sidio.Sitemap.Core.Services;
 
 namespace Halomakes.Blog;
@@ -14,6 +15,7 @@ public class Program
             .AddRazorRuntimeCompilation();
         builder.Services.AddSingleton<PostsService>();
         builder.Services.AddDefaultSitemapServices<SitemapUrlProvider>();
+        builder.Services.AddHighlightJS();
 
         var app = builder.Build();
 
