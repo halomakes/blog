@@ -6,10 +6,12 @@ concurrency:
   group: ${{ github.workflow }}
   cancel-in-progress: true
 jobs:
-  archive:
-    name: Crawl Sites
+  build-list:
+    name: Build Url List
     environment: crawl-delay
     runs-on: ubuntu-latest
+    outputs:
+      urls: ${{ steps.urls.outputs.urls }}
     steps:
       - uses: actions/checkout@v6
         name: Checkout Sitemap File
@@ -29,17 +31,29 @@ jobs:
               [string] $domain = $_;
               $url = "$($domain)$($path)"
               $urls += $url;
-              Write-Host "Warming up $url";
-              Invoke-WebRequest $url -AllowInsecureRedirect -ErrorAction Ignore -ProgressAction SilentlyContinue | Out-Null;
+              # Write-Host "Warming up $url";
+              # Invoke-WebRequest $url -AllowInsecureRedirect -ErrorAction Ignore -ProgressAction SilentlyContinue | Out-Null;
             }
           }
-          [string] $multilineUrls = [string]::Join("`n", $urls);
-          "urls<<EOF`n$multilineUrls`nEOF" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+          [string] $asJson = $urls | ConvertTo-Json -Compress;
+          "urls=$asJson" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
       - name: List URLs
         run: |
           echo "${{ steps.urls.outputs.urls }}"
+  crawl-site:
+    name: Crawl Site
+    runs-on: ubuntu-latest
+    needs: build-list
+    strategy:
+      max-parallel: 2
+      matrix:
+        url: ${{ fromJSON(needs.build-list.outputs.urls) }}
+    steps:
       - name: Archive Site
         uses: JamieMagee/wayback@v2
         with:
-          url: ${{ steps.urls.outputs.urls }}
+          url: ${{ matrix.url }}
           saveOutlinks: true
+      - uses: GuillaumeFalourd/wait-sleep-action@v1
+        with:
+          time: '5'
