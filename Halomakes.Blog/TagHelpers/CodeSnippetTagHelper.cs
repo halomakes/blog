@@ -62,7 +62,8 @@ public class CodeSnippetTagHelper(IWebHostEnvironment environment, IHighlightJSS
 
             var highlighted = await highlighter.HighlightAsync(content, language.ToString().ToLower());
 
-            contentDiv.InnerHtml.SetHtmlContent(highlighted);
+            var display = highlighted?.Replace(Environment.NewLine, "<br/>") ?? content;
+            contentDiv.InnerHtml.SetHtmlContent(display);
 
             output.Content.AppendHtml(toolbarDiv);
             output.Content.AppendHtml(contentDiv);

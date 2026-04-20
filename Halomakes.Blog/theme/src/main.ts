@@ -1,5 +1,5 @@
 import './theme.scss'
-//import {CodeSnippet} from "./components/code-snippet.ts";
+import {CodeSnippet} from "./components/code-snippet.ts";
 import {Selector} from "./components/selector..ts";
 import {ImmichGallery} from "./components/immich-gallery.ts";
 
@@ -28,7 +28,7 @@ const initializeComponent = <TComponent>(type: {
 
 ready(() => {
     window.components = [
-        //...initializeComponent(CodeSnippet),
+        ...initializeComponent(CodeSnippet),
         ...initializeComponent(Selector),
         ...initializeComponent(ImmichGallery)
     ];

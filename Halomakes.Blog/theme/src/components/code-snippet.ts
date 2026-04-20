@@ -1,53 +1,25 @@
-import hljs from 'highlight.js/lib/core';
-import javascript from 'highlight.js/lib/languages/javascript';
-import powershell from 'highlight.js/lib/languages/powershell';
-
-const languageMap = new Map<string, any>([
-    ['javascript', javascript],
-    ['js', javascript],
-    ['powershell', powershell],
-    ['pwsh', powershell],
-    ['ps1', powershell],
-]);
-
 export class CodeSnippet {
     public static readonly selector: string = '.code-snippet';
-    private static initializedLanguages: string[] = [];
-    private code?: string;
+    private codeElement?: HTMLElement;
 
     constructor(element: HTMLElement) {
-        const codeElement: HTMLElement = element.lastElementChild as HTMLElement;
-        if (!codeElement)
+        this.codeElement = element.lastElementChild as HTMLElement;
+        if (!this.codeElement)
             return;
-        this.code = codeElement.innerText;
-        const language: string = (codeElement as any).lang;
-        this.highlightCode(language, codeElement);
         this.setupCopyButton(element);
-    }
-
-    private highlightCode(language: string, codeElement: HTMLElement) {
-        if (!language)
-            return;
-        if (!languageMap.has(language))
-            return;
-        if (!CodeSnippet.initializedLanguages.includes(language)) {
-            CodeSnippet.initializedLanguages.push(language);
-            hljs.registerLanguage(language, languageMap.get(language));
-        }
-
-        hljs.highlightElement(codeElement);
     }
 
     private setupCopyButton(element: HTMLElement) {
         const button = element.querySelector('[data-action=copy]');
         if (!button)
             return;
-        button.addEventListener('click', () => this.copy());
+        button.addEventListener('click', (e) => this.copy(e as MouseEvent));
     }
 
-    public async copy() {
-        if (this.code) {
-            await navigator.clipboard.writeText(this.code);
+    public async copy(e: MouseEvent) {
+        e.preventDefault();
+        if (this.codeElement) {
+            await navigator.clipboard.writeText(this.codeElement.outerText);
         }
     }
 }
