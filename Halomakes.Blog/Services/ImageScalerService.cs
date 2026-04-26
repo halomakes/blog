@@ -17,20 +17,21 @@ public class ImageScalerService(IWebHostEnvironment environment, ILogger<ImageSc
 
     private IList<ScaleStep> GenerateImage(string originalPath, out double aspect)
     {
-        var directoryName = Path.GetDirectoryName(originalPath);
-        var originalFileName = Path.GetFileNameWithoutExtension(originalPath);
-        var originalFsPath = Path.Combine(environment.WebRootPath, originalPath);
-        using var pipeline = MagicImageProcessor.BuildPipeline(originalFsPath, new ProcessImageSettings());
-        aspect = (double)pipeline.PixelSource.Width / pipeline.PixelSource.Height;
         try
         {
+            logger.LogInformation("Getting image set for {Source}", originalPath);
+            var directoryName = Path.GetDirectoryName(originalPath);
+            var originalFileName = Path.GetFileNameWithoutExtension(originalPath);
+            var originalFsPath = Path.Combine(environment.WebRootPath, originalPath);
+            using var pipeline = MagicImageProcessor.BuildPipeline(originalFsPath, new ProcessImageSettings());
+            aspect = (double)pipeline.PixelSource.Width / pipeline.PixelSource.Height;
             return GenerateSteps(pipeline, originalFileName, directoryName, originalFsPath).ToList();
         }
         catch (InvalidDataException ex)
         {
-            Console.WriteLine(ex.Message);
-            Console.WriteLine(originalPath);
-            throw;
+            logger.LogWarning(ex, "Failed to generated images for {Source}", originalPath);
+            aspect = 1;
+            return [];
         }
     }
 
@@ -40,7 +41,7 @@ public class ImageScalerService(IWebHostEnvironment environment, ILogger<ImageSc
     {
         foreach (var width in _standardSizes.Order())
         {
-            logger.LogWarning("Generating scaled image for {Source}: {Resolution}", originalFileName, width);
+            logger.LogInformation("Generating scaled image for {Source}: {Resolution}", originalFileName, width);
             if (pipeline.PixelSource.Width < width)
                 yield break;
             var newFileName = $"{originalFileName}_{width}px.webp";

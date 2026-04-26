@@ -13,7 +13,7 @@ public partial class Program
     {
         factory = new AppFactory();
         using var client = factory.CreateClient();
-        client.Timeout = TimeSpan.FromMinutes(10);
+        client.Timeout = TimeSpan.FromMinutes(30);
 
         var pages = await GetApplicationRoutes(client).ToListAsync();
         foreach (var page in pages)
