@@ -4,7 +4,7 @@ using PhotoSauce.MagicScaler;
 
 namespace Halomakes.Blog.Services;
 
-public class ImageScalerService(IWebHostEnvironment environment)
+public class ImageScalerService(IWebHostEnvironment environment, ILogger<ImageScalerService> logger)
 {
     private readonly List<int> _standardSizes =
         [144, 196, 240, 320, 480, 512, 640, 720, 820, 960, 1024, 1200, 1440, 1600, 1920, 2560, 3180, 4200];
@@ -31,6 +31,7 @@ public class ImageScalerService(IWebHostEnvironment environment)
     {
         foreach (var width in _standardSizes.Order())
         {
+            logger.LogInformation("Generating scaled image for {Source}: {Resolution}", originalFileName, width);
             if (pipeline.PixelSource.Width < width)
                 yield break;
             var newFileName = $"{originalFileName}_{width}px.webp";

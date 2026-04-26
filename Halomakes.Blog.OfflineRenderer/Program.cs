@@ -1,17 +1,17 @@
-﻿using Halomakes.Blog.Services;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 public partial class Program
 {
     private static readonly Lazy<string> RootDirectory = new(() => AppDomain.CurrentDomain.BaseDirectory);
     private const string OutputDirectory = "wwwroot";
-    private static WebApplicationFactory<Halomakes.Blog.Program>? factory;
+    private static AppFactory? factory;
 
     public static async Task Main(string[] _)
     {
-        factory = new WebApplicationFactory<Halomakes.Blog.Program>();
+        factory = new AppFactory();
         using var client = factory.CreateClient();
         client.Timeout = TimeSpan.FromMinutes(10);
 
@@ -95,6 +95,14 @@ public partial class Program
                     !item.PhysicalPath.EndsWith(".map", StringComparison.InvariantCultureIgnoreCase))
                     yield return Path.Combine(relativeToRoot, item.Name);
             }
+        }
+    }
+
+    public class AppFactory : WebApplicationFactory<Halomakes.Blog.Program>
+    {
+        protected override void ConfigureWebHost(IWebHostBuilder builder)
+        {
+            builder.ConfigureServices(services => { services.AddLogging(l => l.AddConsole()); });
         }
     }
 }
