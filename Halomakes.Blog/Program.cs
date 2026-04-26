@@ -2,6 +2,9 @@ using Halomakes.Blog.Providers;
 using Halomakes.Blog.Services;
 using Jering.Web.SyntaxHighlighters.HighlightJS;
 using PhotoSauce.MagicScaler;
+using PhotoSauce.NativeCodecs.Libheif;
+using PhotoSauce.NativeCodecs.Libjpeg;
+using PhotoSauce.NativeCodecs.Libpng;
 using PhotoSauce.NativeCodecs.Libwebp;
 using Sidio.Sitemap.Core.Services;
 
@@ -19,7 +22,13 @@ public class Program
         builder.Services.AddDefaultSitemapServices<SitemapUrlProvider>();
         builder.Services.AddHighlightJS();
         builder.Services.AddTransient<ImageScalerService>();
-        CodecManager.Configure(codecs => { codecs.UseLibwebp(); });
+        CodecManager.Configure(codecs =>
+        {
+            codecs.UseLibwebp();
+            codecs.UseLibheif();
+            codecs.UseLibjpeg();
+            codecs.UseLibpng();
+        });
         builder.Services.AddScoped<FilamentTrackerService>();
 
         var app = builder.Build();
