@@ -1,13 +1,8 @@
 # This workflow will build a .NET project
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
 
-name: Build Static Site
-permissions:
-  contents: write
-  actions: write
-on:
-  push:
-    branches: [ "main", "master" ]
+name: Test
+on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -31,11 +26,3 @@ jobs:
         run: dotnet build --no-restore
       - name: Generate Offline Pages
         run: dotnet run --project Halomakes.Blog.OfflineRenderer/Halomakes.Blog.OfflineRenderer.csproj
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4.8.0
-        with:
-          folder: Halomakes.Blog.OfflineRenderer/bin/Debug/net10.0/wwwroot
-      - name: Trigger Site Crawl
-        uses: benc-uk/workflow-dispatch@v1
-        with:
-          workflow: Wayback Machine Crawl
