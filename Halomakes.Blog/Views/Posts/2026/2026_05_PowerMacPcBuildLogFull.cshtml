@@ -3,13 +3,5 @@
 @attribute [Tags("gaming", "modding", "makes", "3d-printing", "vintage")]
 @attribute [Slug("powermac-g5-build")]
 
-@inject ImageScalerService scaler
-
-@{
-    var image = scaler.ScaleImage("images/2026-05-PowerMac/04242026_141104570.jpg");
-}
-
-@foreach (var step in image.Steps)
-{
-    <img src="@step.Url" alt="potato"/>
-}
+<img scaled src="images/2026-05-PowerMac/04242026_141104570.jpg" alt="Completed build hooked up to a CRT monitor with some OS X skinning" />
+<img scaled src="images/2026-05-PowerMac/IMG_2229.HEIC" basis="0.5m" alt="Another picture" />

@@ -1,0 +1,6 @@
+@use 'variables/sizing';
+
+img[scaled] {
+  max-width: 100%;
+  border-radius: sizing.$radius-md;
+}
