@@ -3,8 +3,8 @@
 /posts/2026/4/using-powershell-to-burn-flacs-with-cd-text
 /posts/2026/4/burning-cds-with-powershell
 /posts/2026/4/progress-on-the-powermac-g5-pc-build-resurrection
-/posts/2026/5/the-complete-powermac-g5-pc-2.0-build-log
-/posts/2026/5/powermac-g5-build
+/posts/2026/4/the-complete-powermac-g5-pc-2.0-build-log
+/posts/2026/4/powermac-g5-build
 /tags
 /tags/powershell
 /tags/music
