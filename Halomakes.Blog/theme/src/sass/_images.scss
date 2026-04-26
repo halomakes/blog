@@ -2,9 +2,13 @@
 @use 'sass:math';
 @use 'mixins/shadow';
 @use 'mixins/outline';
+@use 'variables/animation';
+@use 'variables/colors';
+
+$breakpoint: 840px;
 
 img[scaled] {
-  max-width: 100%;
+  width: 100%;
   border-radius: sizing.$radius-md;
   cursor: pointer;
 }
@@ -17,15 +21,24 @@ gallery {
   align-items: center;
   flex-wrap: wrap;
   padding: 10% 0;
+  @media screen and (max-width: #{$breakpoint}) {
+    gap: 16px;
+  }
 
   & > img {
     flex-grow: 1;
-    width: 0;
+    width: 0 !important;
     min-width: 200px;
     @include shadow.shadow('md');
     z-index: var(--z-idx);
     transform: scale(1.05) translateY(var(--offset));
     @include outline.outline();
+    background-color: colors.$secondary;
+    transition: transform animation.$duration animation.$ease;
+
+    &:hover {
+      transform: scale(1.07) translateY(var(--offset));
+    }
 
     &:first-child {
       transform-origin: left;
@@ -33,6 +46,18 @@ gallery {
 
     &:last-child {
       transform-origin: right;
+    }
+
+    @media screen and (max-width: #{$breakpoint}) {
+      transform: scale(1);
+
+      &:hover {
+        transform: scale(1.02);
+      }
+
+      &:first-child, &:last-child {
+        transform-origin: center;
+      }
     }
   }
 }

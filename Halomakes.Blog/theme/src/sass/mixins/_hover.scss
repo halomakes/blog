@@ -1,5 +1,6 @@
 @use '../variables/animation';
 @use '../variables/colors';
+@use './outline';
 
 @mixin opacity($min: 0.8, $max: 1) {
   opacity: $min;
