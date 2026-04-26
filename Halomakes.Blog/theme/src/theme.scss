@@ -12,6 +12,9 @@
 @forward 'sass/tag';
 @forward 'sass/post-item';
 @forward 'sass/frames';
+@forward 'sass/images';
+@forward 'sass/filament-tracker';
+@forward 'sass/header-link';
 
 html {
   background: #201D38 linear-gradient(125deg, colors.$light 0%, colors.$tertiary 17%, colors.$dark 60%, colors.$dark-bg 100%);

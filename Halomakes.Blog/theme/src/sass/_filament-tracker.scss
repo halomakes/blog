@@ -1,0 +1,70 @@
+@use 'mixins/typography';
+@use 'sass:math';
+@use 'variables/colors';
+@use 'mixins/blur';
+@use 'sass:color';
+@use 'mixins/outline';
+
+filament-tracker {
+  @include typography.mono();
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  $height: 48px;
+  height: $height;
+  border-radius: math.div($height, 2);
+  @include outline.outline();
+  padding: 0 math.div($height, 2);
+  gap: 16px;
+  @include blur.blur();
+  background-color: color.scale(colors.$white, $alpha: -94%);
+
+  & > dl {
+    $gap: 8px;
+    gap: $gap;
+    display: grid;
+    grid-template-columns: auto auto;
+    font-size: 12px;
+    margin: 0;
+
+    & > dt {
+      color: colors.$warning;
+
+      &:not(:first-of-type) {
+        &::before {
+          transform-origin: right;
+          right: 0;
+        }
+      }
+    }
+
+    & > dd {
+      color: colors.$dim;
+      text-align: right;
+      margin: 0;
+
+      &:not(:first-of-type) {
+        &::before {
+          transform-origin: left;
+          left: 0;
+        }
+      }
+    }
+
+    & > dt, & > dd {
+      position: relative;
+
+      &:not(:first-of-type) {
+        &::before {
+          content: '';
+          display: block;
+          position: absolute;
+          background-color: color.scale(colors.$white, $lightness: -60%);
+          width: 120%;
+          height: 1px;
+          top: -.5 * $gap;
+        }
+      }
+    }
+  }
+}

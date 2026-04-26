@@ -19,6 +19,11 @@
       <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="10.0.6" />
       <PackageReference Include="Microsoft.ClearScript.V8.Native.linux-arm64" Version="7.5.0" />
       <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="10.0.2" />
+      <PackageReference Include="PhotoSauce.MagicScaler" Version="0.15.0" />
+      <PackageReference Include="PhotoSauce.NativeCodecs.Libheif" Version="1.19.5-preview1" />
+      <PackageReference Include="PhotoSauce.NativeCodecs.Libjpeg" Version="3.0.4-preview1" />
+      <PackageReference Include="PhotoSauce.NativeCodecs.Libpng" Version="1.6.44-preview1" />
+      <PackageReference Include="PhotoSauce.NativeCodecs.Libwebp" Version="1.4.0-preview1" />
       <PackageReference Include="Sidio.Sitemap.AspNetCore" Version="3.1.1" />
       <PackageReference Include="Slugify.Core" Version="5.1.1" />
     </ItemGroup>

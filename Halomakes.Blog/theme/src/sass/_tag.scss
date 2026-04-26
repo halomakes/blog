@@ -1,11 +1,12 @@
 @use 'variables/colors';
 @use 'variables/animation';
 @use 'sass:color';
+@use 'mixins/outline';
 
 a.tag {
   text-decoration: none !important;
   color: colors.$white;
-  border: 1px solid colors.$secondary;
+  @include outline.outline();
   $pad: 4px;
   padding: $pad ($pad * 2);
   $height: 24px;

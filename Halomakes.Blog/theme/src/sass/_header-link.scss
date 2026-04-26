@@ -1,0 +1,22 @@
+@use 'variables/colors';
+@use 'mixins/hover';
+
+h1:has(.header-link),
+h2:has(.header-link),
+h3:has(.header-link),
+h4:has(.header-link),
+h5:has(.header-link),
+h6:has(.header-link) {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+
+  & > a.header-link {
+    @include hover.opacity(0.6);
+
+    &, &:active, &:visited {
+      color: colors.$white;
+    }
+  }
+}

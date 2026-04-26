@@ -1,27 +1,28 @@
-﻿using Halomakes.Blog.Services;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 public partial class Program
 {
     private static readonly Lazy<string> RootDirectory = new(() => AppDomain.CurrentDomain.BaseDirectory);
     private const string OutputDirectory = "wwwroot";
-    private static WebApplicationFactory<Halomakes.Blog.Program>? factory;
+    private static AppFactory? factory;
 
     public static async Task Main(string[] _)
     {
-        factory = new WebApplicationFactory<Halomakes.Blog.Program>();
+        factory = new AppFactory();
         using var client = factory.CreateClient();
+        client.Timeout = TimeSpan.FromMinutes(30);
 
-
-        var resources = GetStaticResources().ToList();
         var pages = await GetApplicationRoutes(client).ToListAsync();
-
-        foreach (var resource in resources)
-            await StoreResource(client, resource, resource);
         foreach (var page in pages)
             await StoreResource(client, page, string.IsNullOrEmpty(page) ? "index.html" : $"{page}/index.html");
+
+        var resources = GetStaticResources().ToList();
+        foreach (var resource in resources)
+            await StoreResource(client, resource, resource);
+
         await StoreResource(client, "posts/404", "404.html");
         await StoreResource(client, "sitemap.xml", "sitemap.xml");
         await StoreResource(client, "sitemap.txt", "sitemap.txt");
@@ -76,13 +77,14 @@ public partial class Program
 
         IEnumerable<string> GetFilesRecursive(string path, string? parent = null)
         {
-            foreach (var item in hostEnv.WebRootFileProvider.GetDirectoryContents(path))
+            var relativeToRoot = parent is null
+                ? path
+                : Path.Combine(parent, path);
+            foreach (var item in hostEnv.WebRootFileProvider.GetDirectoryContents(relativeToRoot))
             {
                 if (!item.PhysicalPath?.Contains("wwwroot") ?? false)
                     continue;
-                var relativeToRoot = parent is null
-                    ? path
-                    : Path.Combine(parent, path);
+
                 if (item.IsDirectory)
                 {
                     foreach (var r in GetFilesRecursive(item.Name, relativeToRoot))
@@ -93,6 +95,14 @@ public partial class Program
                     !item.PhysicalPath.EndsWith(".map", StringComparison.InvariantCultureIgnoreCase))
                     yield return Path.Combine(relativeToRoot, item.Name);
             }
+        }
+    }
+
+    public class AppFactory : WebApplicationFactory<Halomakes.Blog.Program>
+    {
+        protected override void ConfigureWebHost(IWebHostBuilder builder)
+        {
+            builder.ConfigureServices(services => { services.AddLogging(l => l.AddConsole()); });
         }
     }
 }

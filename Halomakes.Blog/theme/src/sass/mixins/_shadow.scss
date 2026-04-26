@@ -1,0 +1,26 @@
+@use 'sass:color';
+
+@mixin shadow($amount: 'md', $color:hsl(247deg 51% 6%)) {
+  @if $amount == 'lg' {
+    $useColor: color.scale($color, $alpha: -70%);
+    box-shadow: 0.4px 0.2px 0.5px $useColor,
+    2.1px 1.2px 2.7px -0.4px $useColor,
+    3.9px 2.2px 5px -0.7px $useColor,
+    6.4px 3.7px 8.3px -1.1px $useColor,
+    10.2px 5.9px 13.3px -1.4px $useColor,
+    15.9px 9.2px 20.7px -1.8px $useColor,
+    24.1px 14px 31.4px -2.1px $useColor,
+    35.5px 20.7px 46.2px -2.5px $useColor;
+  } @else if $amount == 'md' {
+    $useColor: color.scale($color, $alpha: -60%);
+    box-shadow: 0.4px 0.2px 0.5px $useColor,
+    1.2px 0.7px 1.6px -0.8px $useColor,
+    2.9px 1.7px 3.8px -1.7px $useColor,
+    7.1px 4.1px 9.2px -2.5px $useColor;
+  } @else {
+    $useColor: color.scale($color, $alpha: -50%);
+    box-shadow: 0.4px 0.2px 0.5px $useColor,
+    0.6px 0.3px 0.8px -1.2px $useColor,
+    1.4px 0.8px 1.8px -2.5px $useColor;
+  }
+}
