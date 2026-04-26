@@ -29,13 +29,18 @@ public class PostsService(ApplicationPartManager applicationPartManager)
                     return null;
                 var slugAttributes = v.Type!.GetCustomAttributes<SlugAttribute>();
                 var tagAttributes = v.Type!.GetCustomAttributes<TagsAttribute>();
+                var ogAttribute = v.Type!.GetCustomAttribute<OpenGraphAttribute>();
 
                 return new BlogPostModel(
                     v.RelativePath,
                     postAttribute!.Title,
                     postAttribute!.Published,
-                    [slugHelper.GenerateSlug(postAttribute.Title), ..slugAttributes.SelectMany(static a => a.Slugs)],
-                    tagAttributes.SelectMany(static a => a.Tags).ToList()
+                    [..slugAttributes.SelectMany(static a => a.Slugs), slugHelper.GenerateSlug(postAttribute.Title)],
+                    tagAttributes.SelectMany(static a => a.Tags).ToList(),
+                    ogAttribute?.Description,
+                    !string.IsNullOrEmpty(ogAttribute?.Thumbnail) && !string.IsNullOrEmpty(ogAttribute?.ThumbnailAlt)
+                        ? (ogAttribute!.Thumbnail, ogAttribute!.ThumbnailAlt)
+                        : null
                 );
             })
             .Where(static p => p is not null)

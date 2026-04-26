@@ -18,3 +18,11 @@ public class TagsAttribute(params string[] tags) : Attribute
 {
     public string[] Tags { get; } = tags;
 }
+
+[AttributeUsage(AttributeTargets.Class)]
+public class OpenGraphAttribute(string description, string? thumbnail = null, string? thumbnailAlt = null) : Attribute
+{
+    public string Description => description;
+    public string? Thumbnail => thumbnail;
+    public string? ThumbnailAlt => thumbnailAlt;
+}

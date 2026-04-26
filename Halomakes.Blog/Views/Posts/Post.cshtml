@@ -1,24 +1,30 @@
 @using Halomakes.Blog.Services
 @model BlogPostModel;
-@inject PostsService service;
+@inject PostsService Service;
+@inject ImageScalerService Scaler;
 @{
     ViewData["Title"] = Model.Title;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<article>
+    <h1>@Model.Title</h1>
+    <p class="date">Published
+        <time datetime="@Model.PublishDate.ToString("yyyy-MM-dd")">
+            @Model.PublishDate.ToString("d MMMM yyyy")
+        </time>
+    </p>
+    <div>
+        @foreach (var tag in Model.Tags)
+        {
+            <tag-link tag="@tag"></tag-link>
+        }
+    </div>
 
-<h1>@Model.Title</h1>
-<p class="date">Published @Model.PublishDate</p>
-<div>
-    @foreach (var tag in Model.Tags)
-    {
-        <tag-link tag="@tag"></tag-link>
-    }
-</div>
-
-<partial name="@Model.ViewName"/>
+    <partial name="@Model.ViewName"/>
+</article>
 
 @{
-    var related = service.GetPosts()
+    var related = Service.GetPosts()
         .Where(p => p != Model)
         .OrderByDescending(static p => p.PublishDate)
         .Select(p => (post: p, overlap: p.Tags.Count(t => Model.Tags.Contains(t))))
@@ -30,8 +36,32 @@
 }
 @if (related.Any())
 {
-    <div class="related">
+    <aside class="related">
         <h2>Related Posts</h2>
         <partial name="_PostList" model="related"/>
-    </div>
+    </aside>
+}
+
+@section Metadata
+{
+    <meta property="og:title" content="@Model.Title"/>
+    <meta property="og:type" content="article"/>
+    <meta property="article:published_time" content="@Model.PublishDate.ToDateTime(TimeOnly.MinValue).ToString("O")"/>
+    @foreach (var tag in Model.Tags)
+    {
+        <meta property="article:tag" content="@tag.Replace('-', ' ')"/>
+    }
+    @if (Model.Thumbnail.HasValue)
+    {
+        var thumbnail = Scaler.GenerateThumbnail(Model.Thumbnail.Value.Url, width: 1200);
+
+        <meta property="og:image:url" content="@thumbnail.Url"/>
+        <meta property="og:image:type" content="@thumbnail.Type"/>
+        <meta property="og:image:width" content="@thumbnail.Width"/>
+        <meta property="og:image:height" content="@thumbnail.Height"/>
+        @if (!string.IsNullOrWhiteSpace(Model.Thumbnail?.Alt))
+        {
+            <meta property="og:image:alt" content="@Model.Thumbnail.Value.Alt"/>
+        }
+    }
 }
