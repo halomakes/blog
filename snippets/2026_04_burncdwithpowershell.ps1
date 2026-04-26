@@ -1,95 +1,69 @@
-class Song {
-    hidden [string[]] $FfmpegOutput;
-    hidden [string] $CuePath;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+    <meta name="theme-color" content="#1d1d2b" />
+    <title>No Post.  Postie nay-nay.</title>
+    <script type="application/javascript" crossorigin src="/dist/main.es.js?v=9hK9Yn2C56rKV2aA7qsOI9GTx3uHEAXR42uxAUhHUAU" async></script>
+    <script type="application/javascript" crossorigin src="/dist/particles.es.js?v=vgcD7bzF6Y57h1VXUTL1j7Kmr2uxstL6iZoBmatSUu0" async></script>
+    <link rel="stylesheet" crossorigin href="/dist/theme.css?v=mbWaoD9WkJE0mlFvVcyK0A5euI-_mnKqh9obLg8MUH4" media="print" onload="this.media='all'">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cascadia+Code:ital,wght@0,200..700;1,200..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet" media="print" onload="this.media='all'">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96"/>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+    <link rel="shortcut icon" href="/favicon.ico"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+    <meta name="apple-mobile-web-app-title" content="MyWebSite"/>
+    <link rel="manifest" href="/site.webmanifest"/>
+</head>
+<body>
+<canvas b-q4u8wyg0h0 id="tsparticles" style="display:none;"></canvas>
+<header b-q4u8wyg0h0>
+    <nav b-q4u8wyg0h0>
+        <span b-q4u8wyg0h0 class="title">
+            <span b-q4u8wyg0h0 class="selector">
+                <a b-q4u8wyg0h0 href="#" class="selected">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 6 5 5 5-5" /><path d="m7 13 5 5 5-5" /></svg>
+                    <span b-q4u8wyg0h0>blog</span>
+                </a>
+                <span b-q4u8wyg0h0 class="options">
+                    <a b-q4u8wyg0h0 href="/">blog</a>
+                    <a b-q4u8wyg0h0 href="https://www.alexgriffith.me">www</a>
+                    <a b-q4u8wyg0h0 href="https://www.github.com/halomakes">git</a>
+                    <a b-q4u8wyg0h0 href="https://www.printables.com/@halo_2764310">fdm</a>
+                    <a b-q4u8wyg0h0 href="https://www.youtube.com/halomademeapc">yt</a>
+                </span>
+            </span>
+            <span b-q4u8wyg0h0 class="dot">.</span>
+            <span b-q4u8wyg0h0 class="domain">halomak</span>
+            <span b-q4u8wyg0h0 class="dot">.</span>
+            <span b-q4u8wyg0h0 class="tld">es</span>
+        </span>
+        <span b-q4u8wyg0h0 class="areas">
+            <a href="/posts">recent</a>
+            <a href="/tags">tags</a>
+        </span>
+    </nav>
+</header>
+<div b-q4u8wyg0h0 class="container">
+    <main b-q4u8wyg0h0 role="main" class="pb-3">
+        
+<h1>Not found</h1>
+<p>Sorry, that post hasn't been written yet. Maybe you can ask ChatGPT to write some slop about that for you or
+    something?</p>
+    </main>
+</div>
 
-    [string] $Album;
-    [string] $Artist;
-    [string] $Title;
-    [string] $OutputPath;
-    [string] $SourcePath;
-    [int] $Index;
+<footer b-q4u8wyg0h0>
+    <div b-q4u8wyg0h0 class="container">
+        Generated 04/26/2026 09:22:13 <br b-q4u8wyg0h0/>
+        this site is powered by sleep-deprived brain cells
+    </div>
+</footer>
 
-    Song([System.IO.FileSystemInfo] $file, [int] $index) {
-        $this.SourcePath = $file;
-        $this.CuePath = "$($file.BaseName).wav"
-        $this.OutputPath = "./Burn/$($this.CuePath)";
-        $this.Index = $index;
-    }
-
-    [void] Convert() {
-        $this.FfmpegOutput = (ffmpeg -i $this.SourcePath -ar 44100 -sample_fmt s16 -map_metadata 0:s:0 -y $this.OutputPath 2>&1);
-        $this.Album = $this.GetMetaAttribute("album");
-        $this.Artist = $this.GetMetaAttribute("artist");
-        $this.Title = $this.GetMetaAttribute("title");
-    }
-
-    hidden [string] GetMetaAttribute($attribute) {
-        if ([string]::IsNullOrWhiteSpace($this.FfmpegOutput)) {
-            return $null;
-        }
-        [string] $line = $this.FfmpegOutput | Select-String "   $Attribute";
-        if ([string]::IsNullOrWhiteSpace($line)) {
-            return $null;
-        }
-        [string[]] $split = $line.Split(":");
-        if ($null -eq $split -or $split.Length -lt 2) {
-            return $null;
-        }
-        [string] $trimmed = $split[1].Trim();
-
-        # Normalize the text using FormKD (Compatibility Decomposition, followed by Canonical Composition)
-        $normalizedText = [System.Text.RegularExpressions.Regex]::Replace($trimmed, '\p{M}', '').Normalize([System.Text.NormalizationForm]::FormKD)
-
-        # Remove diacritic marks
-        return [System.Text.RegularExpressions.Regex]::Replace($normalizedText, '\p{M}', '')
-    }
-
-    [string[]] CreateCueSegment() {
-        return "
-FILE `"$($this.CuePath)`" WAVE
-  TRACK $($this.Index.ToString('00')) AUDIO
-    TITLE `"$($this.Title)`"
-    PERFORMER `"$($this.Artist)`"
-    INDEX 01 00:00:00";
-    }
-}
-
-
-function ConvertTo-RedbookAudio {
-    if (-not [bool] (Get-Command -ErrorAction Ignore -Type Application "ffmpeg")) {
-        Write-Error "ffmpeg does not appear to be installed or is not registered in the path.";
-        return;
-    }
-
-    # convert / resample for CD
-    New-Item -Force -Type Directory "Burn" | Out-Null;
-
-    [Song[]] $songs = @();
-    [int] $index = 1;
-    [System.IO.FileSystemInfo[]] $flacs = Get-ChildItem -Filter "*.flac";
-    $flacs | Select-Object | ForEach-Object {
-        Write-Progress -PercentComplete ($index * 100 / $flacs.Length ) -Activity "Converting Songs" -Status "Transcoding $_";
-        [Song] $song = [Song]::new($_, $index);
-        $songs += $song;
-        $song.Convert();
-
-        $index++;
-    }
-
-    # Create CUE File to burn
-    [string] $albumName = $songs[0].Album;
-    [string] $cueSheet = "TITLE `"$albumName`"
-PERFORMER `"$($songs[0].Artist)`"";
-    $songs | ForEach-Object {
-        $cueSheet += $_.CreateCueSegment();
-    }
-
-    $cueSheet | Out-File -Force "./Burn/$albumName.cue";
-
-    # launch IMGBurn if we can
-    [string] $executablePath = "$(${env:ProgramFiles(x86)})\IMGBurn\ImgBurn.exe";
-    if (Test-Path $executablePath) {
-        $cueFile = Get-Item "./Burn/$albumName.cue";
-        & $executablePath /mode WRITE /source $cueFile.FullName;
-    }
-}
+</body>
+</html>
