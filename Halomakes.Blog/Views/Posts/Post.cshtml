@@ -5,17 +5,22 @@
     ViewData["Title"] = Model.Title;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<article>
+    <h1>@Model.Title</h1>
+    <p class="date">Published
+        <time datetime="@Model.PublishDate.ToString("yyyy-MM-dd")">
+            @Model.PublishDate.ToString("d MMMM yyyy")
+        </time>
+    </p>
+    <div>
+        @foreach (var tag in Model.Tags)
+        {
+            <tag-link tag="@tag"></tag-link>
+        }
+    </div>
 
-<h1>@Model.Title</h1>
-<p class="date">Published @Model.PublishDate</p>
-<div>
-    @foreach (var tag in Model.Tags)
-    {
-        <tag-link tag="@tag"></tag-link>
-    }
-</div>
-
-<partial name="@Model.ViewName"/>
+    <partial name="@Model.ViewName"/>
+</article>
 
 @{
     var related = service.GetPosts()
@@ -30,8 +35,8 @@
 }
 @if (related.Any())
 {
-    <div class="related">
+    <aside class="related">
         <h2>Related Posts</h2>
         <partial name="_PostList" model="related"/>
-    </div>
+    </aside>
 }
