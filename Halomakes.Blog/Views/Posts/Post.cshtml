@@ -53,7 +53,7 @@
     }
     @if (Model.Thumbnail.HasValue)
     {
-        var thumbnail = Scaler.GenerateThumbnail(Model.Thumbnail.Value.Url);
+        var thumbnail = Scaler.GenerateThumbnail(Model.Thumbnail.Value.Url, width: 1200);
 
         <meta property="og:image:url" content="@thumbnail.Url"/>
         <meta property="og:image:type" content="@thumbnail.Type"/>

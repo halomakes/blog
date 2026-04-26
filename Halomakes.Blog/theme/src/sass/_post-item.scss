@@ -5,5 +5,37 @@
   text-decoration: none !important;
   color: colors.$white;
   @include hover.shift($opacityMin: 0.6, $inner: true);
-  display: block;
+  display: grid;
+  margin: 12px 0;
+  gap: 8px;
+  $img-size: 46px;
+
+  &:has(img) {
+    grid-template:
+    "img title" auto
+    "img date" auto
+      / $img-size auto;
+  }
+
+  &:not(:has(img)) {
+    grid-template:
+    "title" auto
+    "date" auto
+      / auto auto;
+  }
+
+  & > img {
+    grid-area: img;
+    width: $img-size;
+    height: $img-size;
+  }
+
+  & > h3 {
+    grid-area: title;
+    margin: 0;
+  }
+
+  & > time {
+    grid-area: date;
+  }
 }

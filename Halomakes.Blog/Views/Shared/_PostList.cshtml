@@ -1,12 +1,22 @@
+@using Halomakes.Blog.Services
 @model IEnumerable<BlogPostModel>
+@inject ImageScalerService Scaler
 
 <div class="posts">
-@foreach (var post in Model)
-{
-    <a asp-controller="Posts" asp-action="GetPost" asp-route-year="@post.PublishDate.Year"
-       asp-route-month="@post.PublishDate.Month" asp-route-slug="@post.Slugs.FirstOrDefault()" class="post-item">
-        <h3>@post.Title</h3>
-        <p class="date">@post.PublishDate</p>
-    </a>
-}
+    @foreach (var post in Model)
+    {
+        <a asp-controller="Posts" asp-action="GetPost" asp-route-year="@post.PublishDate.Year"
+           asp-route-month="@post.PublishDate.Month" asp-route-slug="@post.Slugs.FirstOrDefault()" class="post-item">
+            @if (post.Thumbnail.HasValue)
+            {
+                const int squareDim = 46;
+                var thumbnail = Scaler.GenerateThumbnail(post.Thumbnail.Value.Url, squareDim, squareDim);
+                <img src="@thumbnail.Url" alt="@post.Thumbnail.Value.Alt"/>
+            }
+            <h3>@post.Title</h3>
+            <time class="date" datetime="@post.PublishDate.ToString("yyyy-MM-dd")">
+                @post.PublishDate.ToString("d MMMM yyyy")
+            </time>
+        </a>
+    }
 </div>

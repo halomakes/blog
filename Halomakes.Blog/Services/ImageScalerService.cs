@@ -13,8 +13,6 @@ public partial class ImageScalerService(IWebHostEnvironment environment, ILogger
     private static readonly int[] StandardSizes =
         [144, 196, 240, 320, 480, 512, 640, 720, 820, 960, 1024, 1200, 1440, 1600, 1920, 2560, 3180, 4200];
 
-    private const int ThumbnailSize = 1200;
-
     private const int Quality = 50;
 
     private const string MimeType = "image/webp";
@@ -59,7 +57,7 @@ public partial class ImageScalerService(IWebHostEnvironment environment, ILogger
         {
             if (pipeline.PixelSource.Width < width)
                 continue;
-            var newFileName = $"{originalFileName}_{width}px.webp";
+            var newFileName = $"{originalFileName.ToLower()}_{width}px.webp";
             var newFilePath = Path.Combine(directoryName!, newFileName);
             var newFsPath = Path.Combine(environment.WebRootPath, newFilePath);
             if (File.Exists(newFsPath))
@@ -93,18 +91,18 @@ public partial class ImageScalerService(IWebHostEnvironment environment, ILogger
         return new(FormatForClient(newClientUrl), width);
     }
 
-    public Thumbnail GenerateThumbnail(string clientPath)
+    public Thumbnail GenerateThumbnail(string clientPath, int width = 0, int height = 0)
     {
-        logger.LogInformation("Generating thumbnail image for {Source}", clientPath);
-        var originalFsPath = Path.Combine(environment.WebRootPath, clientPath);
+        LogGeneratingThumbnailImageForSource(clientPath);
+        var originalFsPath = string.Concat(environment.WebRootPath, clientPath);
         using var pipeline = MagicImageProcessor.BuildPipeline(originalFsPath, new ProcessImageSettings());
-        var ulid = Path.GetFileName(clientPath).ToUlid();
-        var thumbnailFsDir = $"{environment.WebRootFileProvider}/thumbnails";
+        var ulid = Path.GetFileName($"{clientPath}{width}{height}").ToUlid().ToLower();
+        var thumbnailFsDir = $"{environment.WebRootPath}/thumbnails";
         if (!Path.Exists(thumbnailFsDir))
             Directory.CreateDirectory(thumbnailFsDir);
         var newFileName = $"{ulid}.webp";
         var newClientPath = Path.Combine("thumbnails", newFileName);
-        var newFsPath = Path.Combine(thumbnailFsDir, newClientPath);
+        var newFsPath = Path.Combine(thumbnailFsDir, newFileName);
         if (File.Exists(newFsPath))
         {
             using var existingPipeline = MagicImageProcessor.BuildPipeline(newFsPath, new ProcessImageSettings());
@@ -114,8 +112,9 @@ public partial class ImageScalerService(IWebHostEnvironment environment, ILogger
 
         var result = MagicImageProcessor.ProcessImage(originalFsPath, newFsPath, new ProcessImageSettings
         {
-            Width = ThumbnailSize,
-            EncoderOptions = new WebpLossyEncoderOptions(Quality)
+            EncoderOptions = new WebpLossyEncoderOptions(Quality),
+            Width = width,
+            Height = height
         });
         return new(FormatForClient(newClientPath), MimeType, result.Settings.Width, result.Settings.Height);
     }
@@ -131,4 +130,7 @@ public partial class ImageScalerService(IWebHostEnvironment environment, ILogger
 
     [LoggerMessage(LogLevel.Information, "Getting image set for {Source}")]
     partial void LogGettingImageSetForSource(string source);
+
+    [LoggerMessage(LogLevel.Information, "Generating thumbnail image for {Source}")]
+    partial void LogGeneratingThumbnailImageForSource(string source);
 }
