@@ -1,7 +1,73 @@
-@using Halomakes.Blog.Services
 @attribute [Post("The complete PowerMac G5 PC 2.0 Build Log", 2026, 5, 26)]
 @attribute [Tags("gaming", "modding", "makes", "3d-printing", "vintage")]
 @attribute [Slug("powermac-g5-build")]
 
-<img scaled src="images/2026-05-PowerMac/04242026_141104570.jpg" alt="Completed build hooked up to a CRT monitor with some OS X skinning" />
-<img scaled src="images/2026-05-PowerMac/IMG_2229.HEIC" basis="0.5m" alt="Another picture" />
+<p>I have an old PowerMac G5 that I picked up from the university surplus a decade ago and crudely transplanted a Dell
+    OptiPlex desktop into. I have all the guts from my old desktop left over from last year's upgrade, so I wanted to
+    revive the old case mod but with my current-day tools and abilities.</p>
+<p>I gave myself a deadline of having this ready for IndySmashFest to make sure I would finally actually work on it. And
+    lo, I finished with a week to spare!</p>
+<hr>
+<p>Let's just start off with a photo of the completed build to show what we're working forward, and I'll talk through
+    the design of the various components that went into making this.</p>
+<img scaled src="/images/2026-05-PowerMac/04242026_141104570.jpg"
+     alt="Completed build hooked up to a CRT monitor with some OS X skinning"/>
+
+<h2>Mounting the Motherboard</h2>
+<p>After I pulled all the old guts out and test fitting new components, the first thing I wanted to figure out was
+    mounting the motherboard. Back in the ancient times, I just pulled the original standoffs out, screwed them into the
+    motherboard for alignment, then slapped them back in the chassis with a dab of JB weld on the bottom of each post.
+    While this didn't technically fail, over half of those posts broke off which did not inspire confidence.</p>
+<p>And so, for V2, I wanted to make sure there was a lot more surface contact with the back of the case if I were to
+    glue this thing in. I looked up dimensions for ATX motherboards and created a sort of skeleton around that. I wanted
+    to leave enough room underneath for some smaller cables to run. I ended up going through two revisions to get it
+    lined up so that the GPU would sit at just the right height to meet up with the expansion slots in the back of the
+    case.</p>
+<gallery>
+    <img scaled basis="1/2" src="/images/2026-05-PowerMac/Screenshot 2026-04-25 224956.png"
+         alt="Screnshot of design in Autodesk Fusion.  Design is a bunch of stumps with holes arranged to mate with an ATX motherboard and connected with a flat lattice backplane."/>
+    <img scaled="" basis="1/2" src="/images/2026-05-PowerMac/IMG_2188.HEIC"
+         alt="Photograph of printed design being held in hand.  Holes have been populated with M3 brass threaded inserts."/>
+</gallery>
+<filament-tracker grams="182"></filament-tracker>
+
+<h2>Figuring Out Cooling</h2>
+<p>Up next, I needed to figure out cooling. I had a 360mm radiator (using this because it's what I had lying around, a
+    280mm definitely would have been significantly easier) that didn't really fit in the case, and the stock fan
+    mounting points for the exhaust would intersect with the motherboards bulky I/O shield. I tackled the exhaust
+    first.</p>
+<gallery>
+    <img scaled basis="1/4" src="/images/2026-05-PowerMac/Screenshot 2026-04-25 224933.png"
+         alt="Screenshot of shroud design in CAD software">
+    <img scaled basis="1/4" src="/images/2026-05-PowerMac/Screenshot 2026-04-25 224941.png"
+         alt="Screenshot of design from alternate perspective">
+    <img scaled basis="1/4" src="/images/2026-05-PowerMac/IMG_2198.HEIC" alt="Picture of part in hand">
+    <img scaled basis="1/4" src="/images/2026-05-PowerMac/IMG_2227.HEIC" alt="Picture of part mounted in case">
+</gallery>
+<p>I made a design that wraps around the factory grilles from Apple and lofts up to hold a standard 120mm fan. I
+    included screw holes for the fan and grille, but everything ended up just friction fitting very nicely so I didn't
+    make use of them in the end. This was a super-tight squeeze between the I/O shield and the top of the case so I was
+    exceedingly pleased with how it turned out. The Overture ASA I used for my prints also closely matches the factory
+    plastic parts from apple so it worked out well.</p>
+<p>On my second revision, I tossed in a little post for the original "G5" aluminum vanity plate to mount onto. You'll
+    see that further down.</p>
+<filament-tracker grams="206"></filament-tracker>
+
+<p>Now it was time to deal with the radiator. This 360mm radiator <i>really</i> should not go in this case, but I was
+    determined to make it work. I ended up mounting it diagonally with the top toward the front so that there would be
+    room for bigger GPUs up top. This would make things a really tight squeeze by the power supply (more on that later).
+</p>
+<gallery>
+    <img scaled basis="1/2" src="/images/2026-05-PowerMac/Screenshot 2026-04-01 232414.png"
+         alt="Screenshot of design in CAD software.  It is a long bar with two holes and a tall lip coming up the side with additional holes.">
+    <img scaled basis="1/2" src="/images/2026-05-PowerMac/IMG_2212.HEIC" alt="Picture of the radiator mounted in the case at an angle.">
+</gallery>
+<p>I wanted to make the bottom solid to dissuade hot air from just making a round trip back around the other side of the
+    radiator. I designed it so that it would press fit over two of the original standoffs and this worked a bit too
+    well. While testing my first revision it was so tight that the standoff broke off the case from me trying to get the
+    bracket back off. It would have been pretty secure with just the one post still, but I epoxied this in at the same
+    time as the motherboard tray for good measure.</p>
+<p>This one took me two revisions as well, what a streak!</p>
+<filament-tracker grams="142"></filament-tracker>
+
+<h2></h2>

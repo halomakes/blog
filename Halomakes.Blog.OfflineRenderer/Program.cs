@@ -13,7 +13,7 @@ public partial class Program
     {
         factory = new WebApplicationFactory<Halomakes.Blog.Program>();
         using var client = factory.CreateClient();
-
+        client.Timeout = TimeSpan.FromMinutes(5);
 
         var resources = GetStaticResources().ToList();
         var pages = await GetApplicationRoutes(client).ToListAsync();

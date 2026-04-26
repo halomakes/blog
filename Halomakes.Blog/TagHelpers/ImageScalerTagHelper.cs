@@ -5,7 +5,7 @@ namespace Halomakes.Blog.TagHelpers;
 
 public class ImageScalerTagHelper
 {
-    [HtmlTargetElement("img", Attributes = "scaled")]
+    [HtmlTargetElement("img", Attributes = "scaled", TagStructure = TagStructure.WithoutEndTag)]
     public class TagLinkTagHelper(ImageScalerService scaler) : TagHelper
     {
         [HtmlAttributeName("src")]
@@ -14,14 +14,19 @@ public class ImageScalerTagHelper
         /// <summary>
         /// Percentage of container image is expected to occupy
         /// </summary>
-        public decimal? Basis { get; set; } = 1;
+        public decimal? Basis
+        {
+            get => field is > 0 ? field : 1;
+            set => field = value;
+        }
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
             var scaled = scaler.ScaleImage(SourcePath);
 
+            output.Attributes.SetAttribute("src", SourcePath);
             var srcset = scaled.Steps
-                .Select(s => $"{s.Url} {s.Width}w");
+                .Select(static s => $"{s.Url} {s.Width}w");
             output.Attributes.SetAttribute("srcset", string.Join(", ", srcset));
             var sizes = scaled.Steps
                 .Select((entry, idx) => (width: entry.Width,
@@ -32,7 +37,7 @@ public class ImageScalerTagHelper
                         : $"{tuple.width}px");
             output.Attributes.SetAttribute("sizes", string.Join(", ", sizes));
 
-            output.Attributes.SetAttribute("scaled", null);
+            output.Attributes.SetAttribute("loading", "lazy");
         }
     }
 }

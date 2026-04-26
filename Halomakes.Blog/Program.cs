@@ -19,9 +19,8 @@ public class Program
         builder.Services.AddDefaultSitemapServices<SitemapUrlProvider>();
         builder.Services.AddHighlightJS();
         builder.Services.AddTransient<ImageScalerService>();
-        CodecManager.Configure(codecs => {
-            codecs.UseLibwebp();
-        });
+        CodecManager.Configure(codecs => { codecs.UseLibwebp(); });
+        builder.Services.AddScoped<FilamentTrackerService>();
 
         var app = builder.Build();
 
@@ -34,7 +33,7 @@ public class Program
         app.UseHttpsRedirection();
         app.UseRouting();
 
-        app.MapStaticAssets();
+        app.UseStaticFiles();
 
         app.MapControllerRoute(
                 name: "default",

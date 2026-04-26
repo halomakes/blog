@@ -1,3 +1,4 @@
+using System.Web;
 using Halomakes.Blog.Models;
 using PhotoSauce.MagicScaler;
 
@@ -8,8 +9,11 @@ public class ImageScalerService(IWebHostEnvironment environment)
     private readonly List<int> _standardSizes =
         [144, 196, 240, 320, 480, 512, 640, 720, 820, 960, 1024, 1200, 1440, 1600, 1920, 2560, 3180, 4200];
 
-    public ScaledImage ScaleImage(string originalPath) =>
-        new(FormatForClient(originalPath), GenerateSteps(originalPath).ToList());
+    public ScaledImage ScaleImage(string originalPath)
+    {
+        var workingPath = originalPath.TrimStart('/');
+        return new(FormatForClient(workingPath), GenerateSteps(workingPath).ToList());
+    }
 
     private IEnumerable<ScaleStep> GenerateSteps(string originalPath)
     {
@@ -38,5 +42,6 @@ public class ImageScalerService(IWebHostEnvironment environment)
         }
     }
 
-    private string FormatForClient(string ioPath) => $"/{ioPath.Replace('\\', '/')}";
+    private static string FormatForClient(string ioPath) =>
+        $"/{HttpUtility.UrlPathEncode(ioPath.Replace('\\', '/'))}";
 }
