@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
-    <meta name="theme-color" content="#1d1d2b" />
+    <meta name="theme-color" content="#1d1d2b"/>
     <title>@ViewData["Title"]</title>
     <script type="application/javascript" crossorigin src="~/dist/main.es.js"
             asp-append-version="true" async></script>
@@ -22,7 +22,18 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
     <meta name="apple-mobile-web-app-title" content="MyWebSite"/>
     <link rel="manifest" href="/site.webmanifest"/>
-    @await RenderSectionAsync("Metadata", required: false)
+    @if (IsSectionDefined("Metadata"))
+    {
+        @await RenderSectionAsync("Metadata", required: false)
+    }
+    else
+    {
+        if (!string.IsNullOrWhiteSpace(ViewBag.Title))
+        {
+            <meta property="og:title" content="@ViewBag.Title"/>
+        }
+    }
+
 </head>
 <body>
 <canvas id="tsparticles" style="display:none;"></canvas>
@@ -61,10 +72,14 @@
 
 <footer>
     <div class="container">
-        Generated @DateTime.UtcNow <br/>
+        <time datetime="@DateTime.UtcNow.ToString("O")">
+            Generated @DateTime.UtcNow.ToString("yyyy-MM-dd")
+        </time>
+        <br/>
         this site is powered by sleep-deprived brain cells
     </div>
 </footer>
+
 @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

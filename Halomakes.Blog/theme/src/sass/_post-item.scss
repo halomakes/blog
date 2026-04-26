@@ -1,5 +1,6 @@
 @use 'variables/colors';
 @use 'mixins/hover';
+@use 'variables/sizing';
 
 .post-item {
   text-decoration: none !important;
@@ -28,6 +29,7 @@
     grid-area: img;
     width: $img-size;
     height: $img-size;
+    border-radius: sizing.$radius-sm;
   }
 
   & > h3 {
