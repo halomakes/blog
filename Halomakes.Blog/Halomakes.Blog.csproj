@@ -5,6 +5,7 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
 
     <ItemGroup>
@@ -14,6 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="ByteAether.Ulid" Version="1.3.6" />
       <PackageReference Include="Jering.Web.SyntaxHighlighters.HighlightJS" Version="3.4.0" />
       <PackageReference Include="Lucide.Icons.TagHelper" Version="1.0.2" />
       <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="10.0.6" />
