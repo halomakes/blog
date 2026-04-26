@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
-    <meta name="theme-color" content="#1d1d2b" />
+    <meta name="theme-color" content="#1d1d2b"/>
     <title>No Post.  Postie nay-nay.</title>
     <script type="application/javascript" crossorigin src="/dist/main.es.js?v=9hK9Yn2C56rKV2aA7qsOI9GTx3uHEAXR42uxAUhHUAU" async></script>
     <script type="application/javascript" crossorigin src="/dist/particles.es.js?v=vgcD7bzF6Y57h1VXUTL1j7Kmr2uxstL6iZoBmatSUu0" async></script>
-    <link rel="stylesheet" crossorigin href="/dist/theme.css?v=D7bmYmWPezfUJYtmWQ-acOdEmV4nPuSj_-n7WnnoO1w" media="print" onload="this.media='all'">
+    <link rel="stylesheet" crossorigin href="/dist/theme.css?v=bQWESyIWwde9lccEGUJUvPbzXmIw1EHJ855FZ8IXJkE" media="print" onload="this.media='all'">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -19,7 +19,8 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
     <meta name="apple-mobile-web-app-title" content="MyWebSite"/>
     <link rel="manifest" href="/site.webmanifest"/>
-    
+            <meta property="og:title" content="No Post.  Postie nay-nay."/>
+
 </head>
 <body>
 <canvas id="tsparticles" style="display:none;"></canvas>
@@ -61,10 +62,14 @@
 
 <footer>
     <div class="container">
-        Generated 04/26/2026 22:53:25 <br/>
+        <time datetime="2026-04-26T23:32:22.8137778Z">
+            Generated 2026-04-26
+        </time>
+        <br/>
         this site is powered by sleep-deprived brain cells
     </div>
 </footer>
+
 
 </body>
 </html>
