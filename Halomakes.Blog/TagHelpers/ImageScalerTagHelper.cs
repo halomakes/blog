@@ -36,6 +36,7 @@ public class ImageScalerTagHelper
                         ? $"(width <= {(int)(tuple.next * (1 / Basis))!}px) {tuple.width}px"
                         : $"{tuple.width}px");
             output.Attributes.SetAttribute("sizes", string.Join(", ", sizes));
+            output.Attributes.SetAttribute("aspect", $"{Math.Clamp(scaled.Aspect, .5, 2):F1}");
 
             output.Attributes.SetAttribute("loading", "lazy");
         }

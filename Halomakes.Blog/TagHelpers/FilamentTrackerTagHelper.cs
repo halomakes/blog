@@ -19,7 +19,7 @@ public class FilamentTrackerTagHelper(FilamentTrackerService tracker) : TagHelpe
         tracker.Use(Grams);
 
         var label = new TagBuilder("span");
-        label.InnerHtml.Append("Filament Used");
+        label.InnerHtml.Append("Filament Consumed");
         var values = new TagBuilder("dl");
         foreach (var tag in GetAmount("step", Grams).Concat(GetAmount("total", tracker.Total)))
             values.InnerHtml.AppendHtml(tag);
@@ -33,7 +33,7 @@ public class FilamentTrackerTagHelper(FilamentTrackerService tracker) : TagHelpe
         labelElement.InnerHtml.Append(label);
         yield return labelElement;
         var amountElement = new TagBuilder("dt");
-        amountElement.InnerHtml.Append(amount > 1000 ? $"{(decimal)amount / 1000:d2}" : $"{amount:d0}");
+        amountElement.InnerHtml.Append(amount > 1000 ? $"{(decimal)amount / 1000:d2}kg" : $"{amount:d0}g");
         yield return amountElement;
     }
 }

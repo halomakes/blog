@@ -12,33 +12,42 @@ public class ImageScalerService(IWebHostEnvironment environment)
     public ScaledImage ScaleImage(string originalPath)
     {
         var workingPath = originalPath.TrimStart('/');
-        return new(FormatForClient(workingPath), GenerateSteps(workingPath).ToList());
+        return new(FormatForClient(workingPath), GenerateImage(workingPath, out var aspect), aspect);
     }
 
-    private IEnumerable<ScaleStep> GenerateSteps(string originalPath)
+    private IList<ScaleStep> GenerateImage(string originalPath, out double aspect)
     {
         var directoryName = Path.GetDirectoryName(originalPath);
         var originalFileName = Path.GetFileNameWithoutExtension(originalPath);
         var originalFsPath = Path.Combine(environment.WebRootPath, originalPath);
         using var pipeline = MagicImageProcessor.BuildPipeline(originalFsPath, new ProcessImageSettings());
-        foreach (var size in _standardSizes.Order())
+        aspect = (double)pipeline.PixelSource.Width / pipeline.PixelSource.Height;
+        return GenerateSteps(pipeline, originalFileName, directoryName, originalFsPath).ToList();
+    }
+
+    private IEnumerable<ScaleStep> GenerateSteps(ProcessingPipeline pipeline, string originalFileName,
+        string? directoryName,
+        string originalFsPath)
+    {
+        foreach (var width in _standardSizes.Order())
         {
-            if (pipeline.PixelSource.Width < size)
+            if (pipeline.PixelSource.Width < width)
                 yield break;
-            var newFileName = $"{originalFileName}_{size}px.webp";
+            var newFileName = $"{originalFileName}_{width}px.webp";
             var newFilePath = Path.Combine(directoryName!, newFileName);
             var newFsPath = Path.Combine(environment.WebRootPath, newFilePath);
+            var expectedHeight = width / pipeline.PixelSource.Width * pipeline.PixelSource.Height;
             if (File.Exists(newFsPath))
             {
-                yield return new(FormatForClient(newFilePath), size);
+                yield return new(FormatForClient(newFilePath), width);
                 continue;
             }
 
-            MagicImageProcessor.ProcessImage(originalFsPath, newFsPath, new ProcessImageSettings()
+            MagicImageProcessor.ProcessImage(originalFsPath, newFsPath, new ProcessImageSettings
             {
-                Width = size
+                Width = width
             });
-            yield return new(FormatForClient(newFilePath), size);
+            yield return new(FormatForClient(newFilePath), width);
         }
     }
 

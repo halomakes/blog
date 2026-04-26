@@ -1,6 +1,65 @@
 @use 'variables/sizing';
+@use 'sass:math';
+@use 'mixins/shadow';
 
 img[scaled] {
   max-width: 100%;
   border-radius: sizing.$radius-md;
+}
+
+gallery {
+  display: flex;
+  flex-direction: row;
+  max-width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 10% 0;
+
+  & > img {
+    flex-grow: 1;
+    width: 0;
+    min-width: 200px;
+    @include shadow.shadow('md');
+
+    &:first-child {
+      transform-origin: left;
+    }
+
+    &:last-child {
+      transform-origin: right;
+    }
+  }
+
+  @function getOffset($max: 10) {
+    @if ($max == 0) {
+      @return '0';
+    }
+
+    $randomnessCeiling: $max * .5;
+    $range: math.random();
+    $scale: math.cos(math.$pi * 2 * $range);
+
+    @return #{$scale * $randomnessCeiling}#{'%'};
+  }
+
+  @function getZ() {
+    @return math.floor(math.random(100));
+  }
+
+  @for $i from 1 through 8 {
+    & > img:nth-child(#{$i}) {
+      z-index: getZ();
+
+    }
+
+    @for $j from 5 through 20 {
+      $attrib: $j * 0.1;
+      & > img:nth-child(#{$i})[aspect='#{$attrib}'] {
+        $variability: ($j)*3;
+        transform: scale(1.05) translateY(getOffset($variability));
+        --variability: #{$variability};
+      }
+    }
+  }
 }
