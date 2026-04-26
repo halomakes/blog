@@ -22,7 +22,16 @@ public class ImageScalerService(IWebHostEnvironment environment, ILogger<ImageSc
         var originalFsPath = Path.Combine(environment.WebRootPath, originalPath);
         using var pipeline = MagicImageProcessor.BuildPipeline(originalFsPath, new ProcessImageSettings());
         aspect = (double)pipeline.PixelSource.Width / pipeline.PixelSource.Height;
-        return GenerateSteps(pipeline, originalFileName, directoryName, originalFsPath).ToList();
+        try
+        {
+            return GenerateSteps(pipeline, originalFileName, directoryName, originalFsPath).ToList();
+        }
+        catch (InvalidDataException ex)
+        {
+            Console.WriteLine(ex.Message);
+            Console.WriteLine(originalPath);
+            throw;
+        }
     }
 
     private IEnumerable<ScaleStep> GenerateSteps(ProcessingPipeline pipeline, string originalFileName,
@@ -31,7 +40,7 @@ public class ImageScalerService(IWebHostEnvironment environment, ILogger<ImageSc
     {
         foreach (var width in _standardSizes.Order())
         {
-            logger.LogInformation("Generating scaled image for {Source}: {Resolution}", originalFileName, width);
+            logger.LogWarning("Generating scaled image for {Source}: {Resolution}", originalFileName, width);
             if (pipeline.PixelSource.Width < width)
                 yield break;
             var newFileName = $"{originalFileName}_{width}px.webp";
