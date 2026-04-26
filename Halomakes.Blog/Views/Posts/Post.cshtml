@@ -53,7 +53,7 @@
     }
     @if (Model.Thumbnail.HasValue)
     {
-        var thumbnail = Scaler.GenerateThumbnail(Model.Thumbnail.Value.Url, width: 1200);
+        var thumbnail = Scaler.GenerateThumbnail(Model.Thumbnail.Value.Url, width: 1200, height: 630);
 
         <meta property="og:image:url" content="@thumbnail.Url"/>
         <meta property="og:image:type" content="@thumbnail.Type"/>
@@ -63,5 +63,9 @@
         {
             <meta property="og:image:alt" content="@Model.Thumbnail.Value.Alt"/>
         }
+    }
+    @if (!string.IsNullOrEmpty(Model.Description))
+    {
+        <meta property="og:description" content="@Model.Description"/>
     }
 }
