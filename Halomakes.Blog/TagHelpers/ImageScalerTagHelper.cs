@@ -34,12 +34,13 @@ public class ImageScalerTagHelper
                 .Select((entry, idx) => (width: entry.Width,
                     next: scaled.Steps.Select(static s => s.Width).ElementAtOrDefault(idx + 1)))
                 .Select(tuple =>
-                    tuple.width > 0
+                    tuple.next > 0
                         ? $"(width <= {(int)(tuple.next * (1 / Basis))!}px) {tuple.width}px"
                         : $"{tuple.width}px");
             output.Attributes.SetAttribute("sizes", string.Join(", ", sizes));
             output.Attributes.SetAttribute("aspect", $"{scaled.Aspect:F1}");
             output.Attributes.SetAttribute("style", BuildDeterministicRandomStyle(scaled, rng));
+            output.Attributes.SetAttribute("onclick", $"window.open('{scaled.Steps.Last().Url}', '_blank').focus()");
 
             output.Attributes.SetAttribute("loading", "lazy");
         }

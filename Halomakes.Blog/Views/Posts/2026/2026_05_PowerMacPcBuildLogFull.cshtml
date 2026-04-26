@@ -13,7 +13,7 @@
 <img scaled src="/images/2026-05-PowerMac/04242026_141104570.jpg"
      alt="Completed build hooked up to a CRT monitor with some OS X skinning"/>
 
-<h2>Mounting the Motherboard</h2>
+<h2 linkable>Mounting the Motherboard</h2>
 <p>After I pulled all the old guts out and test fitting new components, the first thing I wanted to figure out was
     mounting the motherboard. Back in the ancient times, I just pulled the original standoffs out, screwed them into the
     motherboard for alignment, then slapped them back in the chassis with a dab of JB weld on the bottom of each post.
@@ -25,13 +25,13 @@
     case.</p>
 <gallery>
     <img scaled basis="1/2" src="/images/2026-05-PowerMac/Screenshot 2026-04-25 224956.png"
-         alt="Screnshot of design in Autodesk Fusion.  Design is a bunch of stumps with holes arranged to mate with an ATX motherboard and connected with a flat lattice backplane."/>
+         alt="Screenshot of design in Autodesk Fusion.  Design is a bunch of stumps with holes arranged to mate with an ATX motherboard and connected with a flat lattice backplane."/>
     <img scaled="" basis="1/2" src="/images/2026-05-PowerMac/IMG_2188.HEIC"
          alt="Photograph of printed design being held in hand.  Holes have been populated with M3 brass threaded inserts."/>
 </gallery>
 <filament-tracker grams="182"></filament-tracker>
 
-<h2>Figuring Out Cooling</h2>
+<h2 linkable>Figuring Out Cooling</h2>
 <p>Up next, I needed to figure out cooling. I had a 360mm radiator (using this because it's what I had lying around, a
     280mm definitely would have been significantly easier) that didn't really fit in the case, and the stock fan
     mounting points for the exhaust would intersect with the motherboards bulky I/O shield. I tackled the exhaust
@@ -60,14 +60,106 @@
 <gallery>
     <img scaled basis="1/2" src="/images/2026-05-PowerMac/Screenshot 2026-04-01 232414.png"
          alt="Screenshot of design in CAD software.  It is a long bar with two holes and a tall lip coming up the side with additional holes.">
-    <img scaled basis="1/2" src="/images/2026-05-PowerMac/IMG_2212.HEIC" alt="Picture of the radiator mounted in the case at an angle.">
+    <img scaled basis="1/2" src="/images/2026-05-PowerMac/IMG_2212.HEIC"
+         alt="Picture of the radiator mounted in the case at an angle.">
 </gallery>
 <p>I wanted to make the bottom solid to dissuade hot air from just making a round trip back around the other side of the
-    radiator. I designed it so that it would press fit over two of the original standoffs and this worked a bit too
-    well. While testing my first revision it was so tight that the standoff broke off the case from me trying to get the
+    radiator. I designed it so that it would press fit over two of the original standoffs - and this worked a bit too
+    well. While testing my first revision, it was so tight that the standoff broke off the case from me trying to get
+    the
     bracket back off. It would have been pretty secure with just the one post still, but I epoxied this in at the same
     time as the motherboard tray for good measure.</p>
-<p>This one took me two revisions as well, what a streak!</p>
+<p>This one took me two revisions as well; what a streak!</p>
 <filament-tracker grams="142"></filament-tracker>
 
-<h2>Power Woes</h2>
+<h2 linkable>Power Woes</h2>
+<p>...aaaand now to the power supply. I bought a spare one off of my friend and it turned out to be an entire inch
+    longer than what I had done my test fit with at the outset. This created some problems for me as the radiator hoses
+    were already a very tight fit with the old (underpowered) PSU and I was now losing a bunch of space. Scarcity was
+    rampant in my project's X-axis. </p>
+<img scaled src="/images/2026-05-PowerMac/IMG_2228.jpg"
+     alt="A short power lead inside the case with a right-angle connector on the end">
+<p>I ended up bastardizing a right-angle power cable that I found in the bin to make this work. I cut it short and
+    soldered to a C14 socket that mounts on the back of the case using the holes in the cheese grater. I originally had
+    something a little nicer changed, but alas, the space constraints got the better of me on that front.</p>
+<gallery>
+    <img scaled basis="1/2" src="/images/2026-05-PowerMac/IMG_2236.HEIC"
+         alt="Early prototype of the power supply mount.  A grey angular design wrapping around the box.">
+    <img scaled basis="1/2" src="/images/2026-05-PowerMac/Screenshot 2026-04-25 224921.png"
+         alt="Final version of the power supply bracket, now split into two separate components and with additional bracing and support">
+</gallery>
+<p>Getting this thing to fit in there was an absolute nightmare. The base was already an intricate 3D puzzle to assemble
+    and it was like having negative space to get this PSU in, even with the very slimmed-down power extension. I nearly
+    caved and bought an SFX PSU but I prevailed in the end. I ended up going through 6 revisions on the design to get
+    something that finally worked right.</p>
+<p>Printing was difficult on this. I kept having issues with warping on early versions of the design, even with a
+    preheated enclosure, dried out ASA, and a scorching-hot bed. I removed more and more material and came to the
+    realization that I could adjust for tolerances a lot faster if I split the design into two pieces. I don't have a
+    good picture of the final version, but I have no intention of disassembling this thing unless absolutely necessary,
+    so in there it will remain. </p>
+<p>The brackets get some M4x4 brass threaded inserts that line up with factory holes on the bottom of the case. It has
+    those two for support and is also right up against the fan shroud, so it's surprisingly secure in place.</p>
+<filament-tracker grams="212"></filament-tracker>
+
+<h2 linkable>I/O & Cable Management</h2>
+<p>There was information online about the front panel headers but it was ever so slightly incomplete for my uses. I
+    probed everything with a multimeter to make sure each pin was what I expected, luckily Apple appeared to use largely
+    standard connectors on the other end. The main thing here is that the FireWire port's ground needs to be connected
+    in order for the power button to function. I don't have a FireWire card in this PC (I have some but haven't ever
+    seen that header on one of my cards), so I did some soldering to pull that ground from the USB connector.</p>
+<gallery>
+    <img scaled basis="1/4" src="/images/2026-05-PowerMac/IMG_2329.HEIC"
+         alt="Pinout drawing of all the pins on the front panel connector">
+    <img scaled basis="1/4" src="/images/2026-05-PowerMac/IMG_2229.HEIC"
+         alt="Picture of 3&quot; cut-off tool on back of case">
+    <img scaled basis="1/4" src="/images/2026-05-PowerMac/IMG_2233.HEIC"
+         alt="Picture of completed cut with clamped wood board acting as a fence">
+    <img scaled basis="1/4" src="/images/2026-05-PowerMac/Screenshot 2026-04-25 224803.png"
+         alt="Screenshot of I/O shield trim in CAD software">
+</gallery>
+<p>I realized that I had a mistake in that the front panel cable could not reach up to the headers on the motherboard so
+    I ended up holding a 1/4" ratchet extension in some pliers and heating it up with a torch to melt a notch to grant
+    the cable passage through the radiator bracket. </p>
+<p>For the rear I/O shield, I cut it out using a 3" cut-off disc and a piece of wood clamped to the case to act as a
+    fence of sorts. I printed a simple trim piece to go around this to keep fingers away the sharp edges. </p>
+<filament-tracker grams="47"></filament-tracker>
+
+<h2 linkable>Prettying Things Up</h2>
+<p>I wanted to make a couple of little vanity plates to wrap things up. The one on the radiator is functional and it
+    makes sure the rad pulls fresh air from the front that it is so far away from instead of just drawing back in hot
+    air from the other side. I tried something new here: laser-cut a pattern and laminated two sheets together. I filled
+    the hole with some epoxy resin with some mica powder mixed in. I just used regular cheap wood engraving basswood
+    sheets, and that kind of bit me when I went to sand it down. The veneer layer on this is quite thin, so I wore
+    through
+    it in a couple spots. I'd love to go back and redo this with some solid wood if I can find a cheap source
+    locally. It mounts up to the radiator using some little brackets I modeled.</p>
+<filament-tracker grams="8"></filament-tracker>
+<p>It was really important to me to keep an optical drive in here, otherwise I could have removed the entire top shelf
+    and made things a lot easier on myself. I have a BD-50 burner in there and wanted to put a little something on it.
+    In 2011 I was watching a Chris Pirillo stream where he talked about meeting Steve Jobs at an Apple Store in
+    California. He introduced himself and said what an honor it was, then Steve's response was "Great, great. Buy an
+    iMac with a SuperDrive." That clip has lived rent-free in my head ever since, so I wanted to put some sort of
+    SuperDrive branding in here.</p>
+<p>The original dual G5 plate screws into the exhaust bracket and I cut a bigger hole in the acryllic panel (there was a
+    smaller hole cut a decade ago for the GPU power plugs to close things up. All the cables I just tucked away or
+    stuffed into a sleeve to make one big snake.</p>
+<gallery>
+    <img scaled basis="1/4" src="/images/2026-05-PowerMac/Screenshot 2026-04-25 224847.png"
+         alt="Screenshot of vanity plate in CAD software">
+    <img scaled basis="1/4" src="/images/2026-05-PowerMac/IMG_2311.HEIC" alt="Completed build sans-covers">
+    <img scaled basis="1/4" src="/images/2026-05-PowerMac/IMG_2328.HEIC"
+         alt="Inside of completed build with all plates in place">
+    <img scaled basis="1/4" src="/images/2026-05-PowerMac/IMG_2327.HEIC" alt="Photo of build with acryllic cover">
+</gallery>
+
+<h2>Software</h2>
+<p>I thought about putting bazzite on this but we play some pretty vintage games at our LAN parties and I didn't want to
+    be fussing around with getting the games working during the event. I installed a version of Tiny11 and then tried
+    out a script called WinMac that installs a bunch of themeing applications, <i>do not recommend</i>. It installed way
+    more stuff than I ended up wanting and seems to have broken my start menu after being uninstalled. But otherwise,
+    classic wallpaperm, dock, and flurry screensaver à la Snow Leopard had me feeling pretty good. Project complete!</p>
+<gallery>
+    <img scaled basis="1/2" src="/images/2026-05-PowerMac/IMG_2409.HEIC" alt="My cat Rindo by the completed build">
+    <img scaled basis="1/2" src="/images/2026-05-PowerMac/04242026_141104570.jpg"
+         alt="Completed build with some software customizations">
+</gallery>

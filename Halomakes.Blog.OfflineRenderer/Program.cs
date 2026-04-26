@@ -13,15 +13,16 @@ public partial class Program
     {
         factory = new WebApplicationFactory<Halomakes.Blog.Program>();
         using var client = factory.CreateClient();
-        client.Timeout = TimeSpan.FromMinutes(5);
+        client.Timeout = TimeSpan.FromMinutes(10);
 
-        var resources = GetStaticResources().ToList();
         var pages = await GetApplicationRoutes(client).ToListAsync();
-
-        foreach (var resource in resources)
-            await StoreResource(client, resource, resource);
         foreach (var page in pages)
             await StoreResource(client, page, string.IsNullOrEmpty(page) ? "index.html" : $"{page}/index.html");
+
+        var resources = GetStaticResources().ToList();
+        foreach (var resource in resources)
+            await StoreResource(client, resource, resource);
+
         await StoreResource(client, "posts/404", "404.html");
         await StoreResource(client, "sitemap.xml", "sitemap.xml");
         await StoreResource(client, "sitemap.txt", "sitemap.txt");
