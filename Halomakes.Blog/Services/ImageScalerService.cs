@@ -1,3 +1,5 @@
+using System.Collections.Concurrent;
+using System.Diagnostics;
 using System.Web;
 using Halomakes.Blog.Extensions;
 using Halomakes.Blog.Models;
@@ -6,7 +8,7 @@ using PhotoSauce.NativeCodecs.Libwebp;
 
 namespace Halomakes.Blog.Services;
 
-public class ImageScalerService(IWebHostEnvironment environment, ILogger<ImageScalerService> logger)
+public partial class ImageScalerService(IWebHostEnvironment environment, ILogger<ImageScalerService> logger)
 {
     private static readonly int[] StandardSizes =
         [144, 196, 240, 320, 480, 512, 640, 720, 820, 960, 1024, 1200, 1440, 1600, 1920, 2560, 3180, 4200];
@@ -27,7 +29,7 @@ public class ImageScalerService(IWebHostEnvironment environment, ILogger<ImageSc
     {
         try
         {
-            logger.LogInformation("Getting image set for {Source}", originalPath);
+            LogGettingImageSetForSource(originalPath);
             var directoryName = Path.GetDirectoryName(originalPath);
             var originalFileName = Path.GetFileNameWithoutExtension(originalPath);
             var originalFsPath = Path.Combine(environment.WebRootPath, originalPath);
@@ -49,34 +51,53 @@ public class ImageScalerService(IWebHostEnvironment environment, ILogger<ImageSc
         string? directoryName,
         string originalFsPath)
     {
+        var existing = new List<ScaleStep>();
+        var generated = new List<ScaleStep>();
+        var toCreate = new List<(string originalFsPath, string newFsPath, string newClientUrl, int width)>();
+
         foreach (var width in StandardSizes.Order())
         {
-            logger.LogInformation("Generating scaled image for {Source}: {Resolution}", originalFileName, width);
             if (pipeline.PixelSource.Width < width)
-                yield break;
+                continue;
             var newFileName = $"{originalFileName}_{width}px.webp";
             var newFilePath = Path.Combine(directoryName!, newFileName);
             var newFsPath = Path.Combine(environment.WebRootPath, newFilePath);
             if (File.Exists(newFsPath))
             {
-                yield return new(FormatForClient(newFilePath), width);
+                existing.Add(new(FormatForClient(newFilePath), width));
                 continue;
             }
 
-            MagicImageProcessor.ProcessImage(originalFsPath, newFsPath, new ProcessImageSettings
-            {
-                Width = width,
-                EncoderOptions = new WebpLossyEncoderOptions(Quality)
-            });
-            yield return new(FormatForClient(newFilePath), width);
+            toCreate.Add((originalFsPath, newFsPath, newFilePath, width));
         }
+
+        toCreate.AsParallel().ForAll(t =>
+        {
+            generated.Add(GenerateStep(t.originalFsPath, t.newFsPath, t.newClientUrl, t.width));
+        });
+
+        return existing.Concat(generated);
+    }
+
+    private ScaleStep GenerateStep(string originalFsPath, string newFsPath, string newClientUrl, int width)
+    {
+        LogGeneratingSource(newClientUrl);
+        var sw = Stopwatch.StartNew();
+        MagicImageProcessor.ProcessImage(originalFsPath, newFsPath, new ProcessImageSettings
+        {
+            Width = width,
+            EncoderOptions = new WebpLossyEncoderOptions(Quality)
+        });
+        sw.Stop();
+        LogCompletedSourceInTime(newClientUrl, sw.Elapsed);
+        return new(FormatForClient(newClientUrl), width);
     }
 
     public Thumbnail GenerateThumbnail(string clientPath)
     {
         logger.LogInformation("Generating thumbnail image for {Source}", clientPath);
         var originalFsPath = Path.Combine(environment.WebRootPath, clientPath);
-        using var pipeline = MagicImageProcessor.BuildPipeline(clientPath, new ProcessImageSettings());
+        using var pipeline = MagicImageProcessor.BuildPipeline(originalFsPath, new ProcessImageSettings());
         var ulid = Path.GetFileName(clientPath).ToUlid();
         var thumbnailFsDir = $"{environment.WebRootFileProvider}/thumbnails";
         if (!Path.Exists(thumbnailFsDir))
@@ -101,4 +122,13 @@ public class ImageScalerService(IWebHostEnvironment environment, ILogger<ImageSc
 
     private static string FormatForClient(string ioPath) =>
         $"/{HttpUtility.UrlPathEncode(ioPath.Replace('\\', '/'))}";
+
+    [LoggerMessage(LogLevel.Information, "Completed {Source} in {Time}")]
+    partial void LogCompletedSourceInTime(string source, TimeSpan time);
+
+    [LoggerMessage(LogLevel.Information, "Generating {Source}")]
+    partial void LogGeneratingSource(string source);
+
+    [LoggerMessage(LogLevel.Information, "Getting image set for {Source}")]
+    partial void LogGettingImageSetForSource(string source);
 }
