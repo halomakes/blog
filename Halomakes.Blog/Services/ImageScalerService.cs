@@ -74,7 +74,7 @@ public partial class ImageScalerService(IWebHostEnvironment environment, ILogger
             generated.Add(GenerateStep(t.originalFsPath, t.newFsPath, t.newClientUrl, t.width));
         });
 
-        return existing.Concat(generated);
+        return existing.Concat(generated).OrderBy(static s => s.Width);
     }
 
     private ScaleStep GenerateStep(string originalFsPath, string newFsPath, string newClientUrl, int width)
