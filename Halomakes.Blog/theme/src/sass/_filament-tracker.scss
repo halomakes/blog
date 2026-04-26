@@ -3,6 +3,7 @@
 @use 'variables/colors';
 @use 'mixins/blur';
 @use 'sass:color';
+@use 'mixins/outline';
 
 filament-tracker {
   @include typography.mono();
@@ -12,7 +13,7 @@ filament-tracker {
   $height: 48px;
   height: $height;
   border-radius: math.div($height, 2);
-  border: 1px solid colors.$secondary;
+  @include outline.outline();
   padding: 0 math.div($height, 2);
   gap: 16px;
   @include blur.blur();

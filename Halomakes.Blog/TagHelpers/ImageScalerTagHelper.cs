@@ -1,3 +1,4 @@
+using Halomakes.Blog.Models;
 using Halomakes.Blog.Services;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
@@ -22,6 +23,7 @@ public class ImageScalerTagHelper
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
+            var rng = new Random(SourcePath.GetHashCode());
             var scaled = scaler.ScaleImage(SourcePath);
 
             output.Attributes.SetAttribute("src", SourcePath);
@@ -36,9 +38,21 @@ public class ImageScalerTagHelper
                         ? $"(width <= {(int)(tuple.next * (1 / Basis))!}px) {tuple.width}px"
                         : $"{tuple.width}px");
             output.Attributes.SetAttribute("sizes", string.Join(", ", sizes));
-            output.Attributes.SetAttribute("aspect", $"{Math.Clamp(scaled.Aspect, .5, 2):F1}");
+            output.Attributes.SetAttribute("aspect", $"{scaled.Aspect:F1}");
+            output.Attributes.SetAttribute("style", BuildDeterministicRandomStyle(scaled, rng));
 
             output.Attributes.SetAttribute("loading", "lazy");
+        }
+
+        private static string BuildDeterministicRandomStyle(ScaledImage image, Random rng)
+        {
+            const double variability = 30;
+            const double scale = 1.05;
+            var random = Math.Cos(rng.NextDouble() * Math.PI * 2);
+            var aspectAdjustment = Math.Sqrt((Math.Clamp(image.Aspect, .5, 2) - .5) / 1.5);
+            var offset = random * variability * aspectAdjustment;
+            var zIdx = rng.Next(0, 100);
+            return $"--z-idx:{zIdx};--offset:{offset:F1}%";
         }
     }
 }

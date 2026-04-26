@@ -1,0 +1,5 @@
+@use '../variables/colors';
+
+@mixin outline($color: colors.$secondary, $width: 1px) {
+  border: $width solid $color;
+}

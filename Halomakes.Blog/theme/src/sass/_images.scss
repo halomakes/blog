@@ -1,6 +1,7 @@
 @use 'variables/sizing';
 @use 'sass:math';
 @use 'mixins/shadow';
+@use 'mixins/outline';
 
 img[scaled] {
   max-width: 100%;
@@ -21,6 +22,9 @@ gallery {
     width: 0;
     min-width: 200px;
     @include shadow.shadow('md');
+    z-index: var(--z-idx);
+    transform: scale(1.05) translateY(var(--offset));
+    @include outline.outline();
 
     &:first-child {
       transform-origin: left;
@@ -28,47 +32,6 @@ gallery {
 
     &:last-child {
       transform-origin: right;
-    }
-  }
-
-  /**
-  Needed a determinate random
-   */
-  @function pseudo-random($indexSum) {
-    @return math.sin(math.tan($indexSum));
-  }
-
-  @function getOffset($max, $indexSum) {
-    @if ($max == 0) {
-      @return '0';
-    }
-
-    $randomnessCeiling: $max * .5;
-    $range: pseudo-random($indexSum);
-    $scale: math.cos(math.$pi * 2 * $range);
-
-    @return #{$scale * $randomnessCeiling}#{'%'};
-  }
-
-  @function getZ($indexSum) {
-    @return math.floor(pseudo-random($indexSum) * 100);
-  }
-
-  @for $i from 1 through 8 {
-    & > img:nth-child(#{$i}) {
-      z-index: getZ($i);
-    }
-
-    @for $j from 5 through 20 {
-      $attrib: $j * 0.1;
-      & > img:nth-child(#{$i})[aspect='#{$attrib}'] {
-        $variability: ($j)*2.5;
-        $salt: $i*15+$j;
-        transform: scale(1.05) translateY(getOffset($variability, $salt));
-        //--variability: #{$variability};
-        //--rand: #{pseudo-random($salt)};
-        //--salt: #{$salt};
-      }
     }
   }
 }
