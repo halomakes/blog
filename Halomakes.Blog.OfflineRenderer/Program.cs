@@ -77,13 +77,14 @@ public partial class Program
 
         IEnumerable<string> GetFilesRecursive(string path, string? parent = null)
         {
-            foreach (var item in hostEnv.WebRootFileProvider.GetDirectoryContents(path))
+            var relativeToRoot = parent is null
+                ? path
+                : Path.Combine(parent, path);
+            foreach (var item in hostEnv.WebRootFileProvider.GetDirectoryContents(relativeToRoot))
             {
                 if (!item.PhysicalPath?.Contains("wwwroot") ?? false)
                     continue;
-                var relativeToRoot = parent is null
-                    ? path
-                    : Path.Combine(parent, path);
+
                 if (item.IsDirectory)
                 {
                     foreach (var r in GetFilesRecursive(item.Name, relativeToRoot))

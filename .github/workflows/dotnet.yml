@@ -5,9 +5,7 @@ name: Build Static Site
 permissions:
   contents: write
   actions: write
-on:
-  push:
-    branches: [ "main", "master" ]
+on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -32,10 +30,12 @@ jobs:
       - name: Generate Offline Pages
         run: dotnet run --project Halomakes.Blog.OfflineRenderer/Halomakes.Blog.OfflineRenderer.csproj
       - name: Deploy 🚀
+        if: github.ref == 'refs/head/master'
         uses: JamesIves/github-pages-deploy-action@v4.8.0
         with:
           folder: Halomakes.Blog.OfflineRenderer/bin/Debug/net10.0/wwwroot
       - name: Trigger Site Crawl
+        if: github.ref == 'refs/head/master'
         uses: benc-uk/workflow-dispatch@v1
         with:
           workflow: Wayback Machine Crawl
