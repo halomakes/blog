@@ -1,0 +1,15 @@
+@using Halomakes.Blog.Services
+@attribute [Post("The complete PowerMac G5 PC 2.0 Build Log", 2026, 5, 26)]
+@attribute [Tags("gaming", "modding", "makes", "3d-printing", "vintage")]
+@attribute [Slug("powermac-g5-build")]
+
+@inject ImageScalerService scaler
+
+@{
+    var image = scaler.ScaleImage("images/2026-05-PowerMac/04242026_141104570.jpg");
+}
+
+@foreach (var step in image.Steps)
+{
+    <img src="@step.Url" alt="potato"/>
+}

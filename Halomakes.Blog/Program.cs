@@ -1,6 +1,8 @@
 using Halomakes.Blog.Providers;
 using Halomakes.Blog.Services;
 using Jering.Web.SyntaxHighlighters.HighlightJS;
+using PhotoSauce.MagicScaler;
+using PhotoSauce.NativeCodecs.Libwebp;
 using Sidio.Sitemap.Core.Services;
 
 namespace Halomakes.Blog;
@@ -16,6 +18,10 @@ public class Program
         builder.Services.AddSingleton<PostsService>();
         builder.Services.AddDefaultSitemapServices<SitemapUrlProvider>();
         builder.Services.AddHighlightJS();
+        builder.Services.AddTransient<ImageScalerService>();
+        CodecManager.Configure(codecs => {
+            codecs.UseLibwebp();
+        });
 
         var app = builder.Build();
 
