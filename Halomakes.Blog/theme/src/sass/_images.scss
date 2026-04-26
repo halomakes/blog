@@ -31,34 +31,43 @@ gallery {
     }
   }
 
-  @function getOffset($max: 10) {
+  /**
+  Needed a determinate random
+   */
+  @function pseudo-random($indexSum) {
+    @return math.sin(math.tan($indexSum));
+  }
+
+  @function getOffset($max, $indexSum) {
     @if ($max == 0) {
       @return '0';
     }
 
     $randomnessCeiling: $max * .5;
-    $range: math.random();
+    $range: pseudo-random($indexSum);
     $scale: math.cos(math.$pi * 2 * $range);
 
     @return #{$scale * $randomnessCeiling}#{'%'};
   }
 
-  @function getZ() {
-    @return math.floor(math.random(100));
+  @function getZ($indexSum) {
+    @return math.floor(pseudo-random($indexSum) * 100);
   }
 
   @for $i from 1 through 8 {
     & > img:nth-child(#{$i}) {
-      z-index: getZ();
-
+      z-index: getZ($i);
     }
 
     @for $j from 5 through 20 {
       $attrib: $j * 0.1;
       & > img:nth-child(#{$i})[aspect='#{$attrib}'] {
-        $variability: ($j)*3;
-        transform: scale(1.05) translateY(getOffset($variability));
-        --variability: #{$variability};
+        $variability: ($j)*2.5;
+        $salt: $i*15+$j;
+        transform: scale(1.05) translateY(getOffset($variability, $salt));
+        //--variability: #{$variability};
+        //--rand: #{pseudo-random($salt)};
+        //--salt: #{$salt};
       }
     }
   }
