@@ -1,6 +1,7 @@
 @use 'sass/variables/colors' as colors;
 @use 'sass/mixins/typography' as typography;
 @use "sass:map";
+@use 'sass:color';
 
 @forward 'normalize.css/normalize.css';
 @forward 'sass/codeSnippet';
@@ -20,7 +21,7 @@ html {
   background: #201D38 linear-gradient(125deg, colors.$light 0%, colors.$tertiary 17%, colors.$dark 60%, colors.$dark-bg 100%);
   color: colors.$white;
 
-  &:after {
+  &:after, &:before {
     position: fixed;
     content: '';
     pointer-events: none;
@@ -28,9 +29,15 @@ html {
     bottom: 0;
     left: 0;
     right: 0;
-    background: transparent radial-gradient(circle farthest-corner at top right, rgba(255, 255, 255, 1) 48%, rgba(0, 0, 0, 1) 100%);
-    mix-blend-mode: multiply;
-    opacity: 0.7;
+  }
+
+  &:after {
+    background: transparent radial-gradient(circle farthest-corner at top right, color.scale(#2c1f7c, $alpha: -80%) 48%, color.scale(#110d30, $alpha: -15%) 100%);
+  }
+
+  &:before {
+    background: url('/perlin.png') repeat;
+    opacity: .3;
   }
 }
 
@@ -39,8 +46,7 @@ body {
 }
 
 canvas#tsparticles {
-  mix-blend-mode: lighten;
-  opacity: 0.3;
+  opacity: 0.2;
   background-color: #201D38 !important;;
 
   &:not([data-generated]) {
