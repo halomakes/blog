@@ -30,6 +30,7 @@
         .Select(p => (post: p, overlap: p.Tags.Count(t => Model.Tags.Contains(t))))
         .Where(static g => g.overlap > 0)
         .OrderByDescending(static g => g.overlap)
+        .ThenByDescending(static g => g.post.PublishDate)
         .Take(5)
         .Select(static g => g.post)
         .ToList();

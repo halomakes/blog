@@ -25,6 +25,7 @@ public class TagsController(PostsService postsService) : Controller
         ViewBag.Tag = tag;
         var posts = postsService.GetPosts()
             .Where(p => p.Tags.Contains(tag.ToLower()))
+            .OrderByDescending(static p => p.PublishDate)
             .Take(10)
             .ToList();
         if (!posts.Any())
