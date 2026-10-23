@@ -4,7 +4,7 @@
 @use 'sass:color';
 
 @forward 'normalize.css/normalize.css';
-@forward 'sass/codeSnippet';
+@forward 'sass/code-snippet';
 @forward 'sass/mixins/typography';
 @forward 'sass/layout';
 @forward "sass/navbar";
@@ -16,6 +16,7 @@
 @forward 'sass/images';
 @forward 'sass/filament-tracker';
 @forward 'sass/header-link';
+@forward 'sass/external-link';
 
 html {
   background: #201D38 linear-gradient(125deg, colors.$light 0%, colors.$tertiary 17%, colors.$dark 60%, colors.$dark-bg 100%);

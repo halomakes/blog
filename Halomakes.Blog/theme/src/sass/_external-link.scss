@@ -1,0 +1,41 @@
+@use 'mixins/typography';
+@use 'sass:math';
+@use 'variables/colors';
+@use 'mixins/blur';
+@use 'sass:color';
+@use 'mixins/outline';
+@use 'mixins/hover';
+
+a.external-link {
+  display: inline-grid;
+  grid-template-areas:
+    "icon site"
+    "icon label";
+
+  $height: 32px;
+  border-radius: math.div($height, 2);
+  @include outline.outline(var(--link-brand));
+  padding: 8px 16px;
+  gap: 2px 8px;
+  @include blur.blur();
+  background-color: color.scale(colors.$white, $alpha: -94%);
+  @include hover.opacity();
+  text-decoration: none;
+  color: colors.$white;
+
+  & > img {
+    width: $height;
+    height: $height;
+    grid-area: icon;
+  }
+
+  & > span:first-of-type {
+    grid-area: site;
+    font-size: 12px;
+    color: colors.$dim;
+  }
+
+  & > span:last-of-type {
+    grid-area: label;
+  }
+}
