@@ -5,6 +5,8 @@
 /posts/2026/4/progress-on-the-powermac-g5-pc-build-resurrection
 /posts/2026/4/powermac-g5-build
 /posts/2026/4/the-complete-powermac-g5-pc-2.0-build-log
+/posts/2026/10/twenty-dollar-xbox
+/posts/2026/10/reviving-the-20-xbox
 /tags
 /tags/powershell
 /tags/music
@@ -14,3 +16,4 @@
 /tags/makes
 /tags/3d-printing
 /tags/vintage
+/tags/repair
