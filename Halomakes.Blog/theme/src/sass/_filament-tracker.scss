@@ -12,6 +12,7 @@ filament-tracker {
   align-items: center;
   $height: 48px;
   height: $height;
+  vertical-align: center;
   border-radius: math.div($height, 2);
   @include outline.outline();
   padding: 0 math.div($height, 2);

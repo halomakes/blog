@@ -48,9 +48,15 @@ body {
 
 canvas#tsparticles {
   opacity: 0.2;
-  background-color: #201D38 !important;;
+  background-color: #201D38 !important;
 
   &:not([data-generated]) {
     display: none;
+  }
+}
+
+p {
+  a {
+    color: inherit;
   }
 }
