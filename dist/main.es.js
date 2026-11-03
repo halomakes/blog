@@ -34,7 +34,7 @@ var e = class {
 	document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", e) : e();
 }, i = (e) => {
 	let t = document.querySelectorAll(e.selector);
-	return Array.from(t).map((e) => e).map((t) => new e(t));
+	return t.length ? Array.from(t).map((e) => e).map((t) => new e(t)) : [];
 };
 r(() => {
 	window.components = [

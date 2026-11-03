@@ -7,6 +7,8 @@
 /posts/2026/4/the-complete-powermac-g5-pc-2.0-build-log
 /posts/2026/10/twenty-dollar-xbox
 /posts/2026/10/reviving-the-20-xbox
+/posts/2026/11/crt-repair-rgb-mod
+/posts/2026/11/i-modded-a-crt-and-didnt-die-from-electric-shock
 /tags
 /tags/powershell
 /tags/music

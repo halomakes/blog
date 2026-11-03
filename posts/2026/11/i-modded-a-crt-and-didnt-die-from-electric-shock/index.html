@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+    <meta name="theme-color" content="#1d1d2b"/>
+    <title>I Modded a CRT and Didn&#x27;t Die from Electric Shock</title>
+    <script type="application/javascript" crossorigin src="/dist/main.es.js?v=Dl5jl5r9SqLM-LrFKp442EYHevS46VOHbwGJTinRbcI" async></script>
+    <script type="application/javascript" crossorigin src="/dist/particles.es.js?v=vgcD7bzF6Y57h1VXUTL1j7Kmr2uxstL6iZoBmatSUu0" async></script>
+    <link rel="stylesheet" crossorigin href="/dist/theme.css?v=XqlpNbscVNZgiF70DEfoN8jeuiZzVWol0G2i3aLs5BY" media="print" onload="this.media='all'">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cascadia+Code:ital,wght@0,200..700;1,200..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet" media="print" onload="this.media='all'">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96"/>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+    <link rel="shortcut icon" href="/favicon.ico"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+    <meta name="apple-mobile-web-app-title" content="MyWebSite"/>
+    <link rel="manifest" href="/site.webmanifest"/>
+
+    <meta property="og:title" content="I Modded a CRT and Didn&#x27;t Die from Electric Shock"/>
+    <meta property="og:type" content="article"/>
+    <meta property="article:published_time" content="2026-11-02T00:00:00.0000000"/>
+        <meta property="article:tag" content="vintage"/>
+        <meta property="article:tag" content="modding"/>
+        <meta property="article:tag" content="repair"/>
+        <meta property="og:image:url" content="/thumbnails/39fzzgrvc12zjvnw353a63sphb.webp"/>
+        <meta property="og:image:type" content="image/webp"/>
+        <meta property="og:image:width" content="1200"/>
+        <meta property="og:image:height" content="630"/>
+            <meta property="og:image:alt" content="Rear side of CRT television with electronics exposed"/>
+        <meta property="og:description" content="Disassembling an old XBR Trinitron to repair the mainboard and install an RGB mod"/>
+
+</head>
+<body style="background-color:#1c154f">
+<canvas id="tsparticles" style="display:none;"></canvas>
+<header>
+    <nav>
+        <span class="title">
+            <span class="selector">
+                <a href="#" class="selected">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 6 5 5 5-5" /><path d="m7 13 5 5 5-5" /></svg>
+                    <span>blog</span>
+                </a>
+                <span class="options">
+                    <a href="/">blog</a>
+                    <a href="https://www.alexgriffith.me">www</a>
+                    <a href="https://www.github.com/halomakes">git</a>
+                    <a href="https://www.printables.com/@halo_2764310">fdm</a>
+                    <a href="https://www.youtube.com/halomademeapc">yt</a>
+                </span>
+            </span>
+            <span class="dot">.</span>
+            <span class="domain">halomak</span>
+            <span class="dot">.</span>
+            <span class="tld">es</span>
+        </span>
+        <span class="areas">
+            <a href="/posts">recent</a>
+            <a href="/tags">tags</a>
+        </span>
+    </nav>
+</header>
+<div class="container">
+    <main role="main">
+        <article>
+    <h1>I Modded a CRT and Didn&#x27;t Die from Electric Shock</h1>
+    <p class="date">Published
+        <time datetime="2026-11-02">
+            2 November 2026
+        </time>
+    </p>
+    <div>
+            <a class="tag" href="/tags/vintage">vintage <span class="count">(3)</span></a>
+            <a class="tag" href="/tags/modding">modding <span class="count">(4)</span></a>
+            <a class="tag" href="/tags/repair">repair <span class="count">(2)</span></a>
+    </div>
+
+    
+<p>
+    I got a Trinitron KV-36XBR200 a month or so back. Thing's an absolute unit. The chrominance on composite/S-Video
+    inputs doesn't seem to quite work on the main output (works fine in picture-in-picture/picture-and-picture) so I
+    decided to do an RGB mod to work around that issue in the meantime.
+</p>
+<p>
+    I got a mod kit from <a href="https://sunthar.com/crts/sony/sony-kv-36xbr200" target="_blank">Sunthar</a> for the
+    similar KV-27V20 and a copy of <a href="https://archive.org/details/manual_KV36XBR200_SM_SONY" target="_blank">the
+        service manual from archive.org</a>. I would have zero clue how to do any of this otherwise.
+</p>
+
+<h2 id="assembling-the-board">Assembling the Board<a class="header-link" href="#assembling-the-board"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" /><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" /></svg></a></h2>
+<p>
+    Populating the mod board itself was easy because everything was through-hole and all of the resistors, diodes, and
+    transistors needed were known and documented on Sunthar's site. I went back and added a bit more solder to the parts
+    here that were a bit low before installing the board - my eyes are definitely starting to have a harder time
+    catching this stuff.
+</p>
+<gallery>
+    <img scaled alt="Top side of mod board with components in place." src="/images/2026-11-CrtRgb/DSC03090.jpg" srcset="/images/2026-11-CrtRgb/dsc03090_144px.webp 144w, /images/2026-11-CrtRgb/dsc03090_196px.webp 196w, /images/2026-11-CrtRgb/dsc03090_240px.webp 240w, /images/2026-11-CrtRgb/dsc03090_320px.webp 320w, /images/2026-11-CrtRgb/dsc03090_480px.webp 480w, /images/2026-11-CrtRgb/dsc03090_512px.webp 512w, /images/2026-11-CrtRgb/dsc03090_640px.webp 640w, /images/2026-11-CrtRgb/dsc03090_720px.webp 720w, /images/2026-11-CrtRgb/dsc03090_820px.webp 820w, /images/2026-11-CrtRgb/dsc03090_960px.webp 960w, /images/2026-11-CrtRgb/dsc03090_1024px.webp 1024w, /images/2026-11-CrtRgb/dsc03090_1200px.webp 1200w, /images/2026-11-CrtRgb/dsc03090_1440px.webp 1440w, /images/2026-11-CrtRgb/dsc03090_1600px.webp 1600w, /images/2026-11-CrtRgb/dsc03090_1920px.webp 1920w, /images/2026-11-CrtRgb/dsc03090_2560px.webp 2560w, /images/2026-11-CrtRgb/dsc03090_3180px.webp 3180w, /images/2026-11-CrtRgb/dsc03090_4200px.webp 4200w" sizes="(width &lt;= 196px) 144px, (width &lt;= 240px) 196px, (width &lt;= 320px) 240px, (width &lt;= 480px) 320px, (width &lt;= 512px) 480px, (width &lt;= 640px) 512px, (width &lt;= 720px) 640px, (width &lt;= 820px) 720px, (width &lt;= 960px) 820px, (width &lt;= 1024px) 960px, (width &lt;= 1200px) 1024px, (width &lt;= 1440px) 1200px, (width &lt;= 1600px) 1440px, (width &lt;= 1920px) 1600px, (width &lt;= 2560px) 1920px, (width &lt;= 3180px) 2560px, (width &lt;= 4200px) 3180px, 4200px" aspect="1.5" style="--z-idx:22;--offset:22.8%" onclick="window.open(&#x27;/images/2026-11-CrtRgb/dsc03090_4200px.webp&#x27;, &#x27;_blank&#x27;).focus()" title="Top side of mod board with components in place." loading="lazy">
+    <img scaled alt="Bottom side of circuit board with component legs sticking through." src="/images/2026-11-CrtRgb/DSC03092.jpg" srcset="/images/2026-11-CrtRgb/dsc03092_144px.webp 144w, /images/2026-11-CrtRgb/dsc03092_196px.webp 196w, /images/2026-11-CrtRgb/dsc03092_240px.webp 240w, /images/2026-11-CrtRgb/dsc03092_320px.webp 320w, /images/2026-11-CrtRgb/dsc03092_480px.webp 480w, /images/2026-11-CrtRgb/dsc03092_512px.webp 512w, /images/2026-11-CrtRgb/dsc03092_640px.webp 640w, /images/2026-11-CrtRgb/dsc03092_720px.webp 720w, /images/2026-11-CrtRgb/dsc03092_820px.webp 820w, /images/2026-11-CrtRgb/dsc03092_960px.webp 960w, /images/2026-11-CrtRgb/dsc03092_1024px.webp 1024w, /images/2026-11-CrtRgb/dsc03092_1200px.webp 1200w, /images/2026-11-CrtRgb/dsc03092_1440px.webp 1440w, /images/2026-11-CrtRgb/dsc03092_1600px.webp 1600w, /images/2026-11-CrtRgb/dsc03092_1920px.webp 1920w, /images/2026-11-CrtRgb/dsc03092_2560px.webp 2560w, /images/2026-11-CrtRgb/dsc03092_3180px.webp 3180w, /images/2026-11-CrtRgb/dsc03092_4200px.webp 4200w" sizes="(width &lt;= 196px) 144px, (width &lt;= 240px) 196px, (width &lt;= 320px) 240px, (width &lt;= 480px) 320px, (width &lt;= 512px) 480px, (width &lt;= 640px) 512px, (width &lt;= 720px) 640px, (width &lt;= 820px) 720px, (width &lt;= 960px) 820px, (width &lt;= 1024px) 960px, (width &lt;= 1200px) 1024px, (width &lt;= 1440px) 1200px, (width &lt;= 1600px) 1440px, (width &lt;= 1920px) 1600px, (width &lt;= 2560px) 1920px, (width &lt;= 3180px) 2560px, (width &lt;= 4200px) 3180px, 4200px" aspect="1.5" style="--z-idx:15;--offset:-19.8%" onclick="window.open(&#x27;/images/2026-11-CrtRgb/dsc03092_4200px.webp&#x27;, &#x27;_blank&#x27;).focus()" title="Bottom side of circuit board with component legs sticking through." loading="lazy">
+    <img scaled alt="Top of mod board with components soldered." src="/images/2026-11-CrtRgb/DSC03095.jpg" srcset="/images/2026-11-CrtRgb/dsc03095_144px.webp 144w, /images/2026-11-CrtRgb/dsc03095_196px.webp 196w, /images/2026-11-CrtRgb/dsc03095_240px.webp 240w, /images/2026-11-CrtRgb/dsc03095_320px.webp 320w, /images/2026-11-CrtRgb/dsc03095_480px.webp 480w, /images/2026-11-CrtRgb/dsc03095_512px.webp 512w, /images/2026-11-CrtRgb/dsc03095_640px.webp 640w, /images/2026-11-CrtRgb/dsc03095_720px.webp 720w, /images/2026-11-CrtRgb/dsc03095_820px.webp 820w, /images/2026-11-CrtRgb/dsc03095_960px.webp 960w, /images/2026-11-CrtRgb/dsc03095_1024px.webp 1024w, /images/2026-11-CrtRgb/dsc03095_1200px.webp 1200w, /images/2026-11-CrtRgb/dsc03095_1440px.webp 1440w, /images/2026-11-CrtRgb/dsc03095_1600px.webp 1600w, /images/2026-11-CrtRgb/dsc03095_1920px.webp 1920w, /images/2026-11-CrtRgb/dsc03095_2560px.webp 2560w, /images/2026-11-CrtRgb/dsc03095_3180px.webp 3180w, /images/2026-11-CrtRgb/dsc03095_4200px.webp 4200w" sizes="(width &lt;= 196px) 144px, (width &lt;= 240px) 196px, (width &lt;= 320px) 240px, (width &lt;= 480px) 320px, (width &lt;= 512px) 480px, (width &lt;= 640px) 512px, (width &lt;= 720px) 640px, (width &lt;= 820px) 720px, (width &lt;= 960px) 820px, (width &lt;= 1024px) 960px, (width &lt;= 1200px) 1024px, (width &lt;= 1440px) 1200px, (width &lt;= 1600px) 1440px, (width &lt;= 1920px) 1600px, (width &lt;= 2560px) 1920px, (width &lt;= 3180px) 2560px, (width &lt;= 4200px) 3180px, 4200px" aspect="1.5" style="--z-idx:3;--offset:19.6%" onclick="window.open(&#x27;/images/2026-11-CrtRgb/dsc03095_4200px.webp&#x27;, &#x27;_blank&#x27;).focus()" title="Top of mod board with components soldered." loading="lazy">
+    <img scaled alt="Bottom of mod board with components soldered." src="/images/2026-11-CrtRgb/DSC03092.jpg" srcset="/images/2026-11-CrtRgb/dsc03092_144px.webp 144w, /images/2026-11-CrtRgb/dsc03092_196px.webp 196w, /images/2026-11-CrtRgb/dsc03092_240px.webp 240w, /images/2026-11-CrtRgb/dsc03092_320px.webp 320w, /images/2026-11-CrtRgb/dsc03092_480px.webp 480w, /images/2026-11-CrtRgb/dsc03092_512px.webp 512w, /images/2026-11-CrtRgb/dsc03092_640px.webp 640w, /images/2026-11-CrtRgb/dsc03092_720px.webp 720w, /images/2026-11-CrtRgb/dsc03092_820px.webp 820w, /images/2026-11-CrtRgb/dsc03092_960px.webp 960w, /images/2026-11-CrtRgb/dsc03092_1024px.webp 1024w, /images/2026-11-CrtRgb/dsc03092_1200px.webp 1200w, /images/2026-11-CrtRgb/dsc03092_1440px.webp 1440w, /images/2026-11-CrtRgb/dsc03092_1600px.webp 1600w, /images/2026-11-CrtRgb/dsc03092_1920px.webp 1920w, /images/2026-11-CrtRgb/dsc03092_2560px.webp 2560w, /images/2026-11-CrtRgb/dsc03092_3180px.webp 3180w, /images/2026-11-CrtRgb/dsc03092_4200px.webp 4200w" sizes="(width &lt;= 196px) 144px, (width &lt;= 240px) 196px, (width &lt;= 320px) 240px, (width &lt;= 480px) 320px, (width &lt;= 512px) 480px, (width &lt;= 640px) 512px, (width &lt;= 720px) 640px, (width &lt;= 820px) 720px, (width &lt;= 960px) 820px, (width &lt;= 1024px) 960px, (width &lt;= 1200px) 1024px, (width &lt;= 1440px) 1200px, (width &lt;= 1600px) 1440px, (width &lt;= 1920px) 1600px, (width &lt;= 2560px) 1920px, (width &lt;= 3180px) 2560px, (width &lt;= 4200px) 3180px, 4200px" aspect="1.5" style="--z-idx:15;--offset:-19.8%" onclick="window.open(&#x27;/images/2026-11-CrtRgb/dsc03092_4200px.webp&#x27;, &#x27;_blank&#x27;).focus()" title="Bottom of mod board with components soldered." loading="lazy">
+</gallery>
+
+<h2 id="gaining-access">Gaining Access<a class="header-link" href="#gaining-access"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" /><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" /></svg></a></h2>
+<p>
+    This is where the fun begins. Getting boards out of the CRT was pretty nerve-wracking as I've never really worked
+    around any voltages higher than US Residential AC before. It was pretty neat how Sony designed all these boards
+    to elegantly slide out of the rear. Here I got a glimpse at a crack on the A board PCB - more on that later.
+</p>
+<gallery>
+    <img scaled alt="Back side of the television with the cover removed, exposing the electronic components within." src="/images/2026-11-CrtRgb/DSC03097.jpg" srcset="/images/2026-11-CrtRgb/dsc03097_144px.webp 144w, /images/2026-11-CrtRgb/dsc03097_196px.webp 196w, /images/2026-11-CrtRgb/dsc03097_240px.webp 240w, /images/2026-11-CrtRgb/dsc03097_320px.webp 320w, /images/2026-11-CrtRgb/dsc03097_480px.webp 480w, /images/2026-11-CrtRgb/dsc03097_512px.webp 512w, /images/2026-11-CrtRgb/dsc03097_640px.webp 640w, /images/2026-11-CrtRgb/dsc03097_720px.webp 720w, /images/2026-11-CrtRgb/dsc03097_820px.webp 820w, /images/2026-11-CrtRgb/dsc03097_960px.webp 960w, /images/2026-11-CrtRgb/dsc03097_1024px.webp 1024w, /images/2026-11-CrtRgb/dsc03097_1200px.webp 1200w, /images/2026-11-CrtRgb/dsc03097_1440px.webp 1440w, /images/2026-11-CrtRgb/dsc03097_1600px.webp 1600w, /images/2026-11-CrtRgb/dsc03097_1920px.webp 1920w, /images/2026-11-CrtRgb/dsc03097_2560px.webp 2560w, /images/2026-11-CrtRgb/dsc03097_3180px.webp 3180w, /images/2026-11-CrtRgb/dsc03097_4200px.webp 4200w" sizes="(width &lt;= 196px) 144px, (width &lt;= 240px) 196px, (width &lt;= 320px) 240px, (width &lt;= 480px) 320px, (width &lt;= 512px) 480px, (width &lt;= 640px) 512px, (width &lt;= 720px) 640px, (width &lt;= 820px) 720px, (width &lt;= 960px) 820px, (width &lt;= 1024px) 960px, (width &lt;= 1200px) 1024px, (width &lt;= 1440px) 1200px, (width &lt;= 1600px) 1440px, (width &lt;= 1920px) 1600px, (width &lt;= 2560px) 1920px, (width &lt;= 3180px) 2560px, (width &lt;= 4200px) 3180px, 4200px" aspect="1.5" style="--z-idx:94;--offset:17.8%" onclick="window.open(&#x27;/images/2026-11-CrtRgb/dsc03097_4200px.webp&#x27;, &#x27;_blank&#x27;).focus()" title="Back side of the television with the cover removed, exposing the electronic components within." loading="lazy">
+    <img scaled alt="Close-up of the UX board on the television." src="/images/2026-11-CrtRgb/DSC03098.jpg" srcset="/images/2026-11-CrtRgb/dsc03098_144px.webp 144w, /images/2026-11-CrtRgb/dsc03098_196px.webp 196w, /images/2026-11-CrtRgb/dsc03098_240px.webp 240w, /images/2026-11-CrtRgb/dsc03098_320px.webp 320w, /images/2026-11-CrtRgb/dsc03098_480px.webp 480w, /images/2026-11-CrtRgb/dsc03098_512px.webp 512w, /images/2026-11-CrtRgb/dsc03098_640px.webp 640w, /images/2026-11-CrtRgb/dsc03098_720px.webp 720w, /images/2026-11-CrtRgb/dsc03098_820px.webp 820w, /images/2026-11-CrtRgb/dsc03098_960px.webp 960w, /images/2026-11-CrtRgb/dsc03098_1024px.webp 1024w, /images/2026-11-CrtRgb/dsc03098_1200px.webp 1200w, /images/2026-11-CrtRgb/dsc03098_1440px.webp 1440w, /images/2026-11-CrtRgb/dsc03098_1600px.webp 1600w, /images/2026-11-CrtRgb/dsc03098_1920px.webp 1920w, /images/2026-11-CrtRgb/dsc03098_2560px.webp 2560w, /images/2026-11-CrtRgb/dsc03098_3180px.webp 3180w, /images/2026-11-CrtRgb/dsc03098_4200px.webp 4200w" sizes="(width &lt;= 196px) 144px, (width &lt;= 240px) 196px, (width &lt;= 320px) 240px, (width &lt;= 480px) 320px, (width &lt;= 512px) 480px, (width &lt;= 640px) 512px, (width &lt;= 720px) 640px, (width &lt;= 820px) 720px, (width &lt;= 960px) 820px, (width &lt;= 1024px) 960px, (width &lt;= 1200px) 1024px, (width &lt;= 1440px) 1200px, (width &lt;= 1600px) 1440px, (width &lt;= 1920px) 1600px, (width &lt;= 2560px) 1920px, (width &lt;= 3180px) 2560px, (width &lt;= 4200px) 3180px, 4200px" aspect="1.5" style="--z-idx:37;--offset:-23.7%" onclick="window.open(&#x27;/images/2026-11-CrtRgb/dsc03098_4200px.webp&#x27;, &#x27;_blank&#x27;).focus()" title="Close-up of the UX board on the television." loading="lazy">
+    <img scaled alt="Close-up of the internals of the television." src="/images/2026-11-CrtRgb/DSC03101.jpg" srcset="/images/2026-11-CrtRgb/dsc03101_144px.webp 144w, /images/2026-11-CrtRgb/dsc03101_196px.webp 196w, /images/2026-11-CrtRgb/dsc03101_240px.webp 240w, /images/2026-11-CrtRgb/dsc03101_320px.webp 320w, /images/2026-11-CrtRgb/dsc03101_480px.webp 480w, /images/2026-11-CrtRgb/dsc03101_512px.webp 512w, /images/2026-11-CrtRgb/dsc03101_640px.webp 640w, /images/2026-11-CrtRgb/dsc03101_720px.webp 720w, /images/2026-11-CrtRgb/dsc03101_820px.webp 820w, /images/2026-11-CrtRgb/dsc03101_960px.webp 960w, /images/2026-11-CrtRgb/dsc03101_1024px.webp 1024w, /images/2026-11-CrtRgb/dsc03101_1200px.webp 1200w, /images/2026-11-CrtRgb/dsc03101_1440px.webp 1440w, /images/2026-11-CrtRgb/dsc03101_1600px.webp 1600w, /images/2026-11-CrtRgb/dsc03101_1920px.webp 1920w, /images/2026-11-CrtRgb/dsc03101_2560px.webp 2560w, /images/2026-11-CrtRgb/dsc03101_3180px.webp 3180w, /images/2026-11-CrtRgb/dsc03101_4200px.webp 4200w" sizes="(width &lt;= 196px) 144px, (width &lt;= 240px) 196px, (width &lt;= 320px) 240px, (width &lt;= 480px) 320px, (width &lt;= 512px) 480px, (width &lt;= 640px) 512px, (width &lt;= 720px) 640px, (width &lt;= 820px) 720px, (width &lt;= 960px) 820px, (width &lt;= 1024px) 960px, (width &lt;= 1200px) 1024px, (width &lt;= 1440px) 1200px, (width &lt;= 1600px) 1440px, (width &lt;= 1920px) 1600px, (width &lt;= 2560px) 1920px, (width &lt;= 3180px) 2560px, (width &lt;= 4200px) 3180px, 4200px" aspect="1.5" style="--z-idx:0;--offset:-17.7%" onclick="window.open(&#x27;/images/2026-11-CrtRgb/dsc03101_4200px.webp&#x27;, &#x27;_blank&#x27;).focus()" title="Close-up of the internals of the television." loading="lazy">
+</gallery>
+<p>
+    I tried to wiggle things around as much as I could but ultimately there was no avoiding having to deal with the
+    anode. I got some alligator clips to ground a screwdriver and poked around under the little suction cup to discharge
+    the system. If it makes a pop sound, you know you did it right. If it doesn't, then either it was already discharged
+    or you did it wrong and the back of this TV could be the last thing you ever see. My TV did not pop. I did not die.
+    Glorious success.
+</p>
+<gallery>
+    <img scaled alt="Gloved hand apprehensively holding a screwdriver in front of the back of the TV." src="/images/2026-11-CrtRgb/DSC03110.jpg" srcset="/images/2026-11-CrtRgb/dsc03110_144px.webp 144w, /images/2026-11-CrtRgb/dsc03110_196px.webp 196w, /images/2026-11-CrtRgb/dsc03110_240px.webp 240w, /images/2026-11-CrtRgb/dsc03110_320px.webp 320w, /images/2026-11-CrtRgb/dsc03110_480px.webp 480w, /images/2026-11-CrtRgb/dsc03110_512px.webp 512w, /images/2026-11-CrtRgb/dsc03110_640px.webp 640w, /images/2026-11-CrtRgb/dsc03110_720px.webp 720w, /images/2026-11-CrtRgb/dsc03110_820px.webp 820w, /images/2026-11-CrtRgb/dsc03110_960px.webp 960w, /images/2026-11-CrtRgb/dsc03110_1024px.webp 1024w, /images/2026-11-CrtRgb/dsc03110_1200px.webp 1200w, /images/2026-11-CrtRgb/dsc03110_1440px.webp 1440w, /images/2026-11-CrtRgb/dsc03110_1600px.webp 1600w, /images/2026-11-CrtRgb/dsc03110_1920px.webp 1920w, /images/2026-11-CrtRgb/dsc03110_2560px.webp 2560w, /images/2026-11-CrtRgb/dsc03110_3180px.webp 3180w, /images/2026-11-CrtRgb/dsc03110_4200px.webp 4200w" sizes="(width &lt;= 196px) 144px, (width &lt;= 240px) 196px, (width &lt;= 320px) 240px, (width &lt;= 480px) 320px, (width &lt;= 512px) 480px, (width &lt;= 640px) 512px, (width &lt;= 720px) 640px, (width &lt;= 820px) 720px, (width &lt;= 960px) 820px, (width &lt;= 1024px) 960px, (width &lt;= 1200px) 1024px, (width &lt;= 1440px) 1200px, (width &lt;= 1600px) 1440px, (width &lt;= 1920px) 1600px, (width &lt;= 2560px) 1920px, (width &lt;= 3180px) 2560px, (width &lt;= 4200px) 3180px, 4200px" aspect="1.5" style="--z-idx:74;--offset:22.7%" onclick="window.open(&#x27;/images/2026-11-CrtRgb/dsc03110_4200px.webp&#x27;, &#x27;_blank&#x27;).focus()" title="Gloved hand apprehensively holding a screwdriver in front of the back of the TV." loading="lazy">
+    <img scaled alt="Backside of the tube with anode removed." src="/images/2026-11-CrtRgb/DSC03111.jpg" srcset="/images/2026-11-CrtRgb/dsc03111_144px.webp 144w, /images/2026-11-CrtRgb/dsc03111_196px.webp 196w, /images/2026-11-CrtRgb/dsc03111_240px.webp 240w, /images/2026-11-CrtRgb/dsc03111_320px.webp 320w, /images/2026-11-CrtRgb/dsc03111_480px.webp 480w, /images/2026-11-CrtRgb/dsc03111_512px.webp 512w, /images/2026-11-CrtRgb/dsc03111_640px.webp 640w, /images/2026-11-CrtRgb/dsc03111_720px.webp 720w, /images/2026-11-CrtRgb/dsc03111_820px.webp 820w, /images/2026-11-CrtRgb/dsc03111_960px.webp 960w, /images/2026-11-CrtRgb/dsc03111_1024px.webp 1024w, /images/2026-11-CrtRgb/dsc03111_1200px.webp 1200w, /images/2026-11-CrtRgb/dsc03111_1440px.webp 1440w, /images/2026-11-CrtRgb/dsc03111_1600px.webp 1600w, /images/2026-11-CrtRgb/dsc03111_1920px.webp 1920w, /images/2026-11-CrtRgb/dsc03111_2560px.webp 2560w, /images/2026-11-CrtRgb/dsc03111_3180px.webp 3180w, /images/2026-11-CrtRgb/dsc03111_4200px.webp 4200w" sizes="(width &lt;= 196px) 144px, (width &lt;= 240px) 196px, (width &lt;= 320px) 240px, (width &lt;= 480px) 320px, (width &lt;= 512px) 480px, (width &lt;= 640px) 512px, (width &lt;= 720px) 640px, (width &lt;= 820px) 720px, (width &lt;= 960px) 820px, (width &lt;= 1024px) 960px, (width &lt;= 1200px) 1024px, (width &lt;= 1440px) 1200px, (width &lt;= 1600px) 1440px, (width &lt;= 1920px) 1600px, (width &lt;= 2560px) 1920px, (width &lt;= 3180px) 2560px, (width &lt;= 4200px) 3180px, 4200px" aspect="1.5" style="--z-idx:39;--offset:22.5%" onclick="window.open(&#x27;/images/2026-11-CrtRgb/dsc03111_4200px.webp&#x27;, &#x27;_blank&#x27;).focus()" title="Backside of the tube with anode removed." loading="lazy">
+</gallery>
+
+<p>
+    I was able to get the A board all the way out now. It was pretty nasty, so I stuck a shop fan next to it and gave it
+    a quick brushing to get most of the dust off. I also got a closer look at the extent of the damage to the PCB (that
+    would be why my tuner and front I/O aren't working). It's right at the end of where the PCB loses structural support
+    from the plastic frame of the TV, so this is probably the aftermath of a drop.
+</p>
+<gallery>
+    <img scaled alt="Main board getting the dust brushed off of it." src="/images/2026-11-CrtRgb/IMG_4993.HEIC" srcset="/images/2026-11-CrtRgb/img_4993_144px.webp 144w, /images/2026-11-CrtRgb/img_4993_196px.webp 196w, /images/2026-11-CrtRgb/img_4993_240px.webp 240w, /images/2026-11-CrtRgb/img_4993_320px.webp 320w, /images/2026-11-CrtRgb/img_4993_480px.webp 480w, /images/2026-11-CrtRgb/img_4993_512px.webp 512w, /images/2026-11-CrtRgb/img_4993_640px.webp 640w, /images/2026-11-CrtRgb/img_4993_720px.webp 720w, /images/2026-11-CrtRgb/img_4993_820px.webp 820w, /images/2026-11-CrtRgb/img_4993_960px.webp 960w, /images/2026-11-CrtRgb/img_4993_1024px.webp 1024w, /images/2026-11-CrtRgb/img_4993_1200px.webp 1200w, /images/2026-11-CrtRgb/img_4993_1440px.webp 1440w, /images/2026-11-CrtRgb/img_4993_1600px.webp 1600w, /images/2026-11-CrtRgb/img_4993_1920px.webp 1920w, /images/2026-11-CrtRgb/img_4993_2560px.webp 2560w" sizes="(width &lt;= 196px) 144px, (width &lt;= 240px) 196px, (width &lt;= 320px) 240px, (width &lt;= 480px) 320px, (width &lt;= 512px) 480px, (width &lt;= 640px) 512px, (width &lt;= 720px) 640px, (width &lt;= 820px) 720px, (width &lt;= 960px) 820px, (width &lt;= 1024px) 960px, (width &lt;= 1200px) 1024px, (width &lt;= 1440px) 1200px, (width &lt;= 1600px) 1440px, (width &lt;= 1920px) 1600px, (width &lt;= 2560px) 1920px, 2560px" aspect="0.8" style="--z-idx:92;--offset:3.2%" onclick="window.open(&#x27;/images/2026-11-CrtRgb/img_4993_2560px.webp&#x27;, &#x27;_blank&#x27;).focus()" title="Main board getting the dust brushed off of it." loading="lazy">
+    <img scaled alt="Close up of the crack in the PCB." src="/images/2026-11-CrtRgb/IMG_4991.HEIC" srcset="/images/2026-11-CrtRgb/img_4991_144px.webp 144w, /images/2026-11-CrtRgb/img_4991_196px.webp 196w, /images/2026-11-CrtRgb/img_4991_240px.webp 240w, /images/2026-11-CrtRgb/img_4991_320px.webp 320w, /images/2026-11-CrtRgb/img_4991_480px.webp 480w, /images/2026-11-CrtRgb/img_4991_512px.webp 512w, /images/2026-11-CrtRgb/img_4991_640px.webp 640w, /images/2026-11-CrtRgb/img_4991_720px.webp 720w, /images/2026-11-CrtRgb/img_4991_820px.webp 820w, /images/2026-11-CrtRgb/img_4991_960px.webp 960w, /images/2026-11-CrtRgb/img_4991_1024px.webp 1024w, /images/2026-11-CrtRgb/img_4991_1200px.webp 1200w, /images/2026-11-CrtRgb/img_4991_1440px.webp 1440w, /images/2026-11-CrtRgb/img_4991_1600px.webp 1600w, /images/2026-11-CrtRgb/img_4991_1920px.webp 1920w, /images/2026-11-CrtRgb/img_4991_2560px.webp 2560w" sizes="(width &lt;= 196px) 144px, (width &lt;= 240px) 196px, (width &lt;= 320px) 240px, (width &lt;= 480px) 320px, (width &lt;= 512px) 480px, (width &lt;= 640px) 512px, (width &lt;= 720px) 640px, (width &lt;= 820px) 720px, (width &lt;= 960px) 820px, (width &lt;= 1024px) 960px, (width &lt;= 1200px) 1024px, (width &lt;= 1440px) 1200px, (width &lt;= 1600px) 1440px, (width &lt;= 1920px) 1600px, (width &lt;= 2560px) 1920px, 2560px" aspect="0.8" style="--z-idx:31;--offset:-11.0%" onclick="window.open(&#x27;/images/2026-11-CrtRgb/img_4991_2560px.webp&#x27;, &#x27;_blank&#x27;).focus()" title="Close up of the crack in the PCB." loading="lazy">
+</gallery>
+
+<h2 id="a-minor-diversion">A Minor Diversion<a class="header-link" href="#a-minor-diversion"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" /><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" /></svg></a></h2>
+<p>
+    I spent several hours running wires to replace the severed traces from the crack. I would have been totally
+    overwhelmed by this if it weren't for the service manual telling me exactly what each pin on the nearby connectors
+    needed to go to. I probed around with a multimeter to confirm connectivity and replace it where needed. Sadly, I
+    haven't had any luck getting the tuner to work but the front A/V connectors are back in action. I suspect I did
+    something wrong connecting the I<sup>2</sup>C lines for the tuner and the TV is not able to get it to actually
+    change channels or something along those lines.
+</p>
+<gallery>
+    <img scaled alt="A board with wires to repair damaged traces in place." src="/images/2026-11-CrtRgb/DSC03113.jpg" srcset="/images/2026-11-CrtRgb/dsc03113_144px.webp 144w, /images/2026-11-CrtRgb/dsc03113_196px.webp 196w, /images/2026-11-CrtRgb/dsc03113_240px.webp 240w, /images/2026-11-CrtRgb/dsc03113_320px.webp 320w, /images/2026-11-CrtRgb/dsc03113_480px.webp 480w, /images/2026-11-CrtRgb/dsc03113_512px.webp 512w, /images/2026-11-CrtRgb/dsc03113_640px.webp 640w, /images/2026-11-CrtRgb/dsc03113_720px.webp 720w, /images/2026-11-CrtRgb/dsc03113_820px.webp 820w, /images/2026-11-CrtRgb/dsc03113_960px.webp 960w, /images/2026-11-CrtRgb/dsc03113_1024px.webp 1024w, /images/2026-11-CrtRgb/dsc03113_1200px.webp 1200w, /images/2026-11-CrtRgb/dsc03113_1440px.webp 1440w, /images/2026-11-CrtRgb/dsc03113_1600px.webp 1600w, /images/2026-11-CrtRgb/dsc03113_1920px.webp 1920w, /images/2026-11-CrtRgb/dsc03113_2560px.webp 2560w, /images/2026-11-CrtRgb/dsc03113_3180px.webp 3180w" sizes="(width &lt;= 196px) 144px, (width &lt;= 240px) 196px, (width &lt;= 320px) 240px, (width &lt;= 480px) 320px, (width &lt;= 512px) 480px, (width &lt;= 640px) 512px, (width &lt;= 720px) 640px, (width &lt;= 820px) 720px, (width &lt;= 960px) 820px, (width &lt;= 1024px) 960px, (width &lt;= 1200px) 1024px, (width &lt;= 1440px) 1200px, (width &lt;= 1600px) 1440px, (width &lt;= 1920px) 1600px, (width &lt;= 2560px) 1920px, (width &lt;= 3180px) 2560px, 3180px" aspect="0.7" style="--z-idx:16;--offset:10.0%" onclick="window.open(&#x27;/images/2026-11-CrtRgb/dsc03113_3180px.webp&#x27;, &#x27;_blank&#x27;).focus()" title="A board with wires to repair damaged traces in place." loading="lazy">
+    <img scaled alt="Closer picture of affected area on board." src="/images/2026-11-CrtRgb/DSC03114.jpg" srcset="/images/2026-11-CrtRgb/dsc03114_144px.webp 144w, /images/2026-11-CrtRgb/dsc03114_196px.webp 196w, /images/2026-11-CrtRgb/dsc03114_240px.webp 240w, /images/2026-11-CrtRgb/dsc03114_320px.webp 320w, /images/2026-11-CrtRgb/dsc03114_480px.webp 480w, /images/2026-11-CrtRgb/dsc03114_512px.webp 512w, /images/2026-11-CrtRgb/dsc03114_640px.webp 640w, /images/2026-11-CrtRgb/dsc03114_720px.webp 720w, /images/2026-11-CrtRgb/dsc03114_820px.webp 820w, /images/2026-11-CrtRgb/dsc03114_960px.webp 960w, /images/2026-11-CrtRgb/dsc03114_1024px.webp 1024w, /images/2026-11-CrtRgb/dsc03114_1200px.webp 1200w, /images/2026-11-CrtRgb/dsc03114_1440px.webp 1440w, /images/2026-11-CrtRgb/dsc03114_1600px.webp 1600w, /images/2026-11-CrtRgb/dsc03114_1920px.webp 1920w, /images/2026-11-CrtRgb/dsc03114_2560px.webp 2560w, /images/2026-11-CrtRgb/dsc03114_3180px.webp 3180w" sizes="(width &lt;= 196px) 144px, (width &lt;= 240px) 196px, (width &lt;= 320px) 240px, (width &lt;= 480px) 320px, (width &lt;= 512px) 480px, (width &lt;= 640px) 512px, (width &lt;= 720px) 640px, (width &lt;= 820px) 720px, (width &lt;= 960px) 820px, (width &lt;= 1024px) 960px, (width &lt;= 1200px) 1024px, (width &lt;= 1440px) 1200px, (width &lt;= 1600px) 1440px, (width &lt;= 1920px) 1600px, (width &lt;= 2560px) 1920px, (width &lt;= 3180px) 2560px, 3180px" aspect="0.7" style="--z-idx:21;--offset:9.0%" onclick="window.open(&#x27;/images/2026-11-CrtRgb/dsc03114_3180px.webp&#x27;, &#x27;_blank&#x27;).focus()" title="Closer picture of affected area on board." loading="lazy">
+</gallery>
+<h2 id="actually-installing-the-mod">Actually Installing the Mod<a class="header-link" href="#actually-installing-the-mod"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" /><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" /></svg></a></h2>
+<p>
+    Alright, with that out of the way, I finally proceeded to doing the actual mod! Since my model
+    varied from the directions I was following from Sunthar's site, it took a bit of staring at schematics to find the
+    right spots for everything.
+</p>
+<p>
+    First, let's start with the connections on the A board. There is a group of resistors east of the tuning chip
+    to be removed. The not-connected-to-ground side of these pads are your attachment points for the red (R1123),
+    green (R1128), and blue (R1133) signal wires from the RGB SCART board. It wasn't explicitly said anywhere in the
+    instructions, but the colors on the diagrams correspond to the colors on the ribbon cables provided with the kit.
+    The
+    right side of the nearby R1353 through-hole resistor is the connection point for the blanking interval wire.
+</p>
+<img src="/images/2026-11-CrtRgb/diagram-rgbb.svg" loading="lazy" class="diagram"
+     alt="Diagram of where to connect red, green, blue, and blanking wires.">
+<p>
+    And now the connections on the UX board. You need to sever the connection on the little island marked for the right
+    audio input in order for stereo sound to work. You can see in the photograph where I cut this line on input 3 before
+    realizing I needed to use an input with S-Video. Audio lines for the two channels go to the center plug on each of
+    those. S-Video detect goes to pin 6, ground on pin 2 (or anywhere really), and sync on pin 4 (the luminance input).
+</p>
+<img src="/images/2026-11-CrtRgb/diagram-sync.svg" loading="lazy" class="diagram"
+     alt="Diagram showing where to connect the S-Video detect, sync-on-luma, ground, and audio wires.">
+
+<p>
+    I hijacked my Video 1 input for this, but if I were to do this again, I might elect to tap into Video 2 instead,
+    especially since I hardly ever use the front inputs on the TV. That would also keep all of the wires contained to a
+    single board. Below I have a diagram of how I believe you would wire that up. You'd still need to pull the front
+    I/O board to sever the stereo audio connection.
+</p>
+<img src="/images/2026-11-CrtRgb/diagram-front.svg" loading="lazy" class="diagram"
+     alt="Diagram showing how one would connect the RGB mod to Video 2 (Front Panel)">
+
+<p>
+    Other odds and ends, another diode that was included with the kit was added inline with R067 on the top side of the
+    A board. That's everything wired up!
+</p>
+<gallery>
+    <img scaled alt="Diode added to top side of A board." src="/images/2026-11-CrtRgb/IMG_5003.HEIC" srcset="/images/2026-11-CrtRgb/img_5003_144px.webp 144w, /images/2026-11-CrtRgb/img_5003_196px.webp 196w, /images/2026-11-CrtRgb/img_5003_240px.webp 240w, /images/2026-11-CrtRgb/img_5003_320px.webp 320w, /images/2026-11-CrtRgb/img_5003_480px.webp 480w, /images/2026-11-CrtRgb/img_5003_512px.webp 512w, /images/2026-11-CrtRgb/img_5003_640px.webp 640w, /images/2026-11-CrtRgb/img_5003_720px.webp 720w, /images/2026-11-CrtRgb/img_5003_820px.webp 820w, /images/2026-11-CrtRgb/img_5003_960px.webp 960w, /images/2026-11-CrtRgb/img_5003_1024px.webp 1024w, /images/2026-11-CrtRgb/img_5003_1200px.webp 1200w, /images/2026-11-CrtRgb/img_5003_1440px.webp 1440w, /images/2026-11-CrtRgb/img_5003_1600px.webp 1600w, /images/2026-11-CrtRgb/img_5003_1920px.webp 1920w, /images/2026-11-CrtRgb/img_5003_2560px.webp 2560w, /images/2026-11-CrtRgb/img_5003_3180px.webp 3180w" sizes="(width &lt;= 196px) 144px, (width &lt;= 240px) 196px, (width &lt;= 320px) 240px, (width &lt;= 480px) 320px, (width &lt;= 512px) 480px, (width &lt;= 640px) 512px, (width &lt;= 720px) 640px, (width &lt;= 820px) 720px, (width &lt;= 960px) 820px, (width &lt;= 1024px) 960px, (width &lt;= 1200px) 1024px, (width &lt;= 1440px) 1200px, (width &lt;= 1600px) 1440px, (width &lt;= 1920px) 1600px, (width &lt;= 2560px) 1920px, (width &lt;= 3180px) 2560px, 3180px" aspect="1.3" style="--z-idx:70;--offset:19.2%" onclick="window.open(&#x27;/images/2026-11-CrtRgb/img_5003_3180px.webp&#x27;, &#x27;_blank&#x27;).focus()" title="Diode added to top side of A board." loading="lazy">
+    <img scaled alt="A and UX boards with wires connected." src="/images/2026-11-CrtRgb/DSC03122.jpg" srcset="/images/2026-11-CrtRgb/dsc03122_144px.webp 144w, /images/2026-11-CrtRgb/dsc03122_196px.webp 196w, /images/2026-11-CrtRgb/dsc03122_240px.webp 240w, /images/2026-11-CrtRgb/dsc03122_320px.webp 320w, /images/2026-11-CrtRgb/dsc03122_480px.webp 480w, /images/2026-11-CrtRgb/dsc03122_512px.webp 512w, /images/2026-11-CrtRgb/dsc03122_640px.webp 640w, /images/2026-11-CrtRgb/dsc03122_720px.webp 720w, /images/2026-11-CrtRgb/dsc03122_820px.webp 820w, /images/2026-11-CrtRgb/dsc03122_960px.webp 960w, /images/2026-11-CrtRgb/dsc03122_1024px.webp 1024w, /images/2026-11-CrtRgb/dsc03122_1200px.webp 1200w, /images/2026-11-CrtRgb/dsc03122_1440px.webp 1440w, /images/2026-11-CrtRgb/dsc03122_1600px.webp 1600w, /images/2026-11-CrtRgb/dsc03122_1920px.webp 1920w, /images/2026-11-CrtRgb/dsc03122_2560px.webp 2560w, /images/2026-11-CrtRgb/dsc03122_3180px.webp 3180w" sizes="(width &lt;= 196px) 144px, (width &lt;= 240px) 196px, (width &lt;= 320px) 240px, (width &lt;= 480px) 320px, (width &lt;= 512px) 480px, (width &lt;= 640px) 512px, (width &lt;= 720px) 640px, (width &lt;= 820px) 720px, (width &lt;= 960px) 820px, (width &lt;= 1024px) 960px, (width &lt;= 1200px) 1024px, (width &lt;= 1440px) 1200px, (width &lt;= 1600px) 1440px, (width &lt;= 1920px) 1600px, (width &lt;= 2560px) 1920px, (width &lt;= 3180px) 2560px, 3180px" aspect="0.7" style="--z-idx:47;--offset:9.2%" onclick="window.open(&#x27;/images/2026-11-CrtRgb/dsc03122_3180px.webp&#x27;, &#x27;_blank&#x27;).focus()" title="A and UX boards with wires connected." loading="lazy">
+</gallery>
+
+<h2 id="things-go-awry">Things Go Awry<a class="header-link" href="#things-go-awry"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" /><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" /></svg></a></h2>
+<p>
+    And with that, I carefully reassembled the TV to test out the changes. I plugged in my Super Famicom and turned on
+    the power to the TV. I heard it degauss... then, nothing. I was really hoping I didn't just break this thing; I did
+    just solder a whole mess of wires on. I walked around the back of the TV and froze in terror. I had not seated the
+    anode correctly, and it had popped out and was dangling around and fizzling away... <i>menacingly</i>. I don't know
+    if I've ever felt so scared in my life, I still had the jitters for several hours after I finished working on the
+    TV. If I had hair on my arms, it would have been standing on end. I didn't want to stick my hand close enough to
+    the TV to put my little alligator clip on a ground point around the tube, so I went and got a set of jumper cables
+    for a car and used that to discharge the set. There was certainly a pop this time. Forgive me for not taking any
+    pictures during that part; I was a bit preoccupied.
+</p>
+
+<h2>Victory Lap</h2>
+<p>
+    After connecting the anode properly, I tried the TV again, and to my shock (ack!) it was working just fine. I was
+    thinking I would have managed to short something out in my tinkering but the mod was working nicely. I learned that
+    my SFC probably needs new capacitors but found the video to be much cleaner when I connected my PS3 or Dreamcast. My
+    cat was there and she was clearly very impressed by it.
+</p>
+<gallery>
+    <img scaled alt="Picture of TV showing SD2SNES menu." src="/images/2026-11-CrtRgb/DSC03126.jpg" srcset="/images/2026-11-CrtRgb/dsc03126_144px.webp 144w, /images/2026-11-CrtRgb/dsc03126_196px.webp 196w, /images/2026-11-CrtRgb/dsc03126_240px.webp 240w, /images/2026-11-CrtRgb/dsc03126_320px.webp 320w, /images/2026-11-CrtRgb/dsc03126_480px.webp 480w, /images/2026-11-CrtRgb/dsc03126_512px.webp 512w, /images/2026-11-CrtRgb/dsc03126_640px.webp 640w, /images/2026-11-CrtRgb/dsc03126_720px.webp 720w, /images/2026-11-CrtRgb/dsc03126_820px.webp 820w, /images/2026-11-CrtRgb/dsc03126_960px.webp 960w, /images/2026-11-CrtRgb/dsc03126_1024px.webp 1024w, /images/2026-11-CrtRgb/dsc03126_1200px.webp 1200w, /images/2026-11-CrtRgb/dsc03126_1440px.webp 1440w, /images/2026-11-CrtRgb/dsc03126_1600px.webp 1600w, /images/2026-11-CrtRgb/dsc03126_1920px.webp 1920w, /images/2026-11-CrtRgb/dsc03126_2560px.webp 2560w, /images/2026-11-CrtRgb/dsc03126_3180px.webp 3180w, /images/2026-11-CrtRgb/dsc03126_4200px.webp 4200w" sizes="(width &lt;= 196px) 144px, (width &lt;= 240px) 196px, (width &lt;= 320px) 240px, (width &lt;= 480px) 320px, (width &lt;= 512px) 480px, (width &lt;= 640px) 512px, (width &lt;= 720px) 640px, (width &lt;= 820px) 720px, (width &lt;= 960px) 820px, (width &lt;= 1024px) 960px, (width &lt;= 1200px) 1024px, (width &lt;= 1440px) 1200px, (width &lt;= 1600px) 1440px, (width &lt;= 1920px) 1600px, (width &lt;= 2560px) 1920px, (width &lt;= 3180px) 2560px, (width &lt;= 4200px) 3180px, 4200px" aspect="1.5" style="--z-idx:40;--offset:12.5%" onclick="window.open(&#x27;/images/2026-11-CrtRgb/dsc03126_4200px.webp&#x27;, &#x27;_blank&#x27;).focus()" title="Picture of TV showing SD2SNES menu." loading="lazy">
+    <img scaled alt="Back of exposed TV with SCART cable plugged in." src="/images/2026-11-CrtRgb/DSC03125.jpg" srcset="/images/2026-11-CrtRgb/dsc03125_144px.webp 144w, /images/2026-11-CrtRgb/dsc03125_196px.webp 196w, /images/2026-11-CrtRgb/dsc03125_240px.webp 240w, /images/2026-11-CrtRgb/dsc03125_320px.webp 320w, /images/2026-11-CrtRgb/dsc03125_480px.webp 480w, /images/2026-11-CrtRgb/dsc03125_512px.webp 512w, /images/2026-11-CrtRgb/dsc03125_640px.webp 640w, /images/2026-11-CrtRgb/dsc03125_720px.webp 720w, /images/2026-11-CrtRgb/dsc03125_820px.webp 820w, /images/2026-11-CrtRgb/dsc03125_960px.webp 960w, /images/2026-11-CrtRgb/dsc03125_1024px.webp 1024w, /images/2026-11-CrtRgb/dsc03125_1200px.webp 1200w, /images/2026-11-CrtRgb/dsc03125_1440px.webp 1440w, /images/2026-11-CrtRgb/dsc03125_1600px.webp 1600w, /images/2026-11-CrtRgb/dsc03125_1920px.webp 1920w, /images/2026-11-CrtRgb/dsc03125_2560px.webp 2560w, /images/2026-11-CrtRgb/dsc03125_3180px.webp 3180w, /images/2026-11-CrtRgb/dsc03125_4200px.webp 4200w" sizes="(width &lt;= 196px) 144px, (width &lt;= 240px) 196px, (width &lt;= 320px) 240px, (width &lt;= 480px) 320px, (width &lt;= 512px) 480px, (width &lt;= 640px) 512px, (width &lt;= 720px) 640px, (width &lt;= 820px) 720px, (width &lt;= 960px) 820px, (width &lt;= 1024px) 960px, (width &lt;= 1200px) 1024px, (width &lt;= 1440px) 1200px, (width &lt;= 1600px) 1440px, (width &lt;= 1920px) 1600px, (width &lt;= 2560px) 1920px, (width &lt;= 3180px) 2560px, (width &lt;= 4200px) 3180px, 4200px" aspect="1.5" style="--z-idx:61;--offset:11.2%" onclick="window.open(&#x27;/images/2026-11-CrtRgb/dsc03125_4200px.webp&#x27;, &#x27;_blank&#x27;).focus()" title="Back of exposed TV with SCART cable plugged in." loading="lazy">
+    <img scaled alt="My cat very attentively expressing her jubilation at my achievement (she is taking a nap)." src="/images/2026-11-CrtRgb/DSC03123.jpg" srcset="/images/2026-11-CrtRgb/dsc03123_144px.webp 144w, /images/2026-11-CrtRgb/dsc03123_196px.webp 196w, /images/2026-11-CrtRgb/dsc03123_240px.webp 240w, /images/2026-11-CrtRgb/dsc03123_320px.webp 320w, /images/2026-11-CrtRgb/dsc03123_480px.webp 480w, /images/2026-11-CrtRgb/dsc03123_512px.webp 512w, /images/2026-11-CrtRgb/dsc03123_640px.webp 640w, /images/2026-11-CrtRgb/dsc03123_720px.webp 720w, /images/2026-11-CrtRgb/dsc03123_820px.webp 820w, /images/2026-11-CrtRgb/dsc03123_960px.webp 960w, /images/2026-11-CrtRgb/dsc03123_1024px.webp 1024w, /images/2026-11-CrtRgb/dsc03123_1200px.webp 1200w, /images/2026-11-CrtRgb/dsc03123_1440px.webp 1440w, /images/2026-11-CrtRgb/dsc03123_1600px.webp 1600w, /images/2026-11-CrtRgb/dsc03123_1920px.webp 1920w, /images/2026-11-CrtRgb/dsc03123_2560px.webp 2560w, /images/2026-11-CrtRgb/dsc03123_3180px.webp 3180w, /images/2026-11-CrtRgb/dsc03123_4200px.webp 4200w" sizes="(width &lt;= 196px) 144px, (width &lt;= 240px) 196px, (width &lt;= 320px) 240px, (width &lt;= 480px) 320px, (width &lt;= 512px) 480px, (width &lt;= 640px) 512px, (width &lt;= 720px) 640px, (width &lt;= 820px) 720px, (width &lt;= 960px) 820px, (width &lt;= 1024px) 960px, (width &lt;= 1200px) 1024px, (width &lt;= 1440px) 1200px, (width &lt;= 1600px) 1440px, (width &lt;= 1920px) 1600px, (width &lt;= 2560px) 1920px, (width &lt;= 3180px) 2560px, (width &lt;= 4200px) 3180px, 4200px" aspect="1.5" style="--z-idx:93;--offset:-24.2%" onclick="window.open(&#x27;/images/2026-11-CrtRgb/dsc03123_4200px.webp&#x27;, &#x27;_blank&#x27;).focus()" title="My cat very attentively expressing her jubilation at my achievement (she is taking a nap)." loading="lazy">
+</gallery>
+
+<p>
+    I traced the profile of the SCART connector onto some painter's tape and used that to dremel out a spot to mount the
+    connector. That's the TV back together!
+</p>
+<gallery>
+    <img scaled alt="Inside of RGB board mounted to rear shell of TV." src="/images/2026-11-CrtRgb/IMG_5008.HEIC" srcset="/images/2026-11-CrtRgb/img_5008_144px.webp 144w, /images/2026-11-CrtRgb/img_5008_196px.webp 196w, /images/2026-11-CrtRgb/img_5008_240px.webp 240w, /images/2026-11-CrtRgb/img_5008_320px.webp 320w, /images/2026-11-CrtRgb/img_5008_480px.webp 480w, /images/2026-11-CrtRgb/img_5008_512px.webp 512w, /images/2026-11-CrtRgb/img_5008_640px.webp 640w, /images/2026-11-CrtRgb/img_5008_720px.webp 720w, /images/2026-11-CrtRgb/img_5008_820px.webp 820w, /images/2026-11-CrtRgb/img_5008_960px.webp 960w, /images/2026-11-CrtRgb/img_5008_1024px.webp 1024w, /images/2026-11-CrtRgb/img_5008_1200px.webp 1200w, /images/2026-11-CrtRgb/img_5008_1440px.webp 1440w, /images/2026-11-CrtRgb/img_5008_1600px.webp 1600w, /images/2026-11-CrtRgb/img_5008_1920px.webp 1920w, /images/2026-11-CrtRgb/img_5008_2560px.webp 2560w" sizes="(width &lt;= 196px) 144px, (width &lt;= 240px) 196px, (width &lt;= 320px) 240px, (width &lt;= 480px) 320px, (width &lt;= 512px) 480px, (width &lt;= 640px) 512px, (width &lt;= 720px) 640px, (width &lt;= 820px) 720px, (width &lt;= 960px) 820px, (width &lt;= 1024px) 960px, (width &lt;= 1200px) 1024px, (width &lt;= 1440px) 1200px, (width &lt;= 1600px) 1440px, (width &lt;= 1920px) 1600px, (width &lt;= 2560px) 1920px, 2560px" aspect="0.8" style="--z-idx:6;--offset:12.0%" onclick="window.open(&#x27;/images/2026-11-CrtRgb/img_5008_2560px.webp&#x27;, &#x27;_blank&#x27;).focus()" title="Inside of RGB board mounted to rear shell of TV." loading="lazy">
+    <img scaled alt="Rear of TV with SCART connector plugged in." src="/images/2026-11-CrtRgb/IMG_5048.HEIC" srcset="/images/2026-11-CrtRgb/img_5048_144px.webp 144w, /images/2026-11-CrtRgb/img_5048_196px.webp 196w, /images/2026-11-CrtRgb/img_5048_240px.webp 240w, /images/2026-11-CrtRgb/img_5048_320px.webp 320w, /images/2026-11-CrtRgb/img_5048_480px.webp 480w, /images/2026-11-CrtRgb/img_5048_512px.webp 512w, /images/2026-11-CrtRgb/img_5048_640px.webp 640w, /images/2026-11-CrtRgb/img_5048_720px.webp 720w, /images/2026-11-CrtRgb/img_5048_820px.webp 820w, /images/2026-11-CrtRgb/img_5048_960px.webp 960w, /images/2026-11-CrtRgb/img_5048_1024px.webp 1024w, /images/2026-11-CrtRgb/img_5048_1200px.webp 1200w, /images/2026-11-CrtRgb/img_5048_1440px.webp 1440w, /images/2026-11-CrtRgb/img_5048_1600px.webp 1600w, /images/2026-11-CrtRgb/img_5048_1920px.webp 1920w, /images/2026-11-CrtRgb/img_5048_2560px.webp 2560w, /images/2026-11-CrtRgb/img_5048_3180px.webp 3180w" sizes="(width &lt;= 196px) 144px, (width &lt;= 240px) 196px, (width &lt;= 320px) 240px, (width &lt;= 480px) 320px, (width &lt;= 512px) 480px, (width &lt;= 640px) 512px, (width &lt;= 720px) 640px, (width &lt;= 820px) 720px, (width &lt;= 960px) 820px, (width &lt;= 1024px) 960px, (width &lt;= 1200px) 1024px, (width &lt;= 1440px) 1200px, (width &lt;= 1600px) 1440px, (width &lt;= 1920px) 1600px, (width &lt;= 2560px) 1920px, (width &lt;= 3180px) 2560px, 3180px" aspect="1.3" style="--z-idx:88;--offset:4.4%" onclick="window.open(&#x27;/images/2026-11-CrtRgb/img_5048_3180px.webp&#x27;, &#x27;_blank&#x27;).focus()" title="Rear of TV with SCART connector plugged in." loading="lazy">
+</gallery>
+<p>
+    After a bit of readjusting the picture size and pin settings, it was time to relax and enjoy the TV. A very welcome
+    and deserved break from all the stress.
+</p>
+<img scaled alt="TV settled back in its home in the corner of the room." src="/images/2026-11-CrtRgb/IMG_5023.HEIC" srcset="/images/2026-11-CrtRgb/img_5023_144px.webp 144w, /images/2026-11-CrtRgb/img_5023_196px.webp 196w, /images/2026-11-CrtRgb/img_5023_240px.webp 240w, /images/2026-11-CrtRgb/img_5023_320px.webp 320w, /images/2026-11-CrtRgb/img_5023_480px.webp 480w, /images/2026-11-CrtRgb/img_5023_512px.webp 512w, /images/2026-11-CrtRgb/img_5023_640px.webp 640w, /images/2026-11-CrtRgb/img_5023_720px.webp 720w, /images/2026-11-CrtRgb/img_5023_820px.webp 820w, /images/2026-11-CrtRgb/img_5023_960px.webp 960w, /images/2026-11-CrtRgb/img_5023_1024px.webp 1024w, /images/2026-11-CrtRgb/img_5023_1200px.webp 1200w, /images/2026-11-CrtRgb/img_5023_1440px.webp 1440w, /images/2026-11-CrtRgb/img_5023_1600px.webp 1600w, /images/2026-11-CrtRgb/img_5023_1920px.webp 1920w, /images/2026-11-CrtRgb/img_5023_2560px.webp 2560w, /images/2026-11-CrtRgb/img_5023_3180px.webp 3180w, /images/2026-11-CrtRgb/img_5023_4200px.webp 4200w" sizes="(width &lt;= 196px) 144px, (width &lt;= 240px) 196px, (width &lt;= 320px) 240px, (width &lt;= 480px) 320px, (width &lt;= 512px) 480px, (width &lt;= 640px) 512px, (width &lt;= 720px) 640px, (width &lt;= 820px) 720px, (width &lt;= 960px) 820px, (width &lt;= 1024px) 960px, (width &lt;= 1200px) 1024px, (width &lt;= 1440px) 1200px, (width &lt;= 1600px) 1440px, (width &lt;= 1920px) 1600px, (width &lt;= 2560px) 1920px, (width &lt;= 3180px) 2560px, (width &lt;= 4200px) 3180px, 4200px" aspect="1.3" style="--z-idx:69;--offset:14.4%" onclick="window.open(&#x27;/images/2026-11-CrtRgb/img_5023_4200px.webp&#x27;, &#x27;_blank&#x27;).focus()" title="TV settled back in its home in the corner of the room." loading="lazy">
+</article>
+
+    <aside class="related">
+        <h2>Related Posts</h2>
+        
+<div class="posts">
+        <a class="post-item" href="/posts/2026/10/twenty-dollar-xbox">
+                <img src="/thumbnails/15b886q9mk9fbfz5eb74d18730.webp" alt="Hand holding up a modified Xbox console"/>
+            <h3>Reviving the $20 Xbox</h3>
+            <time class="date" datetime="2026-10-21">
+                21 October 2026
+            </time>
+        </a>
+        <a class="post-item" href="/posts/2026/4/powermac-g5-build">
+                <img src="/thumbnails/4ex6mswa4nx0z9chk3kaec93pc.webp" alt="Inside of modified PowerMac G5 chassis"/>
+            <h3>The complete PowerMac G5 PC 2.0 Build Log</h3>
+            <time class="date" datetime="2026-04-26">
+                26 April 2026
+            </time>
+        </a>
+        <a class="post-item" href="/posts/2026/4/progress-on-the-powermac-g5-pc-build-resurrection">
+            <h3>Progress on the PowerMac G5 PC Build Resurrection</h3>
+            <time class="date" datetime="2026-04-06">
+                6 April 2026
+            </time>
+        </a>
+</div>
+    </aside>
+
+
+    </main>
+</div>
+
+<footer>
+    <div class="container">
+        <time datetime="2026-11-03T06:10:48.8342040Z">
+            Generated 2026-11-03
+        </time>
+        <br/>
+        this site is powered by sleep-deprived brain cells
+    </div>
+</footer>
+
+
+</body>
+</html>
