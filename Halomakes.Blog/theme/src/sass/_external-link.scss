@@ -13,9 +13,10 @@ a.external-link {
     "icon label";
 
   $height: 32px;
-  border-radius: math.div($height, 2);
+  border-radius: 24px;
+  vertical-align: center;
   @include outline.outline(var(--link-brand));
-  padding: 8px 16px;
+  padding: 7px 16px;
   gap: 2px 8px;
   @include blur.blur();
   background-color: color.scale(colors.$white, $alpha: -94%);

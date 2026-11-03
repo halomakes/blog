@@ -41,6 +41,8 @@ public class ImageScalerTagHelper
             output.Attributes.SetAttribute("aspect", $"{scaled.Aspect:F1}");
             output.Attributes.SetAttribute("style", BuildDeterministicRandomStyle(scaled, rng));
             output.Attributes.SetAttribute("onclick", $"window.open('{scaled.Steps.Last().Url}', '_blank').focus()");
+            if (context.AllAttributes.TryGetAttribute("alt", out var alt))
+                output.Attributes.SetAttribute("title", alt.Value);
 
             output.Attributes.SetAttribute("loading", "lazy");
         }

@@ -37,6 +37,7 @@ public class ExternalLinkTagHelper : TagHelper
         var iconPath = siteInfo?.IconPath ?? "generic.svg";
         var icon = new TagBuilder("img");
         icon.Attributes.Add("src", $"/images/logos/{iconPath}");
+        icon.Attributes.Add("loading", "lazy");
         output.Content.AppendHtml(icon);
 
         var siteLabel = new TagBuilder("span");

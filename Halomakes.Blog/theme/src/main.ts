@@ -23,6 +23,8 @@ const initializeComponent = <TComponent>(type: {
     selector: string
 }): TComponent[] => {
     const elements = document.querySelectorAll(type.selector);
+    if (!elements.length)
+        return [];
     return Array.from(elements).map(el => el as HTMLElement).map(el => new type(el));
 }
 
